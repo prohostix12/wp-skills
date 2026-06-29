@@ -1,26 +1,17 @@
 "use client";
- 
+
 import { Phone, Mail, MapPin, GraduationCap, ExternalLink, Share2, Link2, Play, MessageCircle } from "lucide-react";
 import Link from "next/link";
- 
+
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Skills Program", href: "/skills" },
-  { label: "Universities", href: "#" },
+  { label: "Universities", href: "/skills#universities" },
   { label: "Overseas Education", href: "#" },
-  { label: "About Us", href: "#" },
-  { label: "Contact", href: "#contact" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact", href: "/skills#contact" },
 ];
- 
-const programs = [
-  { label: "AI Video Creation", href: "#" },
-  { label: "Applied Data Science", href: "#" },
-  { label: "Digital Marketing with AI", href: "#" },
-  { label: "Business Intelligence", href: "#" },
-  { label: "Supply Chain Management", href: "#" },
-  { label: "VR for Business", href: "#" },
-];
- 
+
 export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-brand-blue">
@@ -32,7 +23,7 @@ export default function Footer() {
         <div className="absolute -top-40 left-1/4 w-[400px] h-[400px] rounded-full blur-3xl bg-brand-teal/5" />
         <div className="absolute -bottom-20 right-1/4 w-[300px] h-[300px] rounded-full blur-3xl bg-brand-teal/5" />
       </div>
- 
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* CTA Banner */}
         <div className="py-14 border-b border-white/10">
@@ -42,14 +33,7 @@ export default function Footer() {
             <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-brand-teal/5 via-transparent to-brand-teal/5" />
             <div className="relative z-10">
               <div className="flex justify-center mb-5">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-brand-teal">
-                    <GraduationCap size={20} className="text-white" />
-                  </div>
-                  <span className="font-display font-black text-2xl text-white">
-                    World<span className="text-brand-teal">Passport</span>
-                  </span>
-                </div>
+                <img src="/logo.png" alt="World Passport Logo" className="h-12 w-auto object-contain" />
               </div>
               <h3 className="font-display font-black text-white text-2xl md:text-3xl mb-4">
                 Ready to Take Aim at Your Future?
@@ -58,28 +42,22 @@ export default function Footer() {
                 Join the founding cohort of students building international careers with World Passport and CIT.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <a href="#contact" className="btn-primary inline-flex justify-center">
+                <a href="/skills#contact" className="btn-primary inline-flex justify-center">
                   Book Free Consultation →
                 </a>
-                <a href="#contact" className="btn-outline-white inline-flex justify-center">
+                <a href="/skills#contact" className="btn-outline-white inline-flex justify-center">
                   Apply Now
                 </a>
               </div>
             </div>
           </div>
         </div>
- 
         {/* Main Footer Grid */}
-        <div className="py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 border-b border-white/10">
+        <div className="py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 border-b border-white/10">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-brand-teal">
-                <GraduationCap size={18} className="text-white" />
-              </div>
-              <span className="font-display font-black text-xl text-white">
-                World<span className="text-brand-teal">Passport</span>
-              </span>
+            <div className="flex items-center mb-5">
+              <img src="/logo.png" alt="World Passport Logo" className="h-10 w-auto object-contain" />
             </div>
             <p className="text-slate-300 text-sm leading-relaxed mb-6 max-w-xs">
               Bringing international-grade education and career opportunities within reach for students across Kerala.
@@ -114,7 +92,7 @@ export default function Footer() {
               ))}
             </div>
           </div>
- 
+
           {/* Quick Links */}
           <div>
             <h4 className="font-display font-bold text-white text-sm mb-5 uppercase tracking-wider">
@@ -132,25 +110,7 @@ export default function Footer() {
               ))}
             </ul>
           </div>
- 
-          {/* Programs */}
-          <div>
-            <h4 className="font-display font-bold text-white text-sm mb-5 uppercase tracking-wider">
-              Programs
-            </h4>
-            <ul className="flex flex-col gap-3">
-              {programs.map((p) => (
-                <li key={p.label}>
-                  <Link href={p.href}
-                    className="text-slate-300 text-sm hover:text-brand-teal transition-colors hover:translate-x-1 inline-flex items-center gap-1.5 group">
-                    <span className="w-0 group-hover:w-3 overflow-hidden transition-all duration-200 text-brand-teal">›</span>
-                    {p.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
- 
+
           {/* Contact */}
           <div>
             <h4 className="font-display font-bold text-white text-sm mb-5 uppercase tracking-wider">
@@ -159,16 +119,16 @@ export default function Footer() {
             <ul className="flex flex-col gap-4">
               <li className="flex items-start gap-3">
                 <Mail size={14} className="text-brand-teal mt-0.5 flex-shrink-0" />
-                <a href="mailto:bm@worldpassport.in"
+                <a href="mailto:smworldpassportskillacademy@gmail.com"
                   className="text-slate-300 text-sm hover:text-brand-teal transition-colors">
-                  bm@worldpassport.in
+                  smworldpassportskillacademy@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={14} className="text-brand-teal mt-0.5 flex-shrink-0" />
-                <a href="tel:+919205031277"
+                <a href="tel:+919292173857"
                   className="text-slate-300 text-sm hover:text-brand-teal transition-colors">
-                  +91 9205031277
+                  +91 9292173857
                 </a>
               </li>
               <li className="flex items-start gap-3">
@@ -178,7 +138,7 @@ export default function Footer() {
                 </p>
               </li>
             </ul>
- 
+
             {/* WhatsApp CTA */}
             <a
               href="https://wa.me/919205031277"
@@ -191,7 +151,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
- 
+
         {/* Bottom Bar */}
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-slate-400 text-sm">

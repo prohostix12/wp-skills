@@ -13,8 +13,6 @@ const features = [
   { icon: <Rocket size={22} />,    title: "Placement Guidance",                    desc: "Resume building, interview coaching, LinkedIn optimisation, and job-opportunity coordination — we support your career launch.",                       color: "#34d399" },
 ];
 
-const cit = { name: "Canadian Institute of Technology (CIT)", location: "C-DATA Tirana, Albania", programs: 6 };
-
 export default function WhyWorldPassport() {
   return (
     <section className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
@@ -30,56 +28,6 @@ export default function WhyWorldPassport() {
             Why Choose{" "}
             <span className="text-gradient">World Passport?</span>
           </h2>
-          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
-            We fill the credibility gap with CIT — a real international university partnership
-            that gives your qualification genuine global standing.
-          </p>
-        </div>
-
-        {/* CIT Partnership Card */}
-        <div className="mb-14 rounded-2xl overflow-hidden grid lg:grid-cols-5 gap-0" data-aos="fade-up" data-aos-delay="100"
-          style={{ border: "1px solid rgba(167,139,250,0.2)", boxShadow: "0 0 60px rgba(124,58,237,0.1), 0 20px 60px rgba(0,0,0,0.3)" }}>
-          {/* Image */}
-          <div className="relative lg:col-span-2 min-h-[260px]">
-            <img
-              src="/canedian.png"
-              alt="Canadian Institute of Technology campus"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(6,4,24,0.5) 0%, rgba(124,58,237,0.2) 100%)" }} />
-          </div>
-          {/* Info */}
-          <div className="lg:col-span-3 p-8 lg:p-10 flex flex-col justify-center"
-            style={{ background: "rgba(255,255,255,0.03)", backdropFilter: "blur(16px)" }}>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                style={{ background: "rgba(167,139,250,0.15)", border: "1px solid rgba(167,139,250,0.3)" }}>
-                <Building2 size={20} style={{ color: "#a78bfa" }} />
-              </div>
-              <div>
-                <h3 className="font-display font-bold text-white text-lg leading-tight">{cit.name}</h3>
-                <p className="text-sm" style={{ color: "rgba(255,255,255,0.4)" }}>{cit.location}</p>
-              </div>
-            </div>
-            <p className="text-sm leading-relaxed mb-7" style={{ color: "rgba(255,255,255,0.5)" }}>
-              CIT is a recognised international higher education institution committed to globally aligned
-              academic excellence, innovation, and applied learning. Their curriculum and certifications
-              are the backbone of this program.
-            </p>
-            <div className="grid grid-cols-3 gap-3">
-              {[
-                { label: "President", val: "Prof. Dr. Ramiz Zekaj" },
-                { label: "Rector",    val: "Prof. Dr. Ismail Kocayusufoglu" },
-                { label: "Programs",  val: `${cit.programs} Offered` },
-              ].map((x) => (
-                <div key={x.label} className="rounded-xl p-4 text-center"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  <div className="font-bold text-sm leading-tight text-white">{x.val}</div>
-                  <div className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.35)" }}>{x.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Feature cards */}

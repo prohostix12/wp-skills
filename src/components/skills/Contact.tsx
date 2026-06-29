@@ -5,15 +5,34 @@ import { Phone, Mail, MapPin, Send, CheckCircle } from "lucide-react";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to send message.");
+      }
+      setSubmitted(true);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -129,8 +148,21 @@ export default function Contact() {
                       className="w-full px-4 py-3 outline-none transition-all resize-none input-dark"
                     />
                   </div>
-                  <button type="submit" className="btn-primary justify-center mt-2">
-                    <Send size={16} /> Send Message
+                  {error && (
+                    <p className="text-red-400 text-sm text-center py-2 px-4 rounded-xl bg-red-500/10 border border-red-500/20">{error}</p>
+                  )}
+                  <button type="submit" disabled={loading} className="btn-primary justify-center mt-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                    {loading ? (
+                      <span className="flex items-center gap-2">
+                        <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                        </svg>
+                        Sending…
+                      </span>
+                    ) : (
+                      <><Send size={16} /> Send Message</>
+                    )}
                   </button>
                 </form>
               </>
@@ -140,9 +172,9 @@ export default function Contact() {
           {/* Right — Info + Map */}
           <div className="flex flex-col gap-6">
             {[
-              { icon: <Phone size={20} />, label: "Phone / WhatsApp", value: "+91 9205031277", href: "tel:+919205031277", color: "#60a5fa" },
-              { icon: <Mail size={20} />, label: "Email", value: "bm@worldpassport.in", href: "mailto:bm@worldpassport.in", color: "#a78bfa" },
-              { icon: <MapPin size={20} />, label: "Office Address", value: "Ernakulam, Near St. Georges Syro-Malabar Church, Edapally, Kerala", href: "#", color: "#34d399" },
+              { icon: <Phone size={20} />, label: "Phone / WhatsApp", value: "+91 9292173857", href: "tel:+919292173857", color: "#60a5fa" },
+              { icon: <Mail size={20} />, label: "Email", value: "smworldpassportskillacademy@gmail.com", href: "mailto:smworldpassportskillacademy@gmail.com", color: "#a78bfa" },
+              { icon: <MapPin size={20} />, label: "Office Address", value: "St.george forane Church Building ,Palarivattam,Edappally ,Kochi,Eranakulam,Kerala 682024", href: "#", color: "#34d399" },
             ].map((c) => (
               <a
                 key={c.label}

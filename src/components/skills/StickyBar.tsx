@@ -1,21 +1,52 @@
 "use client";
- 
+
 import { useState } from "react";
-import { Phone, Menu, X, GraduationCap } from "lucide-react";
+import { Phone, Menu, X, GraduationCap, LogIn, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
- 
+import { useRouter } from "next/navigation";
+
 const navLinks = [
-  { label: "Home",         href: "/" },
-  { label: "Program",      href: "#pathway" },
-  { label: "Universities", href: "#universities" },
-  { label: "Certificates", href: "#certificates" },
-  { label: "FAQs",         href: "#faq" },
-  { label: "Contact",      href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Program", href: "/programs" },
+  { label: "Universities", href: "/skills#universities" },
+  { label: "Certificates", href: "/skills#certificates" },
+  { label: "FAQs", href: "/skills#faq" },
+  { label: "Contact", href: "/skills#contact" },
 ];
- 
+
 export default function StickyBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
- 
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const [authError, setAuthError] = useState("");
+  const [authLoading, setAuthLoading] = useState(false);
+  const router = useRouter();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthLoading(true);
+    setAuthError("");
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Invalid credentials.");
+      }
+      setLoginOpen(false);
+      router.push("/admin/dashboard");
+    } catch (err: unknown) {
+      setAuthError(err instanceof Error ? err.message : "Login failed.");
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
   return (
     <>
       {/* Top announcement bar */}
@@ -25,25 +56,23 @@ export default function StickyBar() {
         <span>Free Career Counselling — Limited Spots Available!</span>
         <a
           href="#contact"
-          className="hidden sm:inline-flex items-center gap-1 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full hover:bg-purple-600 transition-all ml-2"
+          className="inline-flex items-center gap-1 text-white text-xs font-bold px-4 py-1.5 rounded-full transition-all ml-2"
+          style={{
+            background: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)"
+          }}
         >
           Book Free Call →
         </a>
       </div>
- 
+
       {/* Main Navbar */}
-      <header className="fixed top-9 left-0 right-0 z-50 bg-[#060418]/80 backdrop-blur-md border-b border-white/5">
+      <header className="fixed top-9 left-0 right-0 z-50 bg-[#060418]/85 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-16 gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-purple-600">
-              <GraduationCap size={18} className="text-white" />
-            </div>
-            <span className="font-display font-black text-lg tracking-tight text-white">
-              World<span className="text-purple-400">Passport</span>
-            </span>
+            <img src="/logo.png" alt="World Passport Logo" className="h-9 sm:h-10 w-auto object-contain" />
           </Link>
- 
+
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1">
             <div className="flex items-center gap-0.5 px-2.5 py-1.5 rounded-full border bg-white/5 border-white/5">
@@ -58,8 +87,8 @@ export default function StickyBar() {
               ))}
             </div>
           </nav>
- 
-          {/* Right CTAs */}
+
+          {/* Right — Phone + Login */}
           <div className="hidden md:flex items-center gap-4 flex-shrink-0">
             <a
               href="tel:+919205031277"
@@ -68,14 +97,14 @@ export default function StickyBar() {
               <Phone size={14} className="text-purple-400" />
               +91 9205031277
             </a>
-            <a
-              href="#contact"
-              className="text-white text-sm font-bold px-5 py-2.5 rounded-full transition-all duration-300 btn-primary"
+            <button
+              onClick={() => { setLoginOpen(true); setAuthError(""); }}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white bg-purple-600 hover:bg-purple-700 transition-all cursor-pointer"
             >
-              Book Free Consultation
-            </a>
+              <LogIn size={13} /> Login
+            </button>
           </div>
- 
+
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -85,12 +114,11 @@ export default function StickyBar() {
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
- 
+
         {/* Mobile Menu Drawer */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 border-t border-white/5 ${
-            mobileOpen ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={`md:hidden overflow-hidden transition-all duration-300 border-t border-white/5 ${mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+            }`}
           style={{ background: "#060418" }}
         >
           <nav className="flex flex-col px-6 py-4 gap-1">
@@ -104,24 +132,136 @@ export default function StickyBar() {
                 {link.label}
               </Link>
             ))}
-            <div className="mt-3 pt-3 border-t border-white/5 flex flex-col gap-2">
+            <div className="mt-3 pt-3 border-t border-white/5 flex flex-col gap-3">
               <a
                 href="tel:+919205031277"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-white/80"
               >
                 <Phone size={14} className="text-purple-400" /> +91 9205031277
               </a>
-              <a
-                href="#contact"
-                onClick={() => setMobileOpen(false)}
-                className="text-white text-sm font-bold px-5 py-3 rounded-xl text-center btn-primary"
+              <button
+                onClick={() => { setMobileOpen(false); setLoginOpen(true); setAuthError(""); }}
+                className="flex items-center gap-2 mx-4 px-4 py-2.5 rounded-full text-xs font-bold text-white bg-purple-600 hover:bg-purple-700 transition-all justify-center"
               >
-                Book Free Consultation
-              </a>
+                <LogIn size={13} /> Login
+              </button>
             </div>
           </nav>
         </div>
       </header>
+
+      {/* ── Login Modal ── */}
+      {loginOpen && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+          style={{ background: "rgba(6,4,24,0.8)", backdropFilter: "blur(8px)" }}
+          onClick={(e) => { if (e.target === e.currentTarget) setLoginOpen(false); }}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl p-8 relative"
+            style={{
+              background: "rgba(255,255,255,0.05)",
+              border: "1px solid rgba(167,139,250,0.2)",
+              backdropFilter: "blur(20px)",
+              boxShadow: "0 0 80px rgba(124,58,237,0.2), 0 30px 80px rgba(0,0,0,0.5)",
+            }}
+          >
+            {/* Close */}
+            <button
+              onClick={() => setLoginOpen(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white transition-all"
+            >
+              <X size={15} />
+            </button>
+
+            {/* Icon + Title */}
+            <div className="flex flex-col items-center mb-8">
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{ background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)" }}>
+                <LogIn size={24} style={{ color: "#a78bfa" }} />
+              </div>
+              <h2 className="font-display font-black text-white text-2xl">Admin Login</h2>
+              <p className="text-white/40 text-sm mt-1">Sign in to access your dashboard</p>
+            </div>
+
+            <form onSubmit={handleLogin} className="flex flex-col gap-4">
+              {/* Username */}
+              <div>
+                <label className="block text-xs font-bold text-white/60 mb-2 uppercase tracking-wider">Username</label>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter username"
+                  required
+                  className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all"
+                  style={{
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                  }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(167,139,250,0.5)"; }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
+                />
+              </div>
+
+              {/* Password */}
+              <div>
+                <label className="block text-xs font-bold text-white/60 mb-2 uppercase tracking-wider">Password</label>
+                <div className="relative">
+                  <input
+                    type={showPass ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password"
+                    required
+                    className="w-full px-4 py-3 pr-11 rounded-xl text-white text-sm outline-none transition-all"
+                    style={{
+                      background: "rgba(255,255,255,0.06)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                    }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(167,139,250,0.5)"; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPass(!showPass)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70 transition-colors"
+                  >
+                    {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Error */}
+              {authError && (
+                <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/25">
+                  <X size={14} className="text-red-400 flex-shrink-0" />
+                  <p className="text-red-400 text-sm">{authError}</p>
+                </div>
+              )}
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={authLoading}
+                className="mt-2 w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                style={{ background: "linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)", boxShadow: "0 6px 24px rgba(124,58,237,0.4)" }}
+              >
+                {authLoading ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                    </svg>
+                    Signing in…
+                  </>
+                ) : (
+                  <><LogIn size={15} /> Sign In</>
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }

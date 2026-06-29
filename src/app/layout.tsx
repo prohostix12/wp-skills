@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
-      <body className="bg-white text-slate-900 antialiased">
+      <body className="antialiased">
         <AOSProvider />
         {children}
       </body>

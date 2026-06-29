@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Building2, GraduationCap, Monitor, Briefcase, BookOpen } from "lucide-react";
 
 const universities = [
@@ -43,9 +42,6 @@ const universities = [
 ];
 
 export default function UniversityPartners() {
-  const [activeId, setActiveId] = useState("cit");
-  const active = universities.find((u) => u.id === activeId)!;
-
   return (
     <section id="universities" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
       {/* Background grid */}
@@ -67,131 +63,106 @@ export default function UniversityPartners() {
           </p>
         </div>
 
-        {/* Tab Switcher */}
-        <div className="flex justify-center mb-10" data-aos="fade-up" data-aos-delay="80">
-          <div className="inline-flex items-center gap-2 p-1.5 rounded-2xl"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
-            {universities.map((u) => (
-              <button
-                key={u.id}
-                onClick={() => setActiveId(u.id)}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all duration-250 cursor-pointer"
-                style={
-                  activeId === u.id
-                    ? {
-                        background: `linear-gradient(135deg, ${u.color} 0%, #4c1d95 100%)`,
-                        color: "#fff",
-                        boxShadow: `0 4px 14px ${u.glow}`,
-                      }
-                    : {
-                        background: "transparent",
-                        color: "rgba(255,255,255,0.5)",
-                      }
-                }
-              >
-                <Building2 size={14} />
-                {u.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Card Panel */}
-        <div
-          key={active.id}
-          data-aos="fade-up"
-          data-aos-delay="120"
-          className="grid lg:grid-cols-5 gap-0 rounded-2xl overflow-hidden"
-          style={{
-            border: "1px solid rgba(255,255,255,0.08)",
-            boxShadow: `0 0 60px ${active.glow}, 0 20px 60px rgba(0,0,0,0.4)`
-          }}
-        >
-          {/* Left — Image & info */}
-          <div className="lg:col-span-2 flex flex-col overflow-hidden" style={{ background: "rgba(255,255,255,0.02)" }}>
-            <div className="relative h-48 lg:h-56 flex-shrink-0 overflow-hidden">
-              <img
-                src={active.image}
-                alt={active.name}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent, rgba(6,4,24,0.7))" }} />
-            </div>
+        <div className="space-y-12">
+          {universities.map((uni, idx) => (
+            <div
+              key={uni.id}
+              data-aos="fade-up"
+              data-aos-delay={120 + idx * 50}
+              className="grid lg:grid-cols-5 gap-0 rounded-2xl overflow-hidden"
+              style={{
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: `0 0 60px ${uni.glow}, 0 20px 60px rgba(0,0,0,0.4)`
+              }}
+            >
+              {/* Left — Image & info */}
+              <div className="lg:col-span-2 flex flex-col overflow-hidden" style={{ background: "rgba(255,255,255,0.02)" }}>
+                <div className="relative h-48 lg:h-56 flex-shrink-0 overflow-hidden">
+                  <img
+                    src={uni.image}
+                    alt={uni.name}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent, rgba(6,4,24,0.7))" }} />
+                </div>
 
-            <div className="p-7 flex flex-col flex-1 justify-between">
-              <div>
-                <div className="flex items-center gap-2.5 mb-4">
-                  <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${active.color}15`, border: `1px solid ${active.color}30` }}>
-                    <Building2 size={18} style={{ color: active.color }} />
-                  </div>
+                <div className="p-7 flex flex-col flex-1 justify-between">
                   <div>
-                    <h3 className="font-display font-bold text-white text-base leading-tight">
-                      {active.name}
-                    </h3>
-                    <p className="text-white/40 text-xs">{active.location}</p>
+                    <div className="flex items-center gap-2.5 mb-4">
+                      <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{ background: `${uni.color}15`, border: `1px solid ${uni.color}30` }}>
+                        <Building2 size={18} style={{ color: uni.color }} />
+                      </div>
+                      <div>
+                        <h3 className="font-display font-bold text-white text-base leading-tight">
+                          {uni.name}
+                        </h3>
+                        <p className="text-white/40 text-xs">{uni.location}</p>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{uni.desc}</p>
+                  </div>
+                  <div className="mt-6 h-0.5 rounded-full w-12" style={{ background: uni.color }} />
+                </div>
+              </div>
+
+              {/* Right — Leadership + Stats */}
+              <div className="lg:col-span-3 flex flex-col" style={{ background: "rgba(255,255,255,0.04)" }}>
+                {/* Leadership */}
+                <div className="p-7" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+                  <div className="flex items-center gap-2 mb-5">
+                    <GraduationCap size={16} style={{ color: uni.color }} />
+                    <h4 className="font-display font-bold text-sm uppercase tracking-wider text-white/70">
+                      Academic Leadership
+                    </h4>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {uni.leadership.map((person) => (
+                      <div
+                        key={person.name}
+                        className="flex items-center gap-3 p-4 rounded-xl"
+                        style={{
+                          background: "rgba(255,255,255,0.03)",
+                          border: "1px solid rgba(255,255,255,0.06)",
+                        }}
+                      >
+                        <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                          style={{ background: `${uni.color}15`, border: `1px solid ${uni.color}30` }}>
+                          <GraduationCap size={16} style={{ color: uni.color }} />
+                        </div>
+                        <div>
+                          <p className="font-bold text-white text-sm leading-tight">{person.name}</p>
+                          <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{person.role}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{active.desc}</p>
-              </div>
-              <div className="mt-6 h-0.5 rounded-full w-12" style={{ background: active.color }} />
-            </div>
-          </div>
 
-          {/* Right — Leadership + Stats */}
-          <div className="lg:col-span-3 flex flex-col" style={{ background: "rgba(255,255,255,0.04)" }}>
-            {/* Leadership */}
-            <div className="p-7" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-              <div className="flex items-center gap-2 mb-5">
-                <GraduationCap size={16} style={{ color: active.color }} />
-                <h4 className="font-display font-bold text-sm uppercase tracking-wider text-white/70">
-                  Academic Leadership
-                </h4>
-              </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {active.leadership.map((person) => (
-                  <div
-                    key={person.name}
-                    className="flex items-center gap-3 p-4 rounded-xl"
-                    style={{
-                      background: "rgba(255,255,255,0.03)",
-                      border: "1px solid rgba(255,255,255,0.06)",
-                    }}
-                  >
-                    <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${active.color}15`, border: `1px solid ${active.color}30` }}>
-                      <GraduationCap size={16} style={{ color: active.color }} />
+                {/* Stats */}
+                <div className="grid grid-cols-3 divide-x divide-white/5 flex-1">
+                  {uni.stats.map((stat) => (
+                    <div
+                      key={stat.label}
+                      className="flex flex-col items-center justify-center gap-2 p-6 transition-colors"
+                      style={{ background: "rgba(255,255,255,0.02)" }}
+                    >
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                        style={{ background: `${uni.color}15`, color: uni.color, border: `1px solid ${uni.color}25` }}
+                      >
+                        {stat.icon}
+                      </div>
+                      <p className="font-display font-black text-xl text-white">
+                        {stat.value}
+                      </p>
+                      <p className="text-xs font-semibold text-center" style={{ color: "rgba(255,255,255,0.4)" }}>{stat.label}</p>
                     </div>
-                    <div>
-                      <p className="font-bold text-white text-sm leading-tight">{person.name}</p>
-                      <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{person.role}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 divide-x divide-white/5 flex-1">
-              {active.stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex flex-col items-center justify-center gap-2 p-6 transition-colors"
-                  style={{ background: "rgba(255,255,255,0.02)" }}
-                >
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                    style={{ background: `${active.color}15`, color: active.color, border: `1px solid ${active.color}25` }}
-                  >
-                    {stat.icon}
-                  </div>
-                  <p className="font-display font-black text-xl text-white">
-                    {stat.value}
-                  </p>
-                  <p className="text-xs font-semibold text-center" style={{ color: "rgba(255,255,255,0.4)" }}>{stat.label}</p>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -9,6 +9,7 @@ import Tools from "@/components/skills/Tools";
 import TargetAudience from "@/components/skills/TargetAudience";
 import WhyWorldPassport from "@/components/skills/WhyWorldPassport";
 import UniversityPartners from "@/components/skills/UniversityPartners";
+import InternationalFaculties from "@/components/skills/InternationalFaculties";
 import Certificates from "@/components/skills/Certificates";
 import PlacementSupport from "@/components/skills/PlacementSupport";
 import Testimonials from "@/components/skills/Testimonials";
@@ -48,10 +49,7 @@ export default function SkillsPage() {
       <StickyBar />
 
       {/* Section 2 — Hero (above the fold) */}
-      {/* pt-16 accounts for the announcement bar + nav height */}
-      <div className="pt-20">
-        <Hero />
-      </div>
+      <Hero />
 
       {/* Section 3 — Trust Strip */}
       <TrustStrip />
@@ -76,6 +74,9 @@ export default function SkillsPage() {
 
       {/* Section 9 — University Partners */}
       <UniversityPartners />
+
+      {/* Section 9.5 — International Faculties */}
+      <InternationalFaculties />
 
       {/* Section 10 — Certificates */}
       <Certificates />
