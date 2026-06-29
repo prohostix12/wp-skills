@@ -42,7 +42,7 @@ const WordPressIcon = () => (
 
 const LinkedInIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0h.003z" />
   </svg>
 );
 
@@ -91,48 +91,51 @@ const GoogleAnalyticsIcon = () => (
 /* ── Tool data ──────────────────────────────────────────────────────────── */
 
 const tools = [
-  { name: "YouTube",            icon: <YouTubeIcon /> },
-  { name: "Meta",               icon: <MetaIcon /> },
-  { name: "Instagram",          icon: <InstagramIcon /> },
-  { name: "Facebook",           icon: <FacebookIcon /> },
-  { name: "MOZ",                icon: <MozIcon /> },
-  { name: "WordPress",          icon: <WordPressIcon /> },
-  { name: "LinkedIn",           icon: <LinkedInIcon /> },
-  { name: "Claude",             icon: <ClaudeIcon /> },
-  { name: "Semrush",            icon: <SemrushIcon /> },
-  { name: "Google Tag Manager", icon: <GoogleTagManagerIcon /> },
-  { name: "Shopify",            icon: <ShopifyIcon /> },
-  { name: "Google",             icon: <GoogleIcon /> },
-  { name: "Search Console",     icon: <SearchConsoleIcon /> },
-  { name: "Google Analytics",   icon: <GoogleAnalyticsIcon /> },
+  { name: "YouTube",            icon: <YouTubeIcon />, color: "#ef4444" },
+  { name: "Meta",               icon: <MetaIcon />, color: "#3b82f6" },
+  { name: "Instagram",          icon: <InstagramIcon />, color: "#ec4899" },
+  { name: "Facebook",           icon: <FacebookIcon />, color: "#2563eb" },
+  { name: "MOZ",                icon: <MozIcon />, color: "#06b6d4" },
+  { name: "WordPress",          icon: <WordPressIcon />, color: "#21759b" },
+  { name: "LinkedIn",           icon: <LinkedInIcon />, color: "#0a66c2" },
+  { name: "Claude",             icon: <ClaudeIcon />, color: "#d97706" },
+  { name: "Semrush",            icon: <SemrushIcon />, color: "#f97316" },
+  { name: "Google Tag Manager", icon: <GoogleTagManagerIcon />, color: "#2563eb" },
+  { name: "Shopify",            icon: <ShopifyIcon />, color: "#95bf47" },
+  { name: "Google",             icon: <GoogleIcon />, color: "#ea4335" },
+  { name: "Search Console",     icon: <SearchConsoleIcon />, color: "#fbbc05" },
+  { name: "Google Analytics",   icon: <GoogleAnalyticsIcon />, color: "#f97316" },
 ];
 
 /* ── Component ──────────────────────────────────────────────────────────── */
 
 export default function Tools() {
   return (
-    <section className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
-      </div>
+    <section className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
+      {/* Background grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+      
+      {/* Ambient glow blob */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Heading */}
-        <div className="text-center mb-12" data-aos="fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5 bg-brand-blue/5 border border-brand-blue/10">
-            <Wrench size={12} className="text-brand-blue" />
-            <span className="text-brand-blue text-xs font-bold tracking-widest uppercase">
+        <div className="text-center mb-16" data-aos="fade-up">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5"
+            style={{ background: "rgba(124,58,237,0.12)", border: "1px solid rgba(124,58,237,0.3)" }}>
+            <Wrench size={12} className="text-purple-300" />
+            <span className="text-purple-300 text-xs font-bold tracking-widest uppercase">
               Tools
             </span>
           </div>
-          <h2
-            className="font-display font-black text-brand-blue mb-4"
-            style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}
-          >
+          <h2 className="font-display font-black text-white mb-4" style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}>
             Industry Tools We Cover
           </h2>
-          <p className="text-slate-500 text-base sm:text-lg max-w-md mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg max-w-md mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
             Hands-on training with the platforms and tools that power today&apos;s digital economy.
           </p>
         </div>
@@ -146,12 +149,27 @@ export default function Tools() {
           {tools.map((tool) => (
             <div
               key={tool.name}
-              className="group flex flex-col items-center gap-2.5 p-4 rounded-2xl bg-white border border-slate-100 shadow-[0_2px_12px_rgba(15,37,55,0.04)] hover:-translate-y-1 hover:border-brand-teal/30 hover:shadow-[0_8px_24px_rgba(0,168,150,0.08)] transition-all duration-200 cursor-default"
+              className="group flex flex-col items-center gap-3 p-5 rounded-2xl cursor-default transition-all duration-300 tilt-on-hover"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.07)",
+                backdropFilter: "blur(8px)"
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = `${tool.color}40`;
+                (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${tool.color}20, 0 12px 30px rgba(0,0,0,0.4)`;
+                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
+              }}
             >
-              <div className="text-slate-600 group-hover:text-brand-teal transition-colors duration-200">
+              <div className="transition-transform duration-300 group-hover:scale-110" style={{ color: tool.color }}>
                 {tool.icon}
               </div>
-              <span className="text-[11px] font-semibold text-slate-500 group-hover:text-brand-teal text-center leading-tight transition-colors duration-200">
+              <span className="text-[11px] font-bold text-white/75 text-center leading-tight transition-colors duration-250 group-hover:text-white">
                 {tool.name}
               </span>
             </div>

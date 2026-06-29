@@ -33,13 +33,23 @@ export const metadata: Metadata = {
 
 export default function SkillsPage() {
   return (
-    <main className="text-slate-900 min-h-screen" style={{ background: "#F5F2EB" }}>
+    <main className="text-white/80 min-h-screen relative" style={{ background: "#060418" }}>
+      {/* ── Background Star Particles & Grids ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden>
+        <div className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: "linear-gradient(rgba(150,120,255,0.6) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(150,120,255,0.6) 1.5px, transparent 1.5px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+      </div>
+
       {/* Section 1 — Sticky Navbar */}
       <StickyBar />
 
       {/* Section 2 — Hero (above the fold) */}
-      {/* pt-16 accounts for the announcement bar (top-8 = 2rem) + nav height (h-16 = 4rem) */}
-      <div className="pt-16">
+      {/* pt-16 accounts for the announcement bar + nav height */}
+      <div className="pt-20">
         <Hero />
       </div>
 

@@ -16,22 +16,23 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-28 relative overflow-hidden">
+    <section id="faq" className="py-28 relative overflow-hidden" style={{ background: "#060418" }}>
+      {/* Background grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+      
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Heading */}
         <div className="grid lg:grid-cols-2 gap-10 items-start mb-14" data-aos="fade-up">
           <div>
-            <span className="badge badge-red mb-5">FAQ</span>
-            <h2
-              className="font-display font-black text-brand-dark leading-[1.1]"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}
-            >
-              Frequently Asked{" "}
-              <span className="text-gradient">Questions</span>
+            <span className="badge badge-teal mb-5">FAQ</span>
+            <h2 className="font-display font-black text-white leading-[1.1]" style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}>
+              Frequently Asked <span className="text-gradient">Questions</span>
             </h2>
           </div>
           <div className="lg:pt-10">
-            <p className="text-gray-500 text-lg leading-relaxed">
+            <p className="text-base leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
               Everything you need to know before you enrol.
             </p>
           </div>
@@ -46,31 +47,31 @@ export default function FAQ() {
                 key={i}
                 data-aos="fade-up"
                 data-aos-delay={i * 60}
-                className="rounded-xl bg-white border overflow-hidden transition-all duration-300"
+                className="rounded-xl overflow-hidden transition-all duration-300 tilt-on-hover"
                 style={{
-                  borderColor: isOpen ? "#E63946" : "#F3F4F6",
-                  boxShadow: isOpen ? "0 8px 30px rgba(230,57,70,0.06)" : "0 2px 12px rgba(17,24,39,0.03)",
+                  background: isOpen ? "rgba(124,58,237,0.06)" : "rgba(255,255,255,0.02)",
+                  border: isOpen ? "1px solid rgba(167,139,250,0.4)" : "1px solid rgba(255,255,255,0.06)",
+                  boxShadow: isOpen ? "0 8px 30px rgba(124,58,237,0.15)" : "none",
                 }}
               >
                 <button
-                  className="w-full flex items-center justify-between px-6 py-5 text-left"
+                  className="w-full flex items-center justify-between px-6 py-5 text-left cursor-pointer"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   aria-expanded={isOpen}
                 >
                   <span
-                    className={`font-display font-bold text-base leading-snug transition-colors ${
-                      isOpen ? "text-brand-red" : "text-brand-dark hover:text-brand-red"
-                    }`}
+                    className="font-display font-bold text-base leading-snug transition-colors"
+                    style={{ color: isOpen ? "#c4b5fd" : "rgba(255,255,255,0.85)" }}
                   >
                     {faq.q}
                   </span>
                   <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ml-4 transition-all duration-300"
-                    style={{ background: isOpen ? "#E63946" : "#F3F4F6" }}
+                    style={{ background: isOpen ? "rgba(167,139,250,0.2)" : "rgba(255,255,255,0.05)" }}
                   >
                     {isOpen
                       ? <Minus size={14} className="text-white" />
-                      : <Plus  size={14} className="text-gray-500" />
+                      : <Plus  size={14} className="text-white/60" />
                     }
                   </div>
                 </button>
@@ -80,8 +81,8 @@ export default function FAQ() {
                   style={{ maxHeight: isOpen ? "400px" : "0px" }}
                 >
                   <div className="px-6 pb-6">
-                    <div className="h-px mb-4 bg-gray-100" />
-                    <p className="text-gray-500 text-sm leading-relaxed">{faq.a}</p>
+                    <div className="h-px mb-4" style={{ background: "rgba(255,255,255,0.06)" }} />
+                    <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{faq.a}</p>
                   </div>
                 </div>
               </div>
@@ -90,7 +91,7 @@ export default function FAQ() {
         </div>
 
         <div className="mt-10 text-center">
-          <p className="text-gray-500 text-sm mb-4">Still have questions?</p>
+          <p className="text-sm mb-4" style={{ color: "rgba(255,255,255,0.4)" }}>Still have questions?</p>
           <a href="#contact" className="btn-primary inline-flex">Talk to a Counsellor</a>
         </div>
       </div>

@@ -6,91 +6,98 @@ import {
 } from "lucide-react";
 
 const values = [
-  { icon: <Building2 size={32} strokeWidth={1.5} />,    title: "International University Training", desc: "CIT-certified curriculum with internationally aligned academic excellence.",            color: "#0F2537" },
-  { icon: <Languages size={32} strokeWidth={1.5} />,    title: "IELTS Coaching",                    desc: "Integrated IELTS preparation with expert trainers to open global doors.",              color: "#5B21B6" },
-  { icon: <Briefcase size={32} strokeWidth={1.5} />,    title: "Assured Internship",                desc: "3-month internship with partner companies. Real work experience for your resume.",     color: "#5B21B6" },
-  { icon: <Compass size={32} strokeWidth={1.5} />,      title: "Career Guidance",                   desc: "One-on-one career counselling from experienced mentors. Find your path with clarity.", color: "#0F2537" },
-  { icon: <Rocket size={32} strokeWidth={1.5} />,       title: "Placement Support",                 desc: "Structured placement assistance — coordination, guidance, and job-opportunity support.", color: "#0F2537" },
-  { icon: <Award size={32} strokeWidth={1.5} />,        title: "Global Certifications",             desc: "3 certificates: University Certificate, Course Completion, and Internship Certificate.", color: "#5B21B6" },
-  { icon: <GraduationCap size={32} strokeWidth={1.5} />,title: "Academic Credits",                  desc: "International academic credits that count toward higher studies abroad.",               color: "#0F2537" },
-  { icon: <Wrench size={32} strokeWidth={1.5} />,       title: "Live Projects",                     desc: "Build a strong portfolio with real-world projects guided by industry professionals.",   color: "#5B21B6" },
-  { icon: <FileText size={32} strokeWidth={1.5} />,     title: "Resume Building",                   desc: "Professional resume, LinkedIn, and personal branding to stand out.",                    color: "#0F2537" },
-  { icon: <Mic size={32} strokeWidth={1.5} />,          title: "Interview Training",                desc: "Mock interviews, HR preparation, and communication coaching. Walk in confident.",       color: "#5B21B6" },
+  { icon: <Building2 size={28} strokeWidth={1.5} />,    title: "International University Training", desc: "CIT-certified curriculum with internationally aligned academic excellence.",            color: "#a78bfa" },
+  { icon: <Languages size={28} strokeWidth={1.5} />,    title: "IELTS Coaching",                    desc: "Integrated IELTS preparation with expert trainers to open global doors.",              color: "#60a5fa" },
+  { icon: <Briefcase size={28} strokeWidth={1.5} />,    title: "Assured Internship",                desc: "3-month internship with partner companies. Real work experience for your resume.",     color: "#34d399" },
+  { icon: <Compass size={28} strokeWidth={1.5} />,      title: "Career Guidance",                   desc: "One-on-one career counselling from experienced mentors. Find your path with clarity.", color: "#fbbf24" },
+  { icon: <Rocket size={28} strokeWidth={1.5} />,       title: "Placement Support",                 desc: "Structured placement assistance — coordination, guidance, and job-opportunity support.", color: "#f472b6" },
+  { icon: <Award size={28} strokeWidth={1.5} />,        title: "Global Certifications",             desc: "3 certificates: University Certificate, Course Completion, and Internship Certificate.", color: "#a78bfa" },
+  { icon: <GraduationCap size={28} strokeWidth={1.5} />,title: "Academic Credits",                  desc: "International academic credits that count toward higher studies abroad.",               color: "#60a5fa" },
+  { icon: <Wrench size={28} strokeWidth={1.5} />,       title: "Live Projects",                     desc: "Build a strong portfolio with real-world projects guided by industry professionals.",   color: "#34d399" },
+  { icon: <FileText size={28} strokeWidth={1.5} />,     title: "Resume Building",                   desc: "Professional resume, LinkedIn, and personal branding to stand out.",                    color: "#fbbf24" },
+  { icon: <Mic size={28} strokeWidth={1.5} />,          title: "Interview Training",                desc: "Mock interviews, HR preparation, and communication coaching. Walk in confident.",       color: "#f472b6" },
 ];
 
 export default function ValueStack() {
   return (
-    <section id="value-stack" className="py-24 relative overflow-hidden" style={{ background: "#F5F2EB" }}>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D9D3C7] to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D9D3C7] to-transparent" />
-      </div>
+    <section id="value-stack" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
+      {/* Grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+      {/* Left glow */}
+      <div className="absolute -left-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.1) 0%, transparent 70%)", filter: "blur(50px)" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        {/* Heading — split layout like the reference */}
+        {/* Heading */}
         <div className="grid lg:grid-cols-2 gap-10 items-end mb-16" data-aos="fade-up">
           <div>
-            <span className="inline-block text-[11px] font-bold tracking-[0.15em] uppercase text-slate-500 border border-slate-300 rounded px-2.5 py-1 mb-5">
+            <span className="inline-block text-[11px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5 rounded-full"
+              style={{ background: "rgba(124,58,237,0.15)", color: "#c4b5fd", border: "1px solid rgba(124,58,237,0.3)" }}>
               What You Get
             </span>
-            <h2
-              className="font-display font-black text-brand-blue leading-[1.1]"
-              style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
-            >
+            <h2 className="font-display font-black text-white leading-[1.1]" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
               Everything Included with{" "}
-              <span className="text-brand-teal">World Passport</span>
+              <span className="text-gradient">World Passport</span>
             </h2>
           </div>
           <div className="lg:pb-2">
-            <p className="text-slate-600 text-base leading-relaxed mb-4">
+            <p className="text-base leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.5)" }}>
               Everything you need to launch an international career — bundled in one comprehensive 6-month program.
             </p>
-            <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-white border border-[#E8E3D9] shadow-sm">
-              <Lightbulb size={16} className="text-brand-teal flex-shrink-0" />
-              <p className="text-slate-700 font-semibold text-sm">
+            <div className="inline-flex items-center gap-2.5 px-4 py-3 rounded-xl"
+              style={{ background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.25)", backdropFilter: "blur(8px)" }}>
+              <Lightbulb size={16} style={{ color: "#c4b5fd", flexShrink: 0 }} />
+              <p className="font-semibold text-sm" style={{ color: "rgba(255,255,255,0.75)" }}>
                 Compare to studying abroad at{" "}
-                <span className="text-brand-red font-bold">₹10–15 lakh</span> — same edge, fraction of the cost.
+                <span className="text-gradient-red font-bold">₹10–15 lakh</span> — same edge, fraction of the cost.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-0 border border-[#DDD8CE] rounded-2xl overflow-hidden">
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {values.map((v, i) => (
             <div
               key={v.title}
               data-aos="fade-up"
               data-aos-delay={i * 40}
-              className="group relative flex flex-col p-7 bg-transparent cursor-default transition-all duration-300 hover:bg-white border-r border-b border-[#DDD8CE] last:border-r-0"
+              className="group relative flex flex-col p-6 rounded-2xl cursor-default transition-all duration-300 tilt-on-hover"
               style={{
-                /* Remove right border on last in each row via CSS grid */
-                borderRight: (i + 1) % 5 === 0 ? "none" : undefined,
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.07)",
+                backdropFilter: "blur(8px)",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = `${v.color}40`;
+                (e.currentTarget as HTMLElement).style.boxShadow = `0 0 30px ${v.color}20, 0 16px 40px rgba(0,0,0,0.3)`;
+                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)";
               }}
             >
-              {/* Large outline icon */}
-              <div
-                className="mb-6 transition-transform duration-300 group-hover:-translate-y-0.5 opacity-70 group-hover:opacity-100"
-                style={{ color: v.color }}
-              >
+              {/* Accent line top */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-70"
+                style={{ background: `linear-gradient(90deg, transparent, ${v.color}, transparent)` }} />
+
+              {/* Icon */}
+              <div className="mb-5 w-11 h-11 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:-translate-y-0.5"
+                style={{ background: `${v.color}15`, border: `1px solid ${v.color}25`, color: v.color }}>
                 {v.icon}
               </div>
 
               {/* Step badge */}
-              <span className="inline-block text-[10px] font-bold tracking-[0.12em] uppercase border border-slate-300 text-slate-500 rounded px-2 py-0.5 mb-3 w-fit">
+              <span className="inline-block text-[10px] font-bold tracking-[0.12em] uppercase px-2 py-0.5 mb-3 w-fit rounded-full"
+                style={{ background: `${v.color}12`, color: v.color, border: `1px solid ${v.color}25` }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
 
-              {/* Title */}
-              <h3
-                className="font-display font-bold text-brand-blue text-base mb-2 leading-snug group-hover:text-brand-teal transition-colors duration-300"
-              >
-                {v.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-slate-500 text-sm leading-relaxed">{v.desc}</p>
+              <h3 className="font-display font-bold text-white text-sm mb-2 leading-snug">{v.title}</h3>
+              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>{v.desc}</p>
             </div>
           ))}
         </div>
