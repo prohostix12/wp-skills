@@ -37,6 +37,19 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden bg-[#faf8f5]" style={{ background: "#faf8f5" }}>
+      {/* ── Background Image ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('/background.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.18,
+          zIndex: 0,
+        }}
+      />
+
       {/* Background grid */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]"
         style={{ backgroundImage: "linear-gradient(rgba(124,58,237,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.3) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
