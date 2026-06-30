@@ -170,7 +170,7 @@ export default function Hero() {
             {/* Heading */}
             <h1 ref={headingRef}
               className="font-display font-black text-white leading-[1.1] mb-6 tracking-[-0.03em]"
-              style={{ fontSize: "clamp(2rem, 4.5vw, 3.5rem)" }}>
+              style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
               Build Your{" "}
               <span style={{
                 background: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 50%, #6366f1 100%)",
