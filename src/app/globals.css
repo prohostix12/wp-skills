@@ -555,3 +555,48 @@ h1 .text-gradient, h2 .text-gradient, h3 .text-gradient, h4 .text-gradient, h5 .
 header.fixed button.bg-purple-600, header.fixed button.bg-purple-600 * {
   color: #ffffff !important;
 }
+
+/* ─── CTA Section Dark Card Theme Overrides (Bypasses Final Priority Overrides) ─── */
+div.bg-brand-blue,
+div.bg-brand-blue h1,
+div.bg-brand-blue h2,
+div.bg-brand-blue h3,
+div.bg-brand-blue h4,
+div.bg-brand-blue h5,
+div.bg-brand-blue h6,
+div.bg-brand-blue p,
+div.bg-brand-blue span,
+div.bg-brand-blue div,
+div.bg-brand-blue a,
+div.bg-brand-blue li,
+div.bg-brand-blue svg {
+  color: #ffffff !important;
+}
+
+/* Specific inner overrides */
+div.bg-brand-blue .text-brand-teal {
+  color: #a78bfa !important; /* light purple color for better contrast on dark blue */
+}
+div.bg-brand-blue .text-slate-300 {
+  color: #cbd5e1 !important;
+}
+div.bg-brand-blue .text-slate-400 {
+  color: #94a3b8 !important;
+}
+div.bg-brand-blue .text-slate-500 {
+  color: #64748b !important;
+}
+div.bg-brand-blue .text-white\/70 {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Ensure the outline white button inside CTA maintains correct border and text colors */
+div.bg-brand-blue .btn-outline-white {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+div.bg-brand-blue .btn-outline-white:hover {
+  background: rgba(255, 255, 255, 0.13) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+}

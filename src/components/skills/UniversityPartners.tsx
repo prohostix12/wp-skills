@@ -10,6 +10,7 @@ const universities = [
     location: "Tirana, Albania",
     image: "/canedian.png",
     desc: "The Canadian Institute of Technology, based in Tirana, is a recognised international private higher education institution dedicated to academic excellence, research development, and international cooperation.",
+    websiteUrl: "https://cit.edu.al/",
     leadership: [
       { name: "Prof. Dr. Ramiz Zekaj", role: "President" },
       { name: "Prof. Dr. Ismail Kocayusufoglu", role: "Rector" },
@@ -19,7 +20,7 @@ const universities = [
       { icon: <Monitor size={18} />, value: "Online", label: "Delivery Mode" },
       { icon: <Briefcase size={18} />, value: "Yes", label: "Career Support" },
     ],
-    color: "#a78bfa", glow: "rgba(167,139,250,0.25)"
+    color: "#7c3aed", glow: "rgba(124,58,237,0.08)"
   },
   {
     id: "mesdhetar",
@@ -28,6 +29,7 @@ const universities = [
     location: "Tirana, Albania",
     image: "/mediterranean.png",
     desc: "The Mediterranean University of Albania, based in Tirana, is a recognized private higher education institution dedicated to academic excellence, research development, and international cooperation.",
+    websiteUrl: "https://umu.edu.al/",
     leadership: [
       { name: "Prof. Dr. Anastas Angjeli", role: "Honorary President" },
       { name: "Prof. Dr. Adrian Civici", role: "Rector" },
@@ -37,7 +39,7 @@ const universities = [
       { icon: <Monitor size={18} />, value: "Online", label: "Delivery Mode" },
       { icon: <Briefcase size={18} />, value: "Yes", label: "Career Support" },
     ],
-    color: "#60a5fa", glow: "rgba(96,165,250,0.25)"
+    color: "#3b82f6", glow: "rgba(59,130,246,0.08)"
   },
 ];
 
@@ -70,50 +72,59 @@ export default function UniversityPartners() {
               key={uni.id}
               data-aos="fade-up"
               data-aos-delay={120 + idx * 50}
-              className="grid lg:grid-cols-5 gap-0 rounded-2xl overflow-hidden"
+              className="grid lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden bg-white border border-slate-200"
               style={{
-                border: "1px solid rgba(255,255,255,0.08)",
-                boxShadow: `0 0 60px ${uni.glow}, 0 20px 60px rgba(0,0,0,0.4)`
+                boxShadow: "0 10px 30px -10px rgba(124, 58, 237, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02)"
               }}
             >
               {/* Left — Image & info */}
-              <div className="lg:col-span-2 flex flex-col overflow-hidden" style={{ background: "rgba(255,255,255,0.02)" }}>
+              <div className="lg:col-span-2 flex flex-col overflow-hidden bg-white border-r border-slate-100">
                 <div className="relative h-48 lg:h-56 flex-shrink-0 overflow-hidden">
                   <img
                     src={uni.image}
                     alt={uni.name}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent, rgba(6,4,24,0.7))" }} />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent, rgba(0,0,0,0.4))" }} />
                 </div>
 
-                <div className="p-7 flex flex-col flex-1 justify-between">
+                <div className="p-7 flex flex-col flex-1 justify-between gap-6">
                   <div>
                     <div className="flex items-center gap-2.5 mb-4">
                       <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                        style={{ background: `${uni.color}15`, border: `1px solid ${uni.color}30` }}>
+                        style={{ background: `${uni.color}10`, border: `1px solid ${uni.color}20` }}>
                         <Building2 size={18} style={{ color: uni.color }} />
                       </div>
                       <div>
-                        <h3 className="font-display font-bold text-white text-base leading-tight">
+                        <h3 className="font-display font-bold text-slate-800 text-base leading-tight">
                           {uni.name}
                         </h3>
-                        <p className="text-white/40 text-xs">{uni.location}</p>
+                        <p className="text-slate-500 text-xs mt-0.5">{uni.location}</p>
                       </div>
                     </div>
-                    <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{uni.desc}</p>
+                    <p className="text-sm leading-relaxed text-slate-600">{uni.desc}</p>
                   </div>
-                  <div className="mt-6 h-0.5 rounded-full w-12" style={{ background: uni.color }} />
+                  
+                  {/* View Details Button */}
+                  <a
+                    href={uni.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-xl text-xs font-bold text-white transition-all hover:opacity-90 self-start"
+                    style={{ background: uni.color, boxShadow: `0 4px 12px ${uni.color}25` }}
+                  >
+                    View Details →
+                  </a>
                 </div>
               </div>
 
               {/* Right — Leadership + Stats */}
-              <div className="lg:col-span-3 flex flex-col" style={{ background: "rgba(255,255,255,0.04)" }}>
+              <div className="lg:col-span-3 flex flex-col bg-slate-50/50">
                 {/* Leadership */}
-                <div className="p-7" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+                <div className="p-7 border-b border-slate-100">
                   <div className="flex items-center gap-2 mb-5">
                     <GraduationCap size={16} style={{ color: uni.color }} />
-                    <h4 className="font-display font-bold text-sm uppercase tracking-wider text-white/70">
+                    <h4 className="font-display font-bold text-xs uppercase tracking-wider text-slate-500">
                       Academic Leadership
                     </h4>
                   </div>
@@ -121,19 +132,15 @@ export default function UniversityPartners() {
                     {uni.leadership.map((person) => (
                       <div
                         key={person.name}
-                        className="flex items-center gap-3 p-4 rounded-xl"
-                        style={{
-                          background: "rgba(255,255,255,0.03)",
-                          border: "1px solid rgba(255,255,255,0.06)",
-                        }}
+                        className="flex items-center gap-3 p-4 rounded-xl bg-white border border-slate-200/60"
                       >
                         <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                          style={{ background: `${uni.color}15`, border: `1px solid ${uni.color}30` }}>
+                          style={{ background: `${uni.color}10`, border: `1px solid ${uni.color}20` }}>
                           <GraduationCap size={16} style={{ color: uni.color }} />
                         </div>
                         <div>
-                          <p className="font-bold text-white text-sm leading-tight">{person.name}</p>
-                          <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{person.role}</p>
+                          <p className="font-bold text-slate-800 text-sm leading-tight">{person.name}</p>
+                          <p className="text-xs mt-0.5 text-slate-500">{person.role}</p>
                         </div>
                       </div>
                     ))}
@@ -141,22 +148,21 @@ export default function UniversityPartners() {
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-3 divide-x divide-white/5 flex-1">
+                <div className="grid grid-cols-3 divide-x divide-slate-100 flex-1">
                   {uni.stats.map((stat) => (
                     <div
                       key={stat.label}
-                      className="flex flex-col items-center justify-center gap-2 p-6 transition-colors"
-                      style={{ background: "rgba(255,255,255,0.02)" }}
+                      className="flex flex-col items-center justify-center gap-2 p-6 transition-colors bg-white/40"
                     >
                       <div className="w-9 h-9 rounded-xl flex items-center justify-center"
-                        style={{ background: `${uni.color}15`, color: uni.color, border: `1px solid ${uni.color}25` }}
+                        style={{ background: `${uni.color}10`, color: uni.color, border: `1px solid ${uni.color}20` }}
                       >
                         {stat.icon}
                       </div>
-                      <p className="font-display font-black text-xl text-white">
+                      <p className="font-display font-black text-xl text-slate-800">
                         {stat.value}
                       </p>
-                      <p className="text-xs font-semibold text-center" style={{ color: "rgba(255,255,255,0.4)" }}>{stat.label}</p>
+                      <p className="text-xs font-semibold text-center text-slate-500">{stat.label}</p>
                     </div>
                   ))}
                 </div>
