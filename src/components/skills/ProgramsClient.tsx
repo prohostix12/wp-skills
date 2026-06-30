@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StickyBar from "@/components/skills/StickyBar";
+import Footer from "@/components/skills/Footer";
 
 import { Program, getProgramSlug } from "@/lib/programsData";
 
@@ -240,6 +241,8 @@ export default function ProgramsClient() {
           </p>
         )}
       </div>
+
+      <Footer />
     </main>
   );
 }

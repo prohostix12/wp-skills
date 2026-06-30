@@ -106,7 +106,7 @@ export default function Hero() {
     <section
       className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-32 lg:pt-36 pb-16"
       style={{
-        background: "#faf8f5",
+        backgroundColor: "#faf8f5",
       }}
     >
       {/* ── Blueprint grid overlay ── */}
