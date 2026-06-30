@@ -13,7 +13,6 @@ import InternationalFaculties from "@/components/skills/InternationalFaculties";
 import Certificates from "@/components/skills/Certificates";
 import PlacementSupport from "@/components/skills/PlacementSupport";
 import Testimonials from "@/components/skills/Testimonials";
-import FAQ from "@/components/skills/FAQ";
 import CTA from "@/components/skills/CTA";
 import Contact from "@/components/skills/Contact";
 import Footer from "@/components/skills/Footer";
@@ -86,9 +85,6 @@ export default function SkillsPage() {
 
       {/* Section 11 — Testimonials / Social Proof */}
       <Testimonials />
-
-      {/* Section 12 — FAQ */}
-      <FAQ />
 
       {/* Section 13 — Final CTA */}
       <CTA />

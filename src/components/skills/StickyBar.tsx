@@ -10,7 +10,6 @@ const navLinks = [
   { label: "Programs", href: "/programs" },
   { label: "Universities", href: "/skills#universities" },
   { label: "Certificates", href: "/skills#certificates" },
-  { label: "FAQs", href: "/skills#faq" },
   { label: "Contact", href: "/skills#contact" },
 ];
 
