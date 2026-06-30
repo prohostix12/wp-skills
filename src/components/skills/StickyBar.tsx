@@ -68,8 +68,11 @@ export default function StickyBar() {
       <header className="fixed top-12 left-0 right-0 z-50 bg-[#060418]/85 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-16 gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
-            <img src="/logo.png" alt="World Passport Logo" className="h-9 sm:h-10 w-auto object-contain" />
+          <Link href="/" className="flex flex-col items-center flex-shrink-0 select-none">
+            <img src="/logo.png" alt="World Passport Logo" className="h-7 sm:h-8 w-auto object-contain" />
+            <span className="text-[8px] sm:text-[9px] font-black text-black tracking-widest uppercase mt-0.5">
+              Skill Academy
+            </span>
           </Link>
 
           {/* Desktop Nav */}
