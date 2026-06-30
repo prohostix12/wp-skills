@@ -109,6 +109,18 @@ export default function Hero() {
         backgroundColor: "#faf8f5",
       }}
     >
+      {/* ── Background Video ── */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        style={{ zIndex: 1, opacity: 0.15 }}
+      >
+        <source src="/animation.mp4" type="video/mp4" />
+      </video>
+
       {/* ── Blueprint grid overlay ── */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
         style={{
