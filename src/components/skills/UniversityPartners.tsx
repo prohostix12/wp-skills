@@ -54,7 +54,7 @@ export default function UniversityPartners() {
         {/* Heading */}
         <div className="text-center mb-12" data-aos="fade-up">
           <span className="badge badge-teal mb-4">University Partners</span>
-          <h2 className="font-display font-black text-white mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+          <h2 className="font-display font-black text-black mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
             Our <span className="text-gradient">Partner Universities</span>
           </h2>
           <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>

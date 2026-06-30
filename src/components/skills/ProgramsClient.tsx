@@ -1,18 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StickyBar from "@/components/skills/StickyBar";
 
-import { PROGRAMS, Program, getProgramSlug } from "@/lib/programsData";
-
-// Derive unique categories from data, preserving insertion order
-const UNIQUE_CATEGORIES = Array.from(
-  new Set(PROGRAMS.map((p) => p.category))
-);
-
-const FILTER_TABS = ["ALL", ...UNIQUE_CATEGORIES];
+import { Program, getProgramSlug } from "@/lib/programsData";
 
 // ── Sub-components ─────────────────────────────────────────────────────────
 
@@ -37,9 +30,9 @@ function ProgramCard({ program }: { program: Program }) {
       <article
         className="flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 h-full w-full cursor-pointer"
         style={{
-          background: "#0d0a2e",
-          border: "1px solid rgba(124,58,237,0.3)",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
+          background: "#ffffff",
+          border: "1px solid #e2e8f0",
+          boxShadow: "0 4px 20px rgba(15, 23, 42, 0.04)",
         }}
       >
         {/* Image */}
@@ -70,18 +63,18 @@ function ProgramCard({ program }: { program: Program }) {
           {/* University */}
           <div className="flex items-center gap-2.5">
             <UniversityAvatar initial={program.universityInitial} />
-            <span className="text-white/40 text-[10px] uppercase tracking-wider leading-tight">
+            <span className="text-black/50 text-[10px] uppercase tracking-wider leading-tight">
               {program.university}
             </span>
           </div>
 
           {/* Title */}
-          <h3 className="font-bold text-white text-lg leading-snug">
+          <h3 className="font-bold text-black text-lg leading-snug">
             {program.title}
           </h3>
 
           {/* Description */}
-          <p className="text-white/50 text-sm leading-relaxed line-clamp-3 flex-1">
+          <p className="text-black/70 text-sm leading-relaxed line-clamp-3 flex-1">
             {program.description}
           </p>
 
@@ -102,17 +95,72 @@ function ProgramCard({ program }: { program: Program }) {
 // ── Main export ────────────────────────────────────────────────────────────
 
 export default function ProgramsClient() {
+  const [programs, setPrograms] = useState<Program[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
+
+  useEffect(() => {
+    async function loadPrograms() {
+      try {
+        const res = await fetch("/api/programs");
+        if (res.ok) {
+          const data = await res.json();
+          const list = data.programs || [];
+          
+          // Sort programs as requested:
+          // 1. Digital Marketing
+          // 2. Hospital Administration
+          // 3. Data Science & AI
+          // 4. Logistics
+          // Then others
+          const sorted = [...list].sort((a, b) => {
+            const getOrderIndex = (p: Program) => {
+              const title = p.title.toLowerCase();
+              const category = p.category.toLowerCase();
+              
+              if (title.includes("digital marketing") && !title.includes("with ai")) return 1;
+              if (title.includes("hospital administration") || category.includes("hospital administration")) return 2;
+              if (title.includes("data science & ai") || title.includes("data science and ai") || category.includes("ai")) {
+                if (title.includes("digital marketing")) return 99; // skip "digital marketing with ai" from slot 3
+                return 3;
+              }
+              if (title.includes("logistics") || category.includes("logistics")) return 4;
+              return 99;
+            };
+            
+            const orderA = getOrderIndex(a);
+            const orderB = getOrderIndex(b);
+            
+            if (orderA !== orderB) {
+              return orderA - orderB;
+            }
+            return a.title.localeCompare(b.title);
+          });
+          setPrograms(sorted);
+        }
+      } catch (err) {
+        console.error("Failed to load programs:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadPrograms();
+  }, []);
+
+  const uniqueCategories = Array.from(
+    new Set(programs.map((p) => p.category))
+  );
+  const filterTabs = ["ALL", ...uniqueCategories];
 
   const filtered =
     activeFilter === "ALL"
-      ? PROGRAMS
-      : PROGRAMS.filter((p) => p.category === activeFilter);
+      ? programs
+      : programs.filter((p) => p.category === activeFilter);
 
   return (
     <main
-      className="min-h-screen relative text-white"
-      style={{ background: "#060418" }}
+      className="min-h-screen relative text-black"
+      style={{ background: "#faf8f5" }}
     >
       {/* Purple grid overlay */}
       <div
@@ -123,7 +171,7 @@ export default function ProgramsClient() {
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(150,120,255,0.6) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(150,120,255,0.6) 1.5px, transparent 1.5px)",
+              "linear-gradient(rgba(120,110,90,0.6) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(120,110,90,0.6) 1.5px, transparent 1.5px)",
             backgroundSize: "80px 80px",
           }}
         />
@@ -136,10 +184,10 @@ export default function ProgramsClient() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-36 pb-24">
         {/* Page heading */}
         <div className="mb-10 text-center">
-          <h1 className="font-display font-black text-4xl sm:text-5xl text-white mb-3">
-            Our <span className="text-purple-400">Programs</span>
+          <h1 className="font-display font-black text-4xl sm:text-5xl text-black mb-3">
+            Our <span className="text-purple-700">Programs</span>
           </h1>
-          <p className="text-white/50 text-base max-w-xl mx-auto">
+          <p className="text-black/70 text-base max-w-xl mx-auto">
             Industry-aligned courses designed to accelerate your global career.
           </p>
         </div>
@@ -150,29 +198,33 @@ export default function ProgramsClient() {
           role="tablist"
           aria-label="Filter programs by category"
         >
-          {FILTER_TABS.map((tab) => {
-            const isActive = activeFilter === tab;
-            return (
-              <button
-                key={tab}
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActiveFilter(tab)}
-                className="flex-shrink-0 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-200 cursor-pointer"
-                style={{
-                  background: isActive
-                    ? "#7c3aed"
-                    : "transparent",
-                  border: isActive
-                    ? "1px solid #7c3aed"
-                    : "1px solid rgba(255,255,255,0.3)",
-                  color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
-                }}
-              >
-                {tab}
-              </button>
-            );
-          })}
+          {loading ? (
+            <div className="text-slate-400 text-xs font-bold py-2">Loading categories...</div>
+          ) : (
+            filterTabs.map((tab) => {
+              const isActive = activeFilter === tab;
+              return (
+                <button
+                  key={tab}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActiveFilter(tab)}
+                  className="flex-shrink-0 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-200 cursor-pointer"
+                  style={{
+                    background: isActive
+                      ? "#7c3aed"
+                      : "transparent",
+                    border: isActive
+                      ? "1px solid #7c3aed"
+                      : "1px solid rgba(0,0,0,0.15)",
+                    color: isActive ? "#fff" : "rgba(0,0,0,0.7)",
+                  }}
+                >
+                  {tab}
+                </button>
+              );
+            })
+          )}
         </div>
 
         {/* Cards grid */}
@@ -183,7 +235,7 @@ export default function ProgramsClient() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="text-center text-white/40 py-20 text-sm">
+          <p className="text-center text-black/55 py-20 text-sm">
             No programs found for this category.
           </p>
         )}

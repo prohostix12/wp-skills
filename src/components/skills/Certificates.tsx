@@ -56,7 +56,7 @@ export default function Certificates() {
             className="font-display font-black mb-5"
             style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}
           >
-            <span className="text-white">Walk Away with </span>
+            <span className="text-black">Walk Away with </span>
             <span className="text-brand-teal">3 Certificates</span>
           </h2>
           <p className="text-slate-500 text-base sm:text-lg max-w-xl mx-auto leading-relaxed">

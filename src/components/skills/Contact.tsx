@@ -36,58 +36,53 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
+    <section id="contact" className="py-24 relative overflow-hidden bg-[#faf8f5]" style={{ background: "#faf8f5" }}>
       {/* Background grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02]"
+        style={{ backgroundImage: "linear-gradient(rgba(124,58,237,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.3) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/10 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-14">
-          <span className="badge badge-teal mb-4">Get in Touch</span>
-          <h2 className="font-display font-black text-white mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
-            Start Your Journey — <span className="text-gradient">Talk to Us Today</span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
+            Get in Touch
+          </span>
+          <h2 className="font-display font-black text-black mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+            Start Your Journey — <span className="text-purple-700">Talk to Us Today</span>
           </h2>
-          <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed text-black/60">
             Book your free career counselling call or send us a message. Our team responds within 24 hours.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left — Form */}
-          <div className="rounded-2xl p-8 transition-all duration-300"
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              border: "1px solid rgba(255,255,255,0.07)",
-              backdropFilter: "blur(12px)",
-              boxShadow: "0 20px 50px rgba(0,0,0,0.3)"
-            }}
-          >
+          <div className="rounded-2xl p-8 bg-white border border-slate-200 shadow-sm">
             {submitted ? (
               <div className="flex flex-col items-center justify-center py-12 text-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center border border-green-500/30">
-                  <CheckCircle size={32} className="text-green-400" />
+                <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center border border-green-200">
+                  <CheckCircle size={32} className="text-green-600" />
                 </div>
-                <h3 className="font-display font-bold text-white text-xl">Message Sent!</h3>
-                <p className="max-w-xs text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+                <h3 className="font-display font-bold text-black text-xl">Message Sent!</h3>
+                <p className="max-w-xs text-sm leading-relaxed text-slate-500">
                   Thank you! Our team will get back to you within 24 hours to schedule your free counselling call.
                 </p>
                 <button
                   onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", message: "" }); }}
-                  className="text-purple-400 text-sm font-semibold hover:underline mt-2 cursor-pointer"
+                  className="text-purple-700 text-sm font-semibold hover:underline mt-2 cursor-pointer"
                 >
                   Send another message
                 </button>
               </div>
             ) : (
               <>
-                <h3 className="font-display font-bold text-white text-xl mb-6">
+                <h3 className="font-display font-bold text-black text-xl mb-6">
                   Book Free Counselling
                 </h3>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                   {/* Name */}
                   <div>
-                    <label className="block text-sm font-semibold text-white/70 mb-1.5" htmlFor="name">
+                    <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="name">
                       Full Name *
                     </label>
                     <input
@@ -98,12 +93,12 @@ export default function Contact() {
                       value={form.name}
                       onChange={handleChange}
                       placeholder="Your full name"
-                      className="w-full px-4 py-3 outline-none transition-all input-dark"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none transition-all"
                     />
                   </div>
                   {/* Email */}
                   <div>
-                    <label className="block text-sm font-semibold text-white/70 mb-1.5" htmlFor="email">
+                    <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="email">
                       Email Address *
                     </label>
                     <input
@@ -114,12 +109,12 @@ export default function Contact() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="your@email.com"
-                      className="w-full px-4 py-3 outline-none transition-all input-dark"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none transition-all"
                     />
                   </div>
                   {/* Phone */}
                   <div>
-                    <label className="block text-sm font-semibold text-white/70 mb-1.5" htmlFor="phone">
+                    <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="phone">
                       Phone / WhatsApp *
                     </label>
                     <input
@@ -130,12 +125,12 @@ export default function Contact() {
                       value={form.phone}
                       onChange={handleChange}
                       placeholder="+91 XXXXX XXXXX"
-                      className="w-full px-4 py-3 outline-none transition-all input-dark"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none transition-all"
                     />
                   </div>
                   {/* Message */}
                   <div>
-                    <label className="block text-sm font-semibold text-white/70 mb-1.5" htmlFor="message">
+                    <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="message">
                       Your Message
                     </label>
                     <textarea
@@ -145,11 +140,11 @@ export default function Contact() {
                       value={form.message}
                       onChange={handleChange}
                       placeholder="Tell us about your career goals or ask any question..."
-                      className="w-full px-4 py-3 outline-none transition-all resize-none input-dark"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none transition-all resize-none"
                     />
                   </div>
                   {error && (
-                    <p className="text-red-400 text-sm text-center py-2 px-4 rounded-xl bg-red-500/10 border border-red-500/20">{error}</p>
+                    <p className="text-red-600 text-sm text-center py-2 px-4 rounded-xl bg-red-50 border border-red-200">{error}</p>
                   )}
                   <button type="submit" disabled={loading} className="btn-primary justify-center mt-2 disabled:opacity-60 disabled:cursor-not-allowed">
                     {loading ? (
@@ -179,18 +174,13 @@ export default function Contact() {
               <a
                 key={c.label}
                 href={c.href}
-                className="flex items-start gap-4 p-5 rounded-2xl transition-all duration-300 tilt-on-hover"
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.07)",
-                  backdropFilter: "blur(12px)",
-                }}
+                className="flex items-start gap-4 p-5 rounded-2xl transition-all duration-300 bg-white border border-slate-200 shadow-sm hover:scale-[1.01]"
                 onMouseEnter={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = `${c.color}40`;
-                  (e.currentTarget as HTMLElement).style.boxShadow = `0 0 25px ${c.color}15`;
+                  (e.currentTarget as HTMLElement).style.borderColor = `${c.color}`;
+                  (e.currentTarget as HTMLElement).style.boxShadow = `0 10px 25px rgba(0,0,0,0.05)`;
                 }}
                 onMouseLeave={e => {
-                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
+                  (e.currentTarget as HTMLElement).style.borderColor = "#e2e8f0";
                   (e.currentTarget as HTMLElement).style.boxShadow = "none";
                 }}
               >
@@ -199,20 +189,20 @@ export default function Contact() {
                   {c.icon}
                 </div>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-wider mb-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>{c.label}</p>
-                  <p className="font-semibold text-sm leading-snug text-white">{c.value}</p>
+                  <p className="text-xs font-bold uppercase tracking-wider mb-0.5 text-slate-500">{c.label}</p>
+                  <p className="font-semibold text-sm leading-snug text-black">{c.value}</p>
                 </div>
               </a>
             ))}
 
             {/* Google Map Embed */}
-            <div className="rounded-2xl overflow-hidden shadow-lg"
-              style={{ height: "280px", border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}>
+            <div className="rounded-2xl overflow-hidden shadow-md bg-white border border-slate-200"
+              style={{ height: "280px" }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.5!2d76.3!3d10.02!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d514abec6bf%3A0xbd582caa5f6ef5d5!2sEdapally%2C%20Ernakulam%2C%20Kerala!5e0!3m2!1sen!2sin!4v1"
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) opacity(0.85)" }}
+                style={{ border: 0, opacity: 0.95 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

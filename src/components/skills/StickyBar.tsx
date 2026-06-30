@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "Program", href: "/programs" },
+  { label: "Programs", href: "/programs" },
   { label: "Universities", href: "/skills#universities" },
   { label: "Certificates", href: "/skills#certificates" },
   { label: "FAQs", href: "/skills#faq" },
@@ -91,11 +91,11 @@ export default function StickyBar() {
           {/* Right — Phone + Login */}
           <div className="hidden md:flex items-center gap-4 flex-shrink-0">
             <a
-              href="tel:+919205031277"
+              href="tel:+919292173857"
               className="flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-all"
             >
               <Phone size={14} className="text-purple-400" />
-              +91 9205031277
+              +91 9292173857
             </a>
             <button
               onClick={() => { setLoginOpen(true); setAuthError(""); }}
@@ -134,10 +134,10 @@ export default function StickyBar() {
             ))}
             <div className="mt-3 pt-3 border-t border-white/5 flex flex-col gap-3">
               <a
-                href="tel:+919205031277"
+                href="tel:+919292173857"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-white/80"
               >
-                <Phone size={14} className="text-purple-400" /> +91 9205031277
+                <Phone size={14} className="text-purple-400" /> +91 9292173857
               </a>
               <button
                 onClick={() => { setMobileOpen(false); setLoginOpen(true); setAuthError(""); }}
@@ -154,58 +154,57 @@ export default function StickyBar() {
       {loginOpen && (
         <div
           className="fixed inset-0 z-[200] flex items-center justify-center p-4"
-          style={{ background: "rgba(6,4,24,0.8)", backdropFilter: "blur(8px)" }}
+          style={{ background: "rgba(15,23,42,0.45)", backdropFilter: "blur(4px)" }}
           onClick={(e) => { if (e.target === e.currentTarget) setLoginOpen(false); }}
         >
           <div
             className="w-full max-w-md rounded-2xl p-8 relative"
             style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(167,139,250,0.2)",
-              backdropFilter: "blur(20px)",
-              boxShadow: "0 0 80px rgba(124,58,237,0.2), 0 30px 80px rgba(0,0,0,0.5)",
+              background: "#ffffff",
+              border: "1px solid #e2e8f0",
+              boxShadow: "0 20px 40px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.1)",
             }}
           >
             {/* Close */}
             <button
               onClick={() => setLoginOpen(false)}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white transition-all"
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-500 hover:text-slate-900 transition-all cursor-pointer"
             >
               <X size={15} />
             </button>
 
             {/* Icon + Title */}
             <div className="flex flex-col items-center mb-8">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{ background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)" }}>
-                <LogIn size={24} style={{ color: "#a78bfa" }} />
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.15)" }}>
+                <LogIn size={24} style={{ color: "#7c3aed" }} />
               </div>
-              <h2 className="font-display font-black text-white text-2xl">Admin Login</h2>
-              <p className="text-white/40 text-sm mt-1">Sign in to access your dashboard</p>
+              <h2 className="font-display font-black text-black text-2xl">Admin Login</h2>
+              <p className="text-slate-500 text-sm mt-1">Sign in to access your dashboard</p>
             </div>
 
             <form onSubmit={handleLogin} className="flex flex-col gap-4">
               {/* Username */}
               <div>
-                <label className="block text-xs font-bold text-white/60 mb-2 uppercase tracking-wider">Username</label>
+                <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider">Username</label>
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Enter username"
                   required
-                  className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl text-black text-sm outline-none transition-all"
                   style={{
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    background: "#ffffff",
+                    border: "1px solid #cbd5e1",
                   }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(167,139,250,0.5)"; }}
-                  onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = "#7c3aed"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(124,58,237,0.12)"; }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = "#cbd5e1"; e.currentTarget.style.boxShadow = "none"; }}
                 />
               </div>
 
               {/* Password */}
               <div>
-                <label className="block text-xs font-bold text-white/60 mb-2 uppercase tracking-wider">Password</label>
+                <label className="block text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider">Password</label>
                 <div className="relative">
                   <input
                     type={showPass ? "text" : "password"}
@@ -213,18 +212,18 @@ export default function StickyBar() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter password"
                     required
-                    className="w-full px-4 py-3 pr-11 rounded-xl text-white text-sm outline-none transition-all"
+                    className="w-full px-4 py-3 pr-11 rounded-xl text-black text-sm outline-none transition-all"
                     style={{
-                      background: "rgba(255,255,255,0.06)",
-                      border: "1px solid rgba(255,255,255,0.1)",
+                      background: "#ffffff",
+                      border: "1px solid #cbd5e1",
                     }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "rgba(167,139,250,0.5)"; }}
-                    onBlur={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = "#7c3aed"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(124,58,237,0.12)"; }}
+                    onBlur={(e) => { e.currentTarget.style.borderColor = "#cbd5e1"; e.currentTarget.style.boxShadow = "none"; }}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPass(!showPass)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70 transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
                   >
                     {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
@@ -233,9 +232,9 @@ export default function StickyBar() {
 
               {/* Error */}
               {authError && (
-                <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/25">
-                  <X size={14} className="text-red-400 flex-shrink-0" />
-                  <p className="text-red-400 text-sm">{authError}</p>
+                <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-50 border border-red-200">
+                  <X size={14} className="text-red-600 flex-shrink-0" />
+                  <p className="text-red-600 text-sm font-semibold">{authError}</p>
                 </div>
               )}
 
@@ -243,12 +242,12 @@ export default function StickyBar() {
               <button
                 type="submit"
                 disabled={authLoading}
-                className="mt-2 w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-                style={{ background: "linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)", boxShadow: "0 6px 24px rgba(124,58,237,0.4)" }}
+                className="mt-2 w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed hover:bg-purple-700 cursor-pointer"
+                style={{ background: "#5b21b6", boxShadow: "0 6px 20px rgba(91,33,182,0.25)" }}
               >
                 {authLoading ? (
                   <>
-                    <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                     </svg>

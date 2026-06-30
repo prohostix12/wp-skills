@@ -36,7 +36,7 @@ export default function ValueStack() {
               style={{ background: "rgba(124,58,237,0.15)", color: "#c4b5fd", border: "1px solid rgba(124,58,237,0.3)" }}>
               What You Get
             </span>
-            <h2 className="font-display font-black text-white leading-[1.1]" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+            <h2 className="font-display font-black text-black leading-[1.1]" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
               Everything Included with{" "}
               <span className="text-gradient">World Passport</span>
             </h2>

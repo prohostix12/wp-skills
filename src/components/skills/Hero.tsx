@@ -104,257 +104,160 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-32 lg:pt-36 pb-16"
       style={{
-        background:
-          "radial-gradient(ellipse 80% 60% at 70% 50%, #1a0a4a 0%, #0d0a2e 40%, #060418 100%)",
+        background: "#faf8f5",
       }}
     >
-      {/* ── Star particles ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden>
-        {STARS.map((s, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-white"
-            style={{
-              width: `${s.w}px`,
-              height: `${s.h}px`,
-              top: `${s.t}%`,
-              left: `${s.l}%`,
-              opacity: s.o,
-              animation: `starPulse ${s.dur}s ease-in-out infinite`,
-              animationDelay: `${s.delay}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* ── Ambient glow blobs ── */}
-      <div className="absolute z-0 pointer-events-none"
-        style={{
-          width: "700px", height: "700px", top: "-15%", right: "-5%", borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(88,28,255,0.18) 0%, transparent 70%)", filter: "blur(60px)"
-        }} />
-      <div className="absolute z-0 pointer-events-none"
-        style={{
-          width: "500px", height: "500px", bottom: "-10%", left: "-5%", borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(30,60,180,0.12) 0%, transparent 70%)", filter: "blur(50px)"
-        }} />
-
-      {/* ── Grid overlay ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]"
+      {/* ── Blueprint grid overlay ── */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(150,120,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,0.8) 1px, transparent 1px)",
-          backgroundSize: "50px 50px"
+            "linear-gradient(rgba(120,110,90,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(120,110,90,0.8) 1px, transparent 1px)",
+          backgroundSize: "60px 60px"
         }} />
 
-      {/* ── Main layout ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-[130px] pb-16 w-full">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      {/* Faint blueprint vector graphics in background */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] flex items-center justify-center">
+        <svg width="800" height="800" viewBox="0 0 800 800" fill="none" stroke="#8b5cf6" strokeWidth="1">
+          <circle cx="400" cy="400" r="300" />
+          <circle cx="400" cy="400" r="200" />
+          <line x1="100" y1="400" x2="700" y2="400" />
+          <line x1="400" y1="100" x2="400" y2="700" />
+          <path d="M 200,200 L 600,600 M 600,200 L 200,600" />
+        </svg>
+      </div>
 
-          {/* ── Left ── */}
-          <div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
 
-            {/* Top Badge */}
-            <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase mb-6"
+          {/* ── Left column: Gold-bordered Image Card ── */}
+          <div className="lg:col-span-5 flex justify-center relative order-2 lg:order-1">
+            <div 
+              className="relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-purple-900/10"
               style={{
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "rgba(255,255,255,0.85)"
+                border: "4px solid #a8936d",
+                boxShadow: "0 25px 50px -12px rgba(168, 147, 109, 0.25)"
               }}
             >
-              <span className="text-purple-400 mr-0.5 font-sans font-bold">— ✦ —</span> Skilldad Programs • CIT Certified
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80"
+                alt="Students studying with laptops"
+                className="w-full h-[400px] sm:h-[480px] object-cover"
+              />
+            </div>
+
+            {/* Floating badge: CIT Certified */}
+            <div className="absolute z-20 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-800"
+              style={{
+                top: "10%", right: "-5%", background: "rgba(255,255,255,0.75)",
+                border: "1px solid rgba(0,0,0,0.08)", backdropFilter: "blur(12px)",
+                boxShadow: "0 10px 25px rgba(0,0,0,0.1)", animation: "floatBadge 4s ease-in-out infinite"
+              }}>
+              <Lock size={12} className="text-purple-600" /> CIT Certified
+            </div>
+
+            {/* Floating badge: Global Exposure */}
+            <div className="absolute z-20 flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-800"
+              style={{
+                bottom: "10%", left: "-5%", background: "rgba(255,255,255,0.75)",
+                border: "1px solid rgba(0,0,0,0.08)", backdropFilter: "blur(12px)",
+                boxShadow: "0 10px 25px rgba(0,0,0,0.1)", animation: "floatBadge 5s ease-in-out infinite 0.8s"
+              }}>
+              <Globe size={12} className="text-blue-600" /> Global Exposure
+            </div>
+          </div>
+
+          {/* ── Right column: Content Details ── */}
+          <div className="lg:col-span-7 flex flex-col gap-6 order-1 lg:order-2">
+
+            {/* Top pill badge */}
+            <div className="flex items-center gap-2 w-fit">
+              <span className="w-8 h-[2px] bg-purple-600" />
+              <span className="text-xs font-bold tracking-wider text-slate-500 uppercase">
+                SKILLDAD PROGRAMS | CIT CERTIFIED
+              </span>
             </div>
 
             {/* Heading */}
             <h1 ref={headingRef}
-              className="font-display font-black text-white leading-[1.1] mb-6 tracking-[-0.03em]"
+              className="font-display font-black text-slate-900 leading-[1.15] tracking-tight"
               style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
               Build Your{" "}
-              <span style={{
-                background: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 50%, #6366f1 100%)",
-                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text"
-              }}>
+              <span className="text-purple-700">
                 Global Career
               </span>{" "}
               with International Skills & Industry Training
             </h1>
 
             {/* Sub */}
-            <p ref={subRef} className="text-white/55 text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+            <p ref={subRef} className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-2xl font-medium">
               A 6-month pathway: 3 months CIT international university training + IELTS → 3-month assured internship → placement assistance. From Kerala.
             </p>
 
             {/* Trust chips */}
-            <div ref={chipsRef} className="flex flex-wrap gap-2.5 mb-8">
+            <div ref={chipsRef} className="flex flex-wrap gap-2.5">
               {trustChips.map((chip) => (
                 <div key={chip}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-medium"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold"
                   style={{
-                    background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)",
-                    color: "rgba(255,255,255,0.75)", backdropFilter: "blur(8px)"
+                    background: "#ffffff", border: "1px solid #e2e8f0",
+                    color: "#334155", boxShadow: "0 2px 10px rgba(0,0,0,0.02)"
                   }}>
-                  <CheckCircle size={13} style={{ color: "#a78bfa", flexShrink: 0 }} />
+                  <CheckCircle size={14} className="text-purple-600 flex-shrink-0" />
                   {chip}
                 </div>
               ))}
             </div>
 
             {/* Buttons */}
-            <div ref={btnRef} className="flex flex-wrap gap-3.5 mb-10">
+            <div ref={btnRef} className="flex flex-wrap gap-4 pt-2">
               <a href="#contact"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-white transition-all hover:scale-[1.02]"
                 style={{
-                  display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.9rem 1.8rem",
-                  borderRadius: "9999px", background: "linear-gradient(135deg,#7c3aed 0%,#5b21b6 100%)",
-                  color: "#fff", fontWeight: 600, fontSize: "0.9375rem",
-                  boxShadow: "0 6px 24px rgba(124,58,237,0.4)", transition: "all 0.3s ease", textDecoration: "none"
+                  background: "#5b21b6",
+                  boxShadow: "0 6px 20px rgba(91,33,182,0.3)"
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.boxShadow = "0 10px 30px rgba(124,58,237,0.6)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 24px rgba(124,58,237,0.4)"; (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}>
+              >
                 Book Free Consultation <ArrowRight size={16} />
               </a>
               <a href="#value-stack"
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.9rem 1.8rem",
-                  borderRadius: "9999px", background: "rgba(255,255,255,0.08)", color: "#fff", fontWeight: 600,
-                  fontSize: "0.9375rem", border: "1.5px solid rgba(255,255,255,0.18)",
-                  backdropFilter: "blur(10px)", transition: "all 0.3s ease", textDecoration: "none"
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.13)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)"; }}>
-                <Play size={13} fill="white" /> Explore Skills
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-slate-900 border-2 border-slate-900 transition-all hover:bg-slate-900 hover:text-white"
+              >
+                <Play size={13} fill="currentColor" /> Explore Skills
               </a>
             </div>
 
-            {/* Stats */}
+            {/* Stats card */}
             <div ref={statsRef}
-              className="flex flex-wrap items-stretch overflow-hidden rounded-2xl w-fit"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", backdropFilter: "blur(12px)" }}>
+              className="flex flex-wrap items-stretch overflow-hidden rounded-2xl w-full max-w-2xl mt-4"
+              style={{ background: "#ffffff", border: "1px solid #e2e8f0", boxShadow: "0 10px 30px rgba(0,0,0,0.03)" }}>
               {stats.map((s, i) => (
-                <div key={s.label} className="px-5 sm:px-7 py-3.5 text-center"
-                  style={{ borderRight: i < stats.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none" }}>
-                  <div className="font-display font-bold text-lg sm:text-xl"
+                <div key={s.label} className="flex-1 min-w-[120px] px-4 py-4 text-center"
+                  style={{ borderRight: i < stats.length - 1 ? "1px solid #e2e8f0" : "none" }}>
+                  <div className="font-display font-extrabold text-xl sm:text-2xl"
                     style={s.highlight
-                      ? { background: "linear-gradient(135deg,#34d399,#10b981)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }
-                      : { color: "#fff" }}>
+                      ? { color: "#dc2626" }
+                      : { color: "#0f172a" }}>
                     {s.value}
                   </div>
-                  <div className="text-white/40 text-[10px] sm:text-xs mt-0.5 whitespace-nowrap">
+                  <div className="text-slate-500 text-[10px] sm:text-xs font-semibold mt-1">
                     {s.label}
                   </div>
                 </div>
               ))}
             </div>
+
           </div>
 
-          {/* ── Right — Globe + Orbits ── */}
-          <div className="hidden lg:flex items-center justify-center relative" style={{ height: "520px" }}>
-            {/* Orbit rings */}
-            <div className="absolute rounded-full"
-              style={{
-                width: "460px", height: "460px", border: "1.5px solid rgba(139,92,246,0.18)",
-                top: "50%", left: "50%", transform: "translate(-50%,-50%) rotateX(70deg)"
-              }} />
-            <div className="absolute rounded-full"
-              style={{
-                width: "360px", height: "360px", border: "1px solid rgba(99,102,241,0.12)",
-                top: "50%", left: "50%", transform: "translate(-50%,-50%) rotateX(70deg)"
-              }} />
-
-            {/* Globe core */}
-            <div className="relative z-10 rounded-full overflow-hidden flex items-center justify-center"
-              style={{
-                width: "240px", height: "240px",
-                background: "radial-gradient(circle at 35% 35%, #2563eb 0%, #1e40af 40%, #1e3a8a 70%, #0f1f5c 100%)",
-                boxShadow: "0 0 0 8px rgba(99,102,241,0.12), 0 0 60px rgba(99,102,241,0.3), 0 0 120px rgba(88,28,255,0.15)"
-              }}>
-              <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 240 240" fill="none">
-                {[40, 70, 100, 130, 160, 190, 220].map(cy => (
-                  <ellipse key={cy} cx="120" cy={cy} rx="110" ry={Math.abs(cy - 120) * 0.35 + 5}
-                    stroke="rgba(147,197,253,0.5)" strokeWidth="0.8" fill="none" />
-                ))}
-                {[0, 30, 60, 90, 120, 150].map(angle => (
-                  <ellipse key={angle} cx="120" cy="120"
-                    rx={Math.cos((angle * Math.PI) / 180) * 110} ry="110"
-                    stroke="rgba(147,197,253,0.5)" strokeWidth="0.8" fill="none" />
-                ))}
-              </svg>
-              <div className="relative z-10 rounded-full overflow-hidden"
-                style={{
-                  width: "160px", height: "160px",
-                  backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80&auto=format&fit=crop')",
-                  backgroundSize: "cover", backgroundPosition: "center",
-                  border: "3px solid rgba(255,255,255,0.2)", boxShadow: "0 0 20px rgba(0,0,0,0.3)"
-                }} />
-            </div>
-
-            {/* Floating badge: CIT Certified */}
-            <div className="absolute z-20 flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-semibold text-white"
-              style={{
-                top: "8%", right: "2%", background: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.2)", backdropFilter: "blur(14px)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.2)", animation: "floatBadge 4s ease-in-out infinite"
-              }}>
-              <Lock size={12} style={{ color: "#a78bfa" }} /> CIT Certified
-            </div>
-
-            {/* Floating badge: Global Exposure */}
-            <div className="absolute z-20 flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-semibold text-white"
-              style={{
-                bottom: "10%", left: "20%", background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.16)", backdropFilter: "blur(14px)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.2)", animation: "floatBadge 5s ease-in-out infinite 0.8s"
-              }}>
-              <Globe size={12} style={{ color: "#60a5fa" }} /> Global Exposure
-            </div>
-
-            {/* Orbit icon panels */}
-            {orbitIcons.map(({ icon: Icon, angle }, i) => {
-              const rad = (angle * Math.PI) / 180;
-              const x = 50 + (230 / 4.6) * Math.cos(rad);
-              const y = 50 + (85 / 2.6) * Math.sin(rad);
-              return (
-                <div key={i} className="absolute z-20 flex items-center justify-center rounded-xl"
-                  style={{
-                    width: "44px", height: "44px", left: `${x}%`, top: `${y}%`,
-                    transform: "translate(-50%,-50%)",
-                    background: "linear-gradient(135deg,rgba(124,58,237,0.35) 0%,rgba(99,102,241,0.2) 100%)",
-                    border: "1px solid rgba(167,139,250,0.3)", backdropFilter: "blur(12px)",
-                    boxShadow: "0 4px 16px rgba(88,28,255,0.2)",
-                    animation: `floatBadge ${3 + i * 0.4}s ease-in-out infinite ${i * 0.3}s`
-                  }}>
-                  <Icon size={18} style={{ color: "#c4b5fd" }} />
-                </div>
-              );
-            })}
-
-            {/* Glowing orbs */}
-            {[
-              { size: 10, top: "25%", left: "22%", color: "#818cf8" },
-              { size: 7, top: "70%", left: "72%", color: "#a78bfa" },
-              { size: 12, top: "55%", left: "12%", color: "#60a5fa" },
-            ].map((orb, i) => (
-              <div key={i} className="absolute z-10 rounded-full"
-                style={{
-                  width: orb.size, height: orb.size, top: orb.top, left: orb.left,
-                  background: orb.color, boxShadow: `0 0 ${orb.size * 2}px ${orb.color}`,
-                  animation: `floatBadge ${4 + i}s ease-in-out infinite ${i * 0.5}s`
-                }} />
-            ))}
-          </div>
         </div>
       </div>
 
       {/* ── Keyframe animations ── */}
       <style>{`
-        @keyframes starPulse {
-          0%, 100% { opacity: 0.15; }
-          50% { opacity: 0.7; }
-        }
         @keyframes floatBadge {
-          0%, 100% { transform: translate(-50%, -50%) translateY(0px); }
-          50% { transform: translate(-50%, -50%) translateY(-10px); }
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-8px); }
         }
       `}</style>
     </section>

@@ -22,7 +22,7 @@ export default function TargetAudience() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16" data-aos="fade-up">
           <span className="badge badge-teal mb-4">Who Is This For?</span>
-          <h2 className="font-display font-black text-white mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+          <h2 className="font-display font-black text-black mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
             This Program Is{" "}
             <span className="text-gradient">Built for You</span>
           </h2>

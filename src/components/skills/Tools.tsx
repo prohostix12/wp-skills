@@ -132,7 +132,7 @@ export default function Tools() {
               Tools
             </span>
           </div>
-          <h2 className="font-display font-black text-white mb-4" style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}>
+          <h2 className="font-display font-black text-black mb-4" style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)" }}>
             Industry Tools We Cover
           </h2>
           <p className="text-base sm:text-lg max-w-md mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>

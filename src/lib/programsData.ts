@@ -59,26 +59,6 @@ export const PROGRAMS: Program[] = [
     ],
   },
   {
-    category: "DEVOPS",
-    title: "Cloud Computing",
-    description:
-      "Cloud computing is the on-demand delivery of computing resources—servers, storage, databases, networking, and software—over the internet. Learn cloud architecture patterns, scalability, security, and deployment pipelines.",
-    university: "IITS",
-    universityInitial: "I",
-    rating: 4.8,
-    duration: "12h",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
-    students: "920+",
-    learningPoints: [
-      "Deploy and manage AWS and Azure services",
-      "Configure virtual networks and cloud security",
-      "Optimize cloud infrastructure costs",
-      "Implement scalable database architectures",
-      "Build continuous integration pipelines",
-      "Monitor cloud application performance",
-    ],
-  },
-  {
     category: "HOSPITAL ADMINISTRATION",
     title: "Health Administrator (Hospital Administration & Management)",
     description:

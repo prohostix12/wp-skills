@@ -29,9 +29,9 @@ export default function Problem() {
             <AlertCircle size={12} style={{ color: "#f87171" }} />
             <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#fca5a5" }}>The Problem</span>
           </div>
-          <h2 className="font-display font-black text-white mb-6" style={{ fontSize: "clamp(1.8rem, 4vw, 3.2rem)" }}>
+          <h2 className="font-display font-black text-black mb-6" style={{ fontSize: "clamp(1.8rem, 4vw, 3.2rem)" }}>
             Why Students Struggle to{" "}
-            <span className="text-gradient">Build Global Careers?</span>
+            <span className="text-purple-700">Build Global Careers?</span>
           </h2>
           <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
             A regular degree isn&apos;t getting interviews. Studying abroad costs ₹20–40 lakh. Most students

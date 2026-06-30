@@ -139,9 +139,8 @@ export default function Footer() {
               </li>
             </ul>
 
-            {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/919205031277"
+              href="https://wa.me/919292173857"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-5 px-4 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:-translate-y-0.5"

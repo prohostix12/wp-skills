@@ -1,6 +1,7 @@
 "use client";
 
-import { Star, Rocket, Building2, Briefcase, Globe } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Star, Rocket, Building2, Briefcase, Globe, Quote, Play, User } from "lucide-react";
 
 const batchChips = [
   { icon: <Building2 size={13} />, label: "CIT University Certificate" },
@@ -9,7 +10,26 @@ const batchChips = [
   { icon: <Rocket size={13} />,    label: "Placement Support" },
 ];
 
+interface Testimonial {
+  _id: string;
+  name: string;
+  designation?: string;
+  text: string;
+  mediaType: "photo" | "video";
+  mediaUrl: string;
+  createdAt: string;
+}
+
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    fetch("/api/testimonials")
+      .then((r) => r.json())
+      .then((d) => setTestimonials(d.testimonials || []))
+      .catch(() => {});
+  }, []);
+
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
       {/* Background grid */}
@@ -35,6 +55,75 @@ export default function Testimonials() {
             Founding cohort — limited seats available
           </div>
         </div>
+
+        {/* ── Testimonials Grid (only shown when testimonials exist) ── */}
+        {testimonials.length > 0 && (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {testimonials.map((t) => (
+              <div
+                key={t._id}
+                className="rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:scale-[1.02]"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1px solid rgba(167,139,250,0.15)",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
+                }}
+              >
+                {/* Media */}
+                <div className="relative w-full" style={{ aspectRatio: "16/9", background: "#0d0a25" }}>
+                  {t.mediaType === "video" ? (
+                    <div className="relative w-full h-full group">
+                      <video
+                        src={t.mediaUrl}
+                        className="w-full h-full object-cover"
+                        controls
+                        preload="metadata"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-60 group-hover:opacity-0 transition-opacity">
+                        <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                          <Play size={20} className="text-white ml-1" />
+                        </div>
+                      </div>
+                    </div>
+                  ) : t.mediaUrl ? (
+                    <img
+                      src={t.mediaUrl}
+                      alt={t.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                      }}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <User size={40} className="text-purple-400/40" />
+                    </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="p-5 flex flex-col gap-3 flex-1">
+                  <Quote size={18} className="text-purple-400/60 flex-shrink-0" />
+                  <p className="text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.7)" }}>
+                    {t.text}
+                  </p>
+                  <div className="flex items-center gap-3 pt-2 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+                    <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
+                      style={{ background: "linear-gradient(135deg, #7c3aed, #5b21b6)" }}>
+                      {t.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-white">{t.name}</p>
+                      {t.designation && (
+                        <p className="text-xs font-medium" style={{ color: "rgba(167,139,250,0.8)" }}>{t.designation}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Founding batch banner */}
         <div className="rounded-2xl p-8 md:p-12 text-center relative overflow-hidden" data-aos="zoom-in" data-aos-delay="100"

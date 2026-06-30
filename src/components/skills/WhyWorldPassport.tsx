@@ -24,7 +24,7 @@ export default function WhyWorldPassport() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16" data-aos="fade-up">
           <span className="badge badge-teal mb-4">Why Us</span>
-          <h2 className="font-display font-black text-white mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+          <h2 className="font-display font-black text-black mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
             Why Choose{" "}
             <span className="text-gradient">World Passport?</span>
           </h2>

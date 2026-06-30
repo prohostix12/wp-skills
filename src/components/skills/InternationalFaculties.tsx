@@ -29,125 +29,57 @@ const faculties = [
 
 export default function InternationalFaculties() {
   return (
-    <section id="faculty" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
+    <section id="faculty" className="py-24 relative overflow-hidden bg-[#faf8f5]" style={{ background: "#faf8f5" }}>
       {/* Background grids & decorative highlights */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
+      <div className="absolute inset-0 pointer-events-none opacity-[0.02]"
         style={{ 
-          backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", 
+          backgroundImage: "linear-gradient(rgba(124,58,237,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.3) 1px, transparent 1px)", 
           backgroundSize: "60px 60px" 
         }} 
       />
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[300px] pointer-events-none rounded-full"
-        style={{ background: "radial-gradient(ellipse, rgba(96,165,250,0.06) 0%, transparent 75%)", filter: "blur(60px)" }} />
-      <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[300px] pointer-events-none rounded-full"
-        style={{ background: "radial-gradient(ellipse, rgba(167,139,250,0.06) 0%, transparent 75%)", filter: "blur(60px)" }} />
+        style={{ background: "radial-gradient(circle, rgba(124,58,237,0.03) 0%, transparent 70%)", filter: "blur(65px)" }} />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <span className="badge badge-teal mb-4">Expert Trainers</span>
-          <h2 className="font-display font-black text-white mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
-            International <span className="text-gradient">Faculties</span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
+            Expert Trainers
+          </span>
+          <h2 className="font-display font-black text-black mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+            International <span className="text-purple-700">Faculties</span>
           </h2>
-          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-black/60">
             Learn from global educators and industry pioneers who bring real-world international experience, academic excellence, and cutting-edge insights to your learning journey.
           </p>
         </div>
 
         {/* Faculty Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
           {faculties.map((fac, idx) => (
             <div
               key={fac.name}
               data-aos="fade-up"
               data-aos-delay={100 + idx * 100}
-              className="relative rounded-2xl p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 ease-out group"
-              style={{
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                backdropFilter: "blur(12px)",
-                "--hover-color": fac.color,
-              } as React.CSSProperties}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = `${fac.color}40`;
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 0 45px ${fac.glow}, 0 20px 50px rgba(0,0,0,0.4)`;
-                const imgFrame = e.currentTarget.querySelector(".image-frame") as HTMLElement;
-                if (imgFrame) imgFrame.style.borderColor = fac.color;
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-                const imgFrame = e.currentTarget.querySelector(".image-frame") as HTMLElement;
-                if (imgFrame) imgFrame.style.borderColor = "rgba(255,255,255,0.15)";
-              }}
+              className="bg-white border border-slate-200 rounded-3xl p-8 flex flex-col items-center text-center transition-all duration-300 hover:shadow-md hover:scale-[1.02] shadow-sm relative overflow-hidden group"
             >
-              {/* Subtle card-top color stripe */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
-                style={{ background: `linear-gradient(90deg, transparent, ${fac.color}, transparent)` }} />
+              {/* Photo Frame - Large Focus */}
+              <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl overflow-hidden border border-slate-200 shadow-inner mb-6 relative bg-slate-50">
+                <img
+                  src={fac.image}
+                  alt={fac.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
 
-              {/* Main Content */}
+              {/* Info block */}
               <div>
-                {/* Header: Picture & Name */}
-                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 mb-8">
-                  {/* Photo Frame */}
-                  <div className="image-frame w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden flex-shrink-0 border-2 transition-colors duration-300 shadow-lg"
-                    style={{ borderColor: "rgba(255,255,255,0.15)" }}>
-                    <img
-                      src={fac.image}
-                      alt={fac.name}
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                    />
-                  </div>
-
-                  {/* Name & Academic Position */}
-                  <div className="text-center sm:text-left">
-                    <h3 className="font-display font-black text-xl text-white mb-2 tracking-tight group-hover:text-[var(--hover-color)] transition-colors duration-300">
-                      {fac.name}
-                    </h3>
-                    <p className="text-xs font-semibold leading-relaxed" style={{ color: fac.color }}>
-                      {fac.title}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Faculty Attributes */}
-                <div className="space-y-4">
-                  {/* Division */}
-                  <div className="flex gap-3">
-                    <Network size={16} className="mt-0.5 flex-shrink-0" style={{ color: fac.color }} />
-                    <div>
-                      <span className="text-[10px] uppercase font-bold tracking-wider opacity-40 block">Division / Department</span>
-                      <span className="text-xs text-white/70 leading-relaxed font-medium">{fac.division}</span>
-                    </div>
-                  </div>
-
-                  {/* Qualifications */}
-                  <div className="flex gap-3">
-                    <GraduationCap size={16} className="mt-0.5 flex-shrink-0" style={{ color: fac.color }} />
-                    <div>
-                      <span className="text-[10px] uppercase font-bold tracking-wider opacity-40 block">Qualifications</span>
-                      <span className="text-xs text-white/70 leading-relaxed font-medium">{fac.qualifications}</span>
-                    </div>
-                  </div>
-
-                  {/* Specializations */}
-                  <div className="flex gap-3">
-                    <Cpu size={16} className="mt-0.5 flex-shrink-0" style={{ color: fac.color }} />
-                    <div>
-                      <span className="text-[10px] uppercase font-bold tracking-wider opacity-40 block">Area of Specialization</span>
-                      <span className="text-xs text-white/70 leading-relaxed font-medium">{fac.specialization}</span>
-                    </div>
-                  </div>
-
-                  {/* Experience */}
-                  <div className="flex gap-3">
-                    <Calendar size={16} className="mt-0.5 flex-shrink-0" style={{ color: fac.color }} />
-                    <div>
-                      <span className="text-[10px] uppercase font-bold tracking-wider opacity-40 block">Total Experience</span>
-                      <span className="text-xs text-white/70 leading-relaxed font-medium">{fac.experience}</span>
-                    </div>
-                  </div>
-                </div>
+                <h3 className="font-display font-black text-xl text-black mb-2 tracking-tight">
+                  {fac.name}
+                </h3>
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-50 border border-purple-100 uppercase tracking-wide">
+                  {fac.experience} Experience
+                </span>
               </div>
             </div>
           ))}
