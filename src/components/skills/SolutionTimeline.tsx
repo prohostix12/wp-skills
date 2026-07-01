@@ -8,7 +8,7 @@ const steps = [
     title: "CIT International Training + IELTS",
     desc: "University-affiliated training with the Canadian Institute of Technology (CIT), Tirana, Albania. Includes IELTS coaching and international academic credits.",
     bullets: ["CIT international faculty", "Academic credit pathway", "IELTS integrated coaching"],
-    color: "#a78bfa", glow: "rgba(167,139,250,0.25)",
+    color: "#8b5cf6", glow: "rgba(139,92,246,0.25)",
     icon: <Building2 size={20} />,
   },
   {
@@ -16,7 +16,7 @@ const steps = [
     title: "Skill Development & Live Projects",
     desc: "Intensive hands-on skill building with industry tools and live project experience. Build a portfolio that stands out to employers.",
     bullets: ["Industry-standard tools", "Live project experience", "Portfolio building"],
-    color: "#60a5fa", glow: "rgba(96,165,250,0.25)",
+    color: "#3b82f6", glow: "rgba(59,130,246,0.25)",
     icon: <Monitor size={20} />,
   },
   {
@@ -24,7 +24,7 @@ const steps = [
     title: "Assured Internship",
     desc: "3-month guaranteed internship with partner companies. Real work experience that transforms your resume and professional profile.",
     bullets: ["Internship with partner firms", "Real work environment", "Professional mentoring"],
-    color: "#34d399", glow: "rgba(52,211,153,0.25)",
+    color: "#10b981", glow: "rgba(16,185,129,0.25)",
     icon: <Briefcase size={20} />,
   },
   {
@@ -32,39 +32,32 @@ const steps = [
     title: "Placement Support",
     desc: "Resume building, mock interviews, career counselling, and job-opportunity coordination. Our team supports you until you land your role.",
     bullets: ["Resume & LinkedIn building", "Mock interview training", "Job opportunity support"],
-    color: "#fbbf24", glow: "rgba(251,191,36,0.25)",
+    color: "#f59e0b", glow: "rgba(245,158,11,0.25)",
     icon: <Rocket size={20} />,
   },
 ];
 
 export default function SolutionTimeline() {
   return (
-    <section id="pathway" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
-      {/* graduation.png background image */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        style={{
-          backgroundImage: "url('/download.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          opacity: 0.18,
-        }}
+    <section id="pathway" className="py-24 relative overflow-hidden bg-[#faf8f5]">
+      {/* Background Image */}
+      <img
+        src="/graduation.jpg"
+        alt="Pathway Background"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+        style={{ opacity: 1 }}
       />
-      {/* Grid overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16" data-aos="fade-up">
-          <span className="badge badge-teal mb-4">The 6-Month Pathway</span>
-          <h2 className="font-display font-black text-black mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
+            The 6-Month Pathway
+          </span>
+          <h2 className="font-display font-black text-slate-900 mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
             From Student to{" "}
-            <span className="text-gradient">Global Professional</span>
+            <span className="text-purple-700">Global Professional</span>
           </h2>
-          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-600 font-medium">
             A structured, step-by-step program that takes you from your current degree to a
             global career — with international credentials and real experience.
           </p>
@@ -72,8 +65,7 @@ export default function SolutionTimeline() {
 
         <div className="relative">
           {/* Center vertical line */}
-          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2"
-            style={{ background: "linear-gradient(180deg, rgba(167,139,250,0.8), rgba(96,165,250,0.8), rgba(52,211,153,0.8), rgba(251,191,36,0.8))" }} />
+          <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-slate-200" />
 
           <div className="flex flex-col gap-10">
             {steps.map((step, i) => {
@@ -85,39 +77,36 @@ export default function SolutionTimeline() {
                   {/* Card */}
                   <div className={`flex-1 w-full ${isLeft ? "lg:text-right" : "lg:text-left"}`}>
                     <div
-                      className="group relative rounded-2xl p-7 transition-all duration-400 tilt-on-hover"
-                      style={{
-                        background: "rgba(255,255,255,0.03)",
-                        border: "1px solid rgba(255,255,255,0.08)",
-                        backdropFilter: "blur(12px)",
-                      }}
+                      className="group relative rounded-2xl p-7 transition-all duration-400 bg-white/80 shadow-lg hover:shadow-xl border border-slate-200 backdrop-blur-md"
                       onMouseEnter={e => {
                         (e.currentTarget as HTMLElement).style.borderColor = `${step.color}40`;
-                        (e.currentTarget as HTMLElement).style.boxShadow = `0 0 40px ${step.glow}, 0 20px 40px rgba(0,0,0,0.3)`;
+                        (e.currentTarget as HTMLElement).style.boxShadow = `0 10px 40px ${step.glow}, 0 20px 40px rgba(0,0,0,0.05)`;
+                        (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
                       }}
                       onMouseLeave={e => {
-                        (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.08)";
-                        (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                        (e.currentTarget as HTMLElement).style.borderColor = "#e2e8f0";
+                        (e.currentTarget as HTMLElement).style.boxShadow = "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)";
+                        (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
                       }}
                     >
-                      <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
+                      <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl"
                         style={{ background: `linear-gradient(90deg, transparent, ${step.color}, transparent)` }} />
 
                       <div className={`flex items-center gap-3 mb-4 ${isLeft ? "lg:flex-row-reverse" : ""}`}>
-                        <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+                        <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                           style={{ background: `${step.color}15`, border: `1px solid ${step.color}30`, color: step.color }}>
                           {step.icon}
                         </div>
                         <div>
-                          <span className="text-xs font-bold uppercase tracking-widest" style={{ color: step.color }}>{step.phase}</span>
-                          <h3 className="font-display font-bold text-white text-lg leading-tight">{step.title}</h3>
+                          <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: step.color }}>{step.phase}</span>
+                          <h3 className="font-display font-bold text-slate-900 text-xl leading-tight mt-1">{step.title}</h3>
                         </div>
                       </div>
-                      <p className="text-sm leading-relaxed mb-4" style={{ color: "rgba(255,255,255,0.5)" }}>{step.desc}</p>
-                      <ul className={`flex flex-col gap-1.5 ${isLeft ? "lg:items-end" : "lg:items-start"}`}>
+                      <p className="text-sm leading-relaxed mb-4 text-slate-600 font-medium">{step.desc}</p>
+                      <ul className={`flex flex-col gap-2 ${isLeft ? "lg:items-end" : "lg:items-start"}`}>
                         {step.bullets.map((b) => (
-                          <li key={b} className="flex items-center gap-2 text-sm font-medium" style={{ color: "rgba(255,255,255,0.7)" }}>
-                            <CheckCircle2 size={13} style={{ color: step.color, flexShrink: 0 }} />
+                          <li key={b} className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                            <CheckCircle2 size={16} style={{ color: step.color, flexShrink: 0 }} />
                             {b}
                           </li>
                         ))}
@@ -127,22 +116,22 @@ export default function SolutionTimeline() {
 
                   {/* Center node */}
                   <div className="hidden lg:flex flex-shrink-0 flex-col items-center z-10">
-                    <div className="w-14 h-14 rounded-full flex items-center justify-center text-white font-display font-black text-base"
-                      style={{ background: `linear-gradient(135deg, ${step.color}80, ${step.color}40)`, border: `2px solid ${step.color}60`, boxShadow: `0 0 20px ${step.glow}` }}>
+                    <div className="w-14 h-14 rounded-full flex items-center justify-center text-white font-display font-black text-lg shadow-md"
+                      style={{ background: step.color, border: `3px solid white` }}>
                       {i + 1}
                     </div>
-                    <div className="text-xs font-bold text-center mt-2 whitespace-nowrap" style={{ color: step.color }}>{step.month}</div>
+                    <div className="text-xs font-bold text-center mt-3 whitespace-nowrap text-slate-500 uppercase tracking-wider">{step.month}</div>
                   </div>
 
                   <div className="hidden lg:block flex-1" />
 
                   {/* Mobile node */}
                   <div className="lg:hidden w-full flex items-center gap-3 -mt-4">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0"
-                      style={{ background: step.color, boxShadow: `0 0 12px ${step.glow}` }}>
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-base flex-shrink-0 shadow-sm"
+                      style={{ background: step.color }}>
                       {i + 1}
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-widest" style={{ color: step.color }}>{step.month}</span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-slate-500">{step.month}</span>
                   </div>
                 </div>
               );
@@ -151,15 +140,13 @@ export default function SolutionTimeline() {
         </div>
 
         {/* Completion card */}
-        <div className="mt-16 text-center" data-aos="zoom-in" data-aos-delay="100">
-          <div className="inline-flex flex-col items-center gap-3 px-10 py-8 rounded-2xl animate-pulse-glow"
-            style={{ background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.3)", backdropFilter: "blur(12px)" }}>
-            <div className="w-14 h-14 rounded-full flex items-center justify-center"
-              style={{ background: "rgba(124,58,237,0.2)", border: "1px solid rgba(124,58,237,0.4)" }}>
-              <GraduationCap size={28} style={{ color: "#c4b5fd" }} />
+        <div className="mt-20 text-center" data-aos="zoom-in" data-aos-delay="100">
+          <div className="inline-flex flex-col items-center gap-4 px-12 py-10 rounded-3xl bg-purple-50 border border-purple-100 shadow-sm">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-purple-100 border border-purple-200">
+              <GraduationCap size={32} className="text-purple-600" />
             </div>
-            <h3 className="font-display font-bold text-white text-xl">On Completion</h3>
-            <p className="text-sm max-w-sm text-center leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+            <h3 className="font-display font-black text-slate-900 text-2xl">On Completion</h3>
+            <p className="text-base max-w-md text-center leading-relaxed text-slate-600 font-medium">
               Walk away with 3 certifications, international academic credits, internship experience,
               and full placement assistance.
             </p>

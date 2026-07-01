@@ -65,18 +65,71 @@ export default function AboutPage() {
       {/* Sticky Navigation */}
       <StickyBar />
 
-      {/* ── Header Section ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-12 relative z-10 text-center animate-fade-in">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
-          World Passport
-        </span>
-        <h1 className="font-display font-black text-black leading-tight mb-4" style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}>
-          About <span className="text-purple-700">Us</span>
-        </h1>
-        <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-black/70 font-medium">
-          Empowering students with industry-aligned skills, globally recognized university certifications, and direct pathways to international careers. We bridge the gap between academic learning and real-world global opportunities.
-        </p>
-      </div>
+      {/* ── Header Section (Redesigned) ── */}
+      <section className="relative w-full min-h-[85vh] flex items-center pt-32 pb-20 overflow-hidden">
+        {/* Background Image & Overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1920" 
+            alt="University Campus" 
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col lg:flex-row justify-between items-end gap-12 lg:gap-8 mt-12">
+          
+          {/* Left Content */}
+          <div className="max-w-2xl text-left w-full lg:mb-12">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-bold text-slate-800 bg-white shadow-sm mb-6">
+              <span className="text-purple-600 font-black text-lg leading-none">*</span> About Us
+            </span>
+            <h1 className="font-display font-black text-white leading-tight mb-6 tracking-tight uppercase" style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)" }}>
+              24 Years of Proven Excellence
+            </h1>
+            <p className="text-base sm:text-lg leading-relaxed text-white font-medium max-w-xl">
+              Since 2001, we have been inspiring students to excel in their higher education aspirations by helping them choose the right university abroad. Being an award-winning education consultant, we are the official representative for a wide range of well-reputed universities globally.
+            </p>
+          </div>
+
+          {/* Right Floating Stats Card */}
+          <div className="w-full max-w-md bg-white rounded-2xl p-7 sm:p-9 shadow-2xl relative lg:translate-y-16">
+            <div className="flex flex-col gap-6">
+              
+              {/* Stat 1 */}
+              <div className="flex items-center justify-between border-b border-slate-100 pb-5">
+                <div className="flex items-center gap-6">
+                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">20K</span>
+                  <span className="text-sm font-semibold text-slate-600 leading-tight w-32">Students Recruited</span>
+                </div>
+                <GraduationCap size={32} strokeWidth={1.5} className="text-slate-800" />
+              </div>
+
+              {/* Stat 2 */}
+              <div className="flex items-center justify-between border-b border-slate-100 pb-5">
+                <div className="flex items-center gap-6">
+                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">60 +</span>
+                  <span className="text-sm font-semibold text-slate-600 leading-tight w-32">Prestigious Awards Won</span>
+                </div>
+                <Award size={32} strokeWidth={1.5} className="text-amber-500" />
+              </div>
+
+              {/* Stat 3 */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-6">
+                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">200 +</span>
+                  <span className="text-sm font-semibold text-slate-600 leading-tight w-32">Universities to Choose</span>
+                </div>
+                <Building2 size={32} strokeWidth={1.5} className="text-red-500" />
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
 
       {/* ── Placement Platform Section ── */}
       <PlacementPlatform />

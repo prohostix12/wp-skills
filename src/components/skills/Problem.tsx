@@ -3,100 +3,131 @@
 import { AlertCircle, Zap, BookOpen, Globe, Briefcase, TrendingDown } from "lucide-react";
 
 const problems = [
-  { icon: <BookOpen size={26} />,     title: "Only Theory",                    desc: "Degrees full of theory with no hands-on application. Employers want skills, not just marks.",                          color: "#f87171", glow: "rgba(248,113,113,0.2)" },
-  { icon: <Globe size={26} />,        title: "No International Exposure",      desc: "Without global exposure, your resume looks the same as thousands of other graduates.",                                   color: "#fbbf24", glow: "rgba(251,191,36,0.2)"  },
-  { icon: <Briefcase size={26} />,    title: "No Internship Experience",       desc: "Companies demand experience. But without experience, no one hires you — a painful catch-22.",                           color: "#a78bfa", glow: "rgba(167,139,250,0.2)" },
-  { icon: <TrendingDown size={26} />, title: "Low Placement Opportunities",    desc: "Generic degrees lead to generic outcomes. Without the right skills, placement remains a dream.",                        color: "#f87171", glow: "rgba(248,113,113,0.2)" },
+  { 
+    icon: <BookOpen size={20} />,     
+    title: "Only Theory",                 
+    desc: "Degrees full of theory with no hands-on application. Employers want skills, not just marks.",                
+    colorClass: "bg-red-50 text-red-700 ring-red-100", 
+    iconColor: "text-red-600",
+    tag: "Zero Practical Skills",
+    image: "https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?auto=format&fit=crop&q=80&w=600&h=400"
+  },
+  { 
+    icon: <Globe size={20} />,        
+    title: "No International Exposure",   
+    desc: "Without global exposure, your resume looks the same as thousands of other graduates.",                       
+    colorClass: "bg-amber-50 text-amber-700 ring-amber-100",  
+    iconColor: "text-amber-600",
+    tag: "Limited Global Reach",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=600&h=400"
+  },
+  { 
+    icon: <Briefcase size={20} />,    
+    title: "No Internship Experience",    
+    desc: "Companies demand experience. But without experience, no one hires you — a painful catch-22.",               
+    colorClass: "bg-purple-50 text-purple-700 ring-purple-100", 
+    iconColor: "text-purple-600",
+    tag: "Catch-22 Trap",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600&h=400"
+  },
+  { 
+    icon: <TrendingDown size={20} />, 
+    title: "Low Placement", 
+    desc: "Generic degrees lead to generic outcomes. Without the right skills, placement remains a dream.",           
+    colorClass: "bg-orange-50 text-orange-700 ring-orange-100",  
+    iconColor: "text-orange-600",
+    tag: "Career Stagnation",
+    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=600&h=400"
+  },
 ];
 
 export default function Problem() {
   return (
-    <section className="py-24 relative overflow-hidden bg-[#060418]">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        style={{ zIndex: 1, opacity: 0.4 }}
-      >
-        <source src="/animation.mp4" type="video/mp4" />
-      </video>
-
-      {/* Grid overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.05] z-0"
-        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-
-      {/* Ambient glows */}
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%)", filter: "blur(40px)" }} />
-      <div className="absolute bottom-0 right-0 w-[500px] h-[300px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(99,102,241,0.08) 0%, transparent 70%)", filter: "blur(40px)" }} />
+    <section className="py-24 relative overflow-hidden bg-[#faf8f5]">
+      {/* Background World Map Vector */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 1
+        }} 
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16" data-aos="fade-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6"
-            style={{ background: "rgba(248,113,113,0.1)", border: "1px solid rgba(248,113,113,0.25)" }}>
-            <AlertCircle size={12} style={{ color: "#f87171" }} />
-            <span className="text-xs font-bold tracking-widest uppercase" style={{ color: "#fca5a5" }}>The Problem</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6 bg-red-50 border border-red-100 shadow-sm">
+            <AlertCircle size={14} className="text-red-500" />
+            <span className="text-xs font-bold tracking-widest uppercase text-red-600">The Problem</span>
           </div>
-          <h2 className="font-display font-black text-white mb-6" style={{ fontSize: "clamp(1.8rem, 4vw, 3.2rem)" }}>
+          <h2 className="font-display font-black text-slate-900 mb-6" style={{ fontSize: "clamp(1.8rem, 4vw, 3.2rem)" }}>
             Why Students Struggle to{" "}
-            <span className="text-purple-400">Build Global Careers?</span>
+            <span className="text-purple-700">Build Global Careers?</span>
           </h2>
-          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>
+          <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-600 font-medium">
             A regular degree isn&apos;t getting interviews. Studying abroad costs ₹20–40 lakh. Most students
             are stuck between the two.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {problems.map((p, i) => (
             <div
               key={p.title}
               data-aos="fade-up"
               data-aos-delay={i * 100}
-              className="group relative rounded-2xl p-7 cursor-default tilt-on-hover transition-all duration-300"
-              style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.07)",
-                backdropFilter: "blur(10px)",
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = `${p.color}40`;
-                (e.currentTarget as HTMLElement).style.boxShadow = `0 0 40px ${p.glow}, 0 20px 40px rgba(0,0,0,0.3)`;
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.07)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
-              }}
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
+              style={{ backgroundColor: "#faf3e8", borderColor: "#e8dacc", borderWidth: "1px" }}
             >
-              {/* Glow top accent */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl opacity-60"
-                style={{ background: `linear-gradient(90deg, transparent, ${p.color}, transparent)` }} />
-
-              {/* Icon with glow */}
-              <div className="mb-5 w-12 h-12 rounded-xl flex items-center justify-center"
-                style={{ background: `${p.color}15`, border: `1px solid ${p.color}30`, color: p.color }}>
-                {p.icon}
+              {/* Image Section */}
+              <div className="h-40 overflow-hidden relative">
+                <img 
+                  src={p.image} 
+                  alt={p.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+                <div className="absolute bottom-3 left-4 flex items-center gap-2">
+                   <div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-white shadow-md ${p.iconColor}`}>
+                    {p.icon}
+                  </div>
+                </div>
               </div>
-              <h3 className="font-display font-bold text-white text-lg mb-3">{p.title}</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>{p.desc}</p>
+
+              {/* Card body */}
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-display font-bold text-slate-900 text-lg leading-snug">
+                    {p.title}
+                  </h3>
+                  <span className="text-2xl font-black text-slate-100 font-serif tabular-nums select-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <p className="text-sm leading-relaxed text-slate-600 flex-1 mb-4">
+                  {p.desc}
+                </p>
+
+                {/* Impact tag */}
+                <div className={`mt-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[11px] font-bold uppercase tracking-wide ring-1 ring-inset ${p.colorClass}`}>
+                  {p.tag}
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
         {/* Bridge statement */}
         <div className="text-center" data-aos="zoom-in" data-aos-delay="200">
-          <div className="inline-flex items-center gap-3 px-8 py-5 rounded-2xl max-w-3xl"
-            style={{ background: "rgba(124,58,237,0.1)", border: "1px solid rgba(124,58,237,0.25)", backdropFilter: "blur(12px)" }}>
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background: "rgba(124,58,237,0.2)", border: "1px solid rgba(124,58,237,0.3)" }}>
-              <Zap size={18} style={{ color: "#c4b5fd" }} />
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 px-8 py-6 rounded-2xl max-w-3xl bg-purple-50 border border-purple-100 shadow-sm">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-100 border border-purple-200">
+              <Zap size={20} className="text-purple-600" />
             </div>
-            <p className="text-base sm:text-lg text-left sm:text-center font-semibold" style={{ color: "rgba(255,255,255,0.8)" }}>
-              <span className="text-gradient font-extrabold">World Passport</span> bridges this gap —
+            <p className="text-base sm:text-lg text-center sm:text-left font-semibold text-slate-700">
+              <span className="font-extrabold text-purple-700">World Passport</span> bridges this gap —
               bringing international education within reach from Kerala.
             </p>
           </div>

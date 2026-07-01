@@ -36,7 +36,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden bg-[#faf8f5]" style={{ background: "#faf8f5" }}>
+    <section id="contact" className="py-24 relative overflow-hidden">
       {/* ── Background Image ── */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -45,7 +45,7 @@ export default function Contact() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          opacity: 0.18,
+          opacity: 1,
           zIndex: 0,
         }}
       />
