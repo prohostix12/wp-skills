@@ -10,7 +10,7 @@ const universities = [
     location: "Tirana, Albania",
     image: "/canedian.png",
     desc: "The Canadian Institute of Technology, based in Tirana, is a recognised international private higher education institution dedicated to academic excellence, research development, and international cooperation.",
-    websiteUrl: "https://cit.edu.al/",
+    websiteUrl: "/skills/cit",
     leadership: [
       { name: "Prof. Dr. Ramiz Zekaj", role: "President" },
       { name: "Prof. Dr. Ismail Kocayusufoglu", role: "Rector" },
@@ -29,7 +29,7 @@ const universities = [
     location: "Tirana, Albania",
     image: "/mediterranean.png",
     desc: "The Mediterranean University of Albania, based in Tirana, is a recognized private higher education institution dedicated to academic excellence, research development, and international cooperation.",
-    websiteUrl: "https://umu.edu.al/",
+    websiteUrl: "/skills/mediterranean",
     leadership: [
       { name: "Prof. Dr. Anastas Angjeli", role: "Honorary President" },
       { name: "Prof. Dr. Adrian Civici", role: "Rector" },
