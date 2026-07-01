@@ -181,21 +181,41 @@ export default function ProgramsClient() {
       {/* Sticky navbar */}
       <StickyBar />
 
-      {/* Page content — padded to clear sticky bars (announcement 36px + nav 64px = 100px) */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-36 pb-24">
-        {/* Page heading */}
-        <div className="mb-10 text-center">
-          <h1 className="font-display font-black text-4xl sm:text-5xl text-black mb-3">
+      {/* Hero Heading Section with Video */}
+      <div className="relative w-full pt-32 pb-12 flex flex-col items-center justify-center overflow-hidden border-b border-slate-200/60 shadow-sm">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+          style={{ zIndex: 0, opacity: 0.4 }}
+        >
+          <source src="/animation.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Soft overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-[#faf8f5]/20 z-10 pointer-events-none backdrop-blur-[1px]" />
+        
+        <div className="relative z-20 text-center px-4 max-w-3xl mx-auto">
+          <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold uppercase tracking-widest shadow-sm">
+            Explore Our Courses
+          </div>
+          <h1 className="font-display font-black text-5xl sm:text-7xl text-slate-900 mb-6 tracking-tight leading-tight">
             Our <span className="text-purple-700">Programs</span>
           </h1>
-          <p className="text-black/70 text-base max-w-xl mx-auto">
-            Industry-aligned courses designed to accelerate your global career.
+          <p className="text-slate-700 text-lg sm:text-xl font-medium leading-relaxed">
+            Industry-aligned courses designed to accelerate your global career. Master new skills with our international university training.
           </p>
         </div>
+      </div>
+
+      {/* Page content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-6 pb-24">
 
         {/* Filter tabs */}
         <div
-          className="flex gap-2 overflow-x-auto pb-3 mb-10 scrollbar-none"
+          className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none"
           role="tablist"
           aria-label="Filter programs by category"
         >

@@ -116,7 +116,7 @@ export default function Hero() {
         muted
         playsInline
         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        style={{ zIndex: 1, opacity: 1 }}
+        style={{ zIndex: 0, opacity: 0.15 }}
       >
         <source src="/animation.mp4" type="video/mp4" />
       </video>
@@ -144,7 +144,7 @@ export default function Hero() {
         <div className="grid lg:grid-cols-12 gap-12 items-center">
 
           {/* ── Left column: Gold-bordered Image Card ── */}
-          <div className="lg:col-span-5 flex justify-center relative order-2 lg:order-1">
+          <div className="lg:col-span-5 flex justify-center relative order-2 lg:order-1 lg:-mt-12">
             <div 
               className="relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-purple-900/10"
               style={{
@@ -155,7 +155,7 @@ export default function Hero() {
               <img
                 src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80"
                 alt="Students studying with laptops"
-                className="w-full h-[400px] sm:h-[480px] object-cover"
+                className="w-full h-[360px] sm:h-[420px] object-cover"
               />
             </div>
 
@@ -183,13 +183,7 @@ export default function Hero() {
           {/* ── Right column: Content Details ── */}
           <div className="lg:col-span-7 flex flex-col gap-6 order-1 lg:order-2">
 
-            {/* Top pill badge */}
-            <div className="flex items-center gap-2 w-fit">
-              <span className="w-8 h-[2px] bg-purple-600" />
-              <span className="text-xs font-bold tracking-wider text-slate-500 uppercase">
-                SKILLDAD PROGRAMS | CIT CERTIFIED
-              </span>
-            </div>
+
 
             {/* Heading */}
             <h1 ref={headingRef}
