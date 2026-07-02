@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import StickyBar from "@/components/skills/StickyBar";
 import Footer from "@/components/skills/Footer";
+import { BookOpen, Layers, BadgeCheck, Monitor } from "lucide-react";
 
 import { Program, getProgramSlug } from "@/lib/programsData";
 
@@ -182,7 +183,7 @@ export default function ProgramsClient() {
       <StickyBar />
 
       {/* Hero Heading Section with Video */}
-      <div className="relative w-full pt-32 pb-12 flex flex-col items-center justify-center overflow-hidden border-b border-slate-200/60 shadow-sm">
+      <div className="relative w-full pt-40 pb-28 flex flex-col items-center justify-center overflow-hidden border-b border-slate-200/60 shadow-sm">
         <video
           autoPlay
           loop
@@ -204,9 +205,29 @@ export default function ProgramsClient() {
           <h1 className="font-display font-black text-5xl sm:text-7xl text-slate-900 mb-6 tracking-tight leading-tight">
             Our <span className="text-purple-700">Programs</span>
           </h1>
-          <p className="text-slate-700 text-lg sm:text-xl font-medium leading-relaxed">
+          <p className="text-slate-700 text-lg sm:text-xl font-medium leading-relaxed mb-10">
             Industry-aligned courses designed to accelerate your global career. Master new skills with our international university training.
           </p>
+
+          {/* Quick stats */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
+            {[
+              { icon: <BookOpen size={18} />, value: loading ? "—" : `${programs.length}+`, label: "Programs" },
+              { icon: <Layers size={18} />, value: loading ? "—" : `${uniqueCategories.length}`, label: "Categories" },
+              { icon: <BadgeCheck size={18} />, value: "Certified", label: "Credentials" },
+              { icon: <Monitor size={18} />, value: "Online", label: "Delivery Mode" },
+            ].map((s) => (
+              <div key={s.label} className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/60 shadow-sm flex items-center gap-3 text-left">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-100 text-purple-700">
+                  {s.icon}
+                </div>
+                <div>
+                  <div className="text-slate-900 font-bold text-sm">{s.value}</div>
+                  <div className="text-slate-500 text-[10px] uppercase tracking-wider">{s.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

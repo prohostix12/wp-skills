@@ -1,331 +1,358 @@
 "use client";
 
-import React, { useEffect } from "react";
-import StickyBar from "@/components/skills/StickyBar";
-import AOSProvider from "@/components/AOSProvider";
-import { 
-  Building2, 
-  MapPin, 
-  Globe, 
-  BookOpen, 
-  Users, 
-  Trophy, 
-  Monitor, 
-  CheckCircle2, 
-  Calendar,
-  Briefcase,
-  GraduationCap,
-  ArrowRight,
-  Phone,
-  Mail,
-  DollarSign,
-  Library,
-  Wifi,
-  Coffee
-} from "lucide-react";
+import React from "react";
 import Link from "next/link";
+import StickyBar from "@/components/skills/StickyBar";
+import Footer from "@/components/skills/Footer";
+import { citCourses } from "@/data/citCourses";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Award,
+  BadgeCheck,
+  BookOpen,
+  Building2,
+  ChevronRight,
+  CircleCheckBig,
+  Clock,
+  GraduationCap,
+  Globe,
+  MapPin,
+  Monitor,
+  Rocket,
+  Shield,
+  Star,
+  Users,
+  Zap,
+} from "lucide-react";
+
+const CIT_LOGO = "https://upload.wikimedia.org/wikipedia/en/thumb/d/d9/Logo_of_the_Canadian_Institute_of_Technology.svg/250px-Logo_of_the_Canadian_Institute_of_Technology.svg.png";
+
+const quickStats = [
+  { icon: <BookOpen size={18} />, color: "#3B82F6", value: "6 Courses", label: "Programs" },
+  { icon: <MapPin size={18} />, color: "#F59E0B", value: "Tirana, Albania", label: "Location" },
+  { icon: <BadgeCheck size={18} />, color: "#8B5CF6", value: "ECTS Credits", label: "Accreditation" },
+  { icon: <Rocket size={18} />, color: "#10B981", value: "SkillDad", label: "Placement" },
+];
+
+const whyChoose = [
+  { icon: <BadgeCheck size={18} />, title: "ECTS Accredited", desc: "European Credit Transfer System — recognized in 48+ countries" },
+  { icon: <Globe size={18} />, title: "Bologna Process", desc: "Part of the European Higher Education Area standards" },
+  { icon: <Award size={18} />, title: "Quality Education", desc: "Rigorous academic standards with industry-aligned curriculum" },
+  { icon: <Users size={18} />, title: "Expert Faculty", desc: "Learn from experienced professionals and academic researchers" },
+  { icon: <Rocket size={18} />, title: "SkillDad Placement", desc: "Guaranteed access to 500+ global companies after certification" },
+  { icon: <Shield size={18} />, title: "Recognized Globally", desc: "Employers worldwide value European university qualifications" },
+];
+
+const programs = citCourses.map((c) => ({
+  color: c.color,
+  title: c.title,
+  duration: c.duration,
+  tools: c.tools.join(", "),
+  image: c.image,
+  points: c.points,
+  href: `/skills/course/${c.slug}`,
+}));
+
+const eligibility = [
+  "Open to all nationalities — no geographic restrictions",
+  "Basic computer literacy and internet access required",
+  "English proficiency (intermediate level or above)",
+  "No prior domain experience needed for most programs",
+  "Minimum age: 18 years",
+  "Commitment to complete coursework and assessments",
+];
+
+const accreditation = [
+  { title: "ECTS Credits", desc: "European Credit Transfer System" },
+  { title: "Bologna Process", desc: "European Higher Education Area" },
+  { title: "International Recognition", desc: "Valid in 48+ countries" },
+];
+
+const color = "#3B82F6";
 
 export default function CITDetails() {
-  const color = "#7c3aed";
-  const glow = "rgba(124,58,237,0.15)";
-
   return (
-    <div className="bg-[#060418] min-h-screen text-slate-200 selection:bg-purple-500/30 font-sans">
-      <AOSProvider />
-      <StickyBar />
+    <main
+      className="cit-bg-image min-h-screen bg-cover bg-center bg-fixed bg-no-repeat relative"
+      style={{ backgroundImage: "url('/page-bg-skill.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-white/20" />
+      <div className="relative z-10">
+        <StickyBar />
 
-      {/* ── Hero Section ── */}
-      <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden border-b border-white/5">
-        {/* Background Effects */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#060418] via-transparent to-[#060418] z-10" />
-          <div className="absolute inset-0 bg-[#060418]/60 z-10" />
-          <img 
-            src="/canedian.png" 
-            alt="CIT Campus" 
-            className="w-full h-full object-cover object-center opacity-50"
-          />
-        </div>
+        {/* ── Back link + Hero banner ── */}
+        <section className="px-4 sm:px-6 lg:px-8 pt-32 lg:pt-36 pb-4">
+          <div className="max-w-6xl mx-auto">
+            <Link href="/skills#universities" className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 mb-4 transition-colors">
+              <ArrowLeft size={16} /> Back to Skill Programs
+            </Link>
 
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl" data-aos="fade-up">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6">
-              <Building2 size={14} className="text-purple-400" />
-              <span className="text-xs font-semibold text-white tracking-wide uppercase">Partner University</span>
-            </div>
-            
-            <h1 className="text-5xl lg:text-7xl font-display font-black text-white mb-6 leading-[1.1]">
-              Canadian Institute of <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Technology</span>
-            </h1>
-            
-            <p className="text-lg lg:text-xl text-white mb-8 leading-relaxed">
-              Based in Tirana, CIT is a recognized international private higher education institution dedicated to academic excellence, research development, and global cooperation.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="#programs" className="px-8 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-all shadow-[0_0_30px_rgba(124,58,237,0.3)]">
-                Explore Programs
-              </Link>
-              <a href="https://cit.edu.al/" target="_blank" rel="noopener noreferrer" className="px-8 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold transition-all flex items-center gap-2">
-                <Globe size={18} /> Official Website
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Quick Stats ── */}
-      <section className="py-12 border-b border-slate-200 relative z-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { icon: <BookOpen />, label: "Academic Programs", value: "6+" },
-              { icon: <MapPin />, label: "Location", value: "Tirana, AL" },
-              { icon: <Monitor />, label: "Delivery Mode", value: "Hybrid / Online" },
-              { icon: <Briefcase />, label: "Career Support", value: "95% Placed" }
-            ].map((stat, i) => (
-              <div key={i} className="flex flex-col items-center text-center gap-3" data-aos="fade-up" data-aos-delay={i * 100}>
-                <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600">
-                  {stat.icon}
-                </div>
-                <div>
-                  <div className="text-2xl font-black text-black">{stat.value}</div>
-                  <div className="text-sm text-slate-600 font-medium">{stat.label}</div>
-                </div>
+            <div className="rounded-3xl overflow-hidden relative min-h-[320px] flex items-end">
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: "url('/canedian.png')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+              <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, ${color}30 0%, ${color}EE 100%)` }} />
+              <div className="absolute top-6 right-8 opacity-[0.08]">
+                <GraduationCap size={180} className="text-white" />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── Overview & Mission ── */}
-      <section className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div data-aos="fade-right">
-              <h2 className="text-3xl lg:text-4xl font-display font-black text-white mb-6">
-                Shaping the <span className="text-purple-400">Future Leaders</span> of Technology & Business
-              </h2>
-              <div className="space-y-6 text-slate-300 leading-relaxed text-lg">
-                <p>
-                  The Canadian Institute of Technology (CIT) delivers a North American standard of education in the heart of the Balkans. We prepare students for the global marketplace through rigorous academics and practical skills.
-                </p>
-                <p>
-                  Our programs are designed in collaboration with industry experts, ensuring that our graduates are not just degree holders, but ready-to-deploy professionals in Software Engineering, IT, and Business Administration.
-                </p>
-              </div>
-              
-              <div className="mt-8 grid grid-cols-2 gap-4">
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-                  <GraduationCap className="text-purple-400 mb-3" size={24} />
-                  <h4 className="text-white font-bold mb-1">Global Standards</h4>
-                  <p className="text-sm text-slate-400">Curriculum aligned with international academic benchmarks.</p>
-                </div>
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
-                  <Trophy className="text-blue-400 mb-3" size={24} />
-                  <h4 className="text-white font-bold mb-1">Excellence</h4>
-                  <p className="text-sm text-slate-400">Award-winning faculty and research-driven methodology.</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="relative" data-aos="fade-left">
-              <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-blue-500/20 rounded-3xl blur-3xl -z-10" />
-              <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative bg-[#0a0726] aspect-[4/3] flex items-center justify-center">
-                <img src="/technology.jpg" alt="Technology at CIT" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-overlay" />
-                <div className="relative z-10 text-center p-8">
-                  <div className="w-20 h-20 mx-auto bg-purple-600 rounded-full flex items-center justify-center mb-6 shadow-[0_0_40px_rgba(124,58,237,0.5)]">
-                    <CheckCircle2 size={40} className="text-white" />
+              <div className="relative z-10 p-8 sm:p-12 w-full">
+                <div className="flex items-end justify-between gap-6">
+                  <div className="flex-1">
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      <span className="px-4 py-1.5 rounded-full bg-white/25 text-white text-xs font-bold border border-white/30 backdrop-blur-sm">ECTS Certified</span>
+                      <span className="px-4 py-1.5 rounded-full bg-white/20 text-white text-xs font-medium border border-white/20 flex items-center gap-1.5">
+                        <MapPin size={11} /> Tirana, Albania
+                      </span>
+                      <span className="px-4 py-1.5 rounded-full bg-white/20 text-white text-xs font-medium border border-white/20 flex items-center gap-1.5">
+                        <BookOpen size={11} /> 6 Programs
+                      </span>
+                    </div>
+                    <h1 className="font-black text-3xl sm:text-4xl lg:text-5xl text-white mb-3 leading-tight">
+                      Canadian Institute of Technology (CIT)
+                    </h1>
+                    <p className="text-white/70 text-base sm:text-lg max-w-2xl">
+                      A recognized European higher education institution committed to internationally aligned academic excellence, innovation, and applied learning.
+                    </p>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Accredited Excellence</h3>
-                  <p className="text-white">Recognized by the Ministry of Education, Sports and Youth in Albania.</p>
+                  <div className="hidden sm:flex w-24 h-24 rounded-2xl bg-white/95 backdrop-blur-sm items-center justify-center p-3 shadow-xl border border-white/50 flex-shrink-0">
+                    <img src={CIT_LOGO} alt="Canadian Institute of Technology logo" className="w-full h-full object-contain" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── Academic Programs ── */}
-      <section id="programs" className="py-24 bg-[#0a0726] relative border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-3xl lg:text-5xl font-display font-black text-white mb-4">Available <span className="text-purple-400">Programs</span></h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Discover our cutting-edge Bachelor's and Master's degree programs tailored for the modern digital economy.</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Software Engineering", type: "Bachelor of Science", dur: "3 Years", desc: "Master modern software development, architecture, and coding practices." },
-              { title: "Computer Engineering & IT", type: "Bachelor of Science", dur: "3 Years", desc: "Deep dive into hardware, networking, and IT infrastructure systems." },
-              { title: "Business Administration", type: "Bachelor of Arts", dur: "3 Years", desc: "Develop foundational business, management, and entrepreneurial skills." },
-              { title: "Business Administration & IT", type: "Bachelor of Arts", dur: "3 Years", desc: "Bridging the gap between business strategy and technological solutions." },
-              { title: "Software Engineering", type: "Master of Science", dur: "2 Years", desc: "Advanced concepts in software design, AI, and project management." },
-              { title: "Digital Marketing", type: "Master of Science", dur: "1.5 Years", desc: "Strategic digital marketing, analytics, and modern business growth." },
-            ].map((prog, i) => (
-              <div key={i} className="group p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-purple-500/50 hover:bg-white/[0.07] transition-all duration-300 flex flex-col h-full" data-aos="fade-up" data-aos-delay={i * 50}>
-                <div className="text-xs font-bold text-purple-400 tracking-wider uppercase mb-2">{prog.type}</div>
-                <h3 className="text-xl font-bold text-white mb-3">{prog.title}</h3>
-                <p className="text-slate-400 text-sm mb-6 flex-grow">{prog.desc}</p>
-                <div className="flex items-center justify-between pt-6 border-t border-white/10 mt-auto">
-                  <div className="flex items-center gap-2 text-sm text-slate-300">
-                    <Calendar size={16} className="text-slate-500" /> {prog.dur}
+        {/* ── Quick stats ── */}
+        <section className="px-4 sm:px-6 lg:px-8 py-3">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {quickStats.map((s) => (
+                <div key={s.label} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${s.color}15`, color: s.color }}>
+                    {s.icon}
                   </div>
-                  <ArrowRight size={18} className="text-purple-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  <div>
+                    <div className="text-gray-900 font-bold text-sm">{s.value}</div>
+                    <div className="text-gray-400 text-[10px] uppercase tracking-wider">{s.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Main content ── */}
+        <section className="px-4 sm:px-6 lg:px-8 py-6">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-3 gap-6">
+            {/* Left column */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* About */}
+              <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
+                <h2 className="font-bold text-xl text-gray-900 mb-4 flex items-center gap-2">
+                  <Building2 size={20} style={{ color }} /> About the University
+                </h2>
+                <p className="text-gray-600 leading-relaxed mb-4">
+                  <span className="text-gray-900 font-semibold">Canadian Institute of Technology (CIT)</span> is an accredited European higher education institution located in Tirana, Albania. The university offers ECTS-certified professional skill programs designed to equip students with industry-ready competencies recognized across 48+ European countries.
+                </p>
+                <p className="text-gray-600 leading-relaxed">
+                  All programs are aligned with the Bologna Process framework and delivered through a combination of expert instruction, hands-on projects, and mentorship. Graduates receive internationally recognized certificates with guaranteed placement support through SkillDad.
+                </p>
+              </div>
+
+              {/* Why Choose */}
+              <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
+                <h2 className="font-bold text-xl text-gray-900 mb-6 flex items-center gap-2">
+                  <Star size={20} style={{ color }} /> Why Choose Canadian Institute of Technology?
+                </h2>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {whyChoose.map((item) => (
+                    <div key={item.title} className="rounded-2xl p-5 bg-gray-50 border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background: `${color}15`, color }}>
+                        {item.icon}
+                      </div>
+                      <h4 className="font-bold text-gray-900 text-sm mb-1">{item.title}</h4>
+                      <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── Admission Requirements ── */}
-      <section className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-br from-purple-900/40 to-[#060418] border border-purple-500/20 rounded-3xl p-8 lg:p-16 relative overflow-hidden" data-aos="fade-up">
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-            
-            <div className="grid lg:grid-cols-2 gap-12 relative z-10">
-              <div>
-                <h2 className="text-3xl lg:text-4xl font-display font-black text-white mb-6">Admission <span className="text-purple-400">Requirements</span></h2>
-                <p className="text-slate-300 mb-8 text-lg">
-                  Ready to join CIT? Here is everything you need to know to prepare your application for our undergraduate and graduate programs.
-                </p>
-                <a href="#apply" className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-[#060418] font-bold transition-all hover:bg-slate-200 shadow-xl">
-                  Start Application <ArrowRight size={18} />
+              {/* Programs */}
+              <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
+                <h2 className="font-bold text-xl text-gray-900 mb-6 flex items-center gap-2">
+                  <BookOpen size={20} style={{ color }} /> Programs Offered
+                </h2>
+                <div className="space-y-4">
+                  {programs.map((prog) => (
+                    <div key={prog.title} className="group rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all">
+                      <div className="flex flex-col sm:flex-row">
+                        <div className="relative w-full sm:w-48 h-36 sm:h-auto flex-shrink-0 overflow-hidden">
+                          <div
+                            className="absolute inset-0 transition-transform duration-500 group-hover:scale-110"
+                            style={{ backgroundImage: `url('${prog.image}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+                          />
+                          <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${prog.color}80, ${prog.color}40)` }} />
+                        </div>
+                        <div className="flex-1 p-5">
+                          <div className="flex items-start justify-between gap-3 mb-3">
+                            <h4 className="font-bold text-gray-900 text-base">{prog.title}</h4>
+                            <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${prog.color}15`, color: prog.color }}>
+                              <BookOpen size={16} />
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap gap-2 mb-3">
+                            <span className="text-[10px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1" style={{ background: `${prog.color}10`, color: prog.color }}>
+                              <Clock size={9} /> {prog.duration}
+                            </span>
+                            <span className="text-[10px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1" style={{ background: `${prog.color}10`, color: prog.color }}>
+                              <Monitor size={9} /> Online
+                            </span>
+                            <span className="text-[10px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 bg-gray-100 text-gray-600">
+                              <Zap size={9} /> {prog.tools}
+                            </span>
+                          </div>
+                          <div className="flex flex-wrap gap-x-4 gap-y-1.5 mb-4">
+                            {prog.points.map((p) => (
+                              <div key={p} className="flex items-center gap-1.5">
+                                <CircleCheckBig size={11} className="flex-shrink-0" style={{ color: prog.color }} />
+                                <span className="text-gray-600 text-xs">{p}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <a href={prog.href} className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors" style={{ color: prog.color }}>
+                            View Course Details <ChevronRight size={14} />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Eligibility */}
+              <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
+                <h2 className="font-bold text-xl text-gray-900 mb-6 flex items-center gap-2">
+                  <Shield size={20} style={{ color }} /> Eligibility &amp; Requirements
+                </h2>
+                <div className="space-y-3">
+                  {eligibility.map((req) => (
+                    <div key={req} className="flex items-center gap-3 p-3.5 rounded-xl bg-gray-50 border border-gray-100">
+                      <CircleCheckBig size={16} className="flex-shrink-0" style={{ color }} />
+                      <span className="text-gray-700 text-sm">{req}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right sidebar */}
+            <div className="space-y-6">
+              <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-lg sticky top-24">
+                <div className="text-center mb-5">
+                  <div className="w-20 h-20 rounded-2xl bg-white flex items-center justify-center mx-auto mb-3 shadow-lg border border-gray-100 p-2">
+                    <img src={CIT_LOGO} alt="Canadian Institute of Technology logo" className="w-full h-full object-contain" />
+                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg">Canadian Institute of Technology</h3>
+                  <p className="text-gray-400 text-xs mt-1">Tirana, Albania</p>
+                </div>
+                <div className="space-y-2.5 mb-6">
+                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 border border-gray-100">
+                    <span className="text-gray-500 text-sm flex items-center gap-2"><BookOpen size={14} /> Programs</span>
+                    <span className="font-semibold text-sm text-gray-900">6 Courses</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 border border-gray-100">
+                    <span className="text-gray-500 text-sm flex items-center gap-2"><BadgeCheck size={14} /> Certificate</span>
+                    <span className="font-semibold text-sm text-blue-600">ECTS Credits</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 border border-gray-100">
+                    <span className="text-gray-500 text-sm flex items-center gap-2"><Rocket size={14} /> Placement</span>
+                    <span className="font-semibold text-sm text-emerald-600">SkillDad</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 border border-gray-100">
+                    <span className="text-gray-500 text-sm flex items-center gap-2"><Globe size={14} /> Recognition</span>
+                    <span className="font-semibold text-sm text-purple-600">48+ Countries</span>
+                  </div>
+                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 border border-gray-100">
+                    <span className="text-gray-500 text-sm flex items-center gap-2"><MapPin size={14} /> Location</span>
+                    <span className="font-semibold text-sm text-gray-900">Tirana, Albania</span>
+                  </div>
+                </div>
+                <a
+                  href="/skills#contact"
+                  className="w-full flex items-center justify-center gap-2 py-4 rounded-xl text-white font-bold transition-all hover:scale-[1.02] shadow-lg"
+                  style={{ background: `linear-gradient(135deg, ${color}, ${color}CC)`, boxShadow: `0 8px 20px ${color}30` }}
+                >
+                  Enroll Now <ArrowRight size={16} />
                 </a>
+                <p className="text-center text-[10px] text-gray-400 mt-3">Limited seats available</p>
               </div>
-              
-              <div className="space-y-6">
-                {[
-                  { title: "High School Diploma", desc: "For Bachelor's programs, a certified copy of your high school diploma." },
-                  { title: "English Proficiency", desc: "IELTS (min 5.5), TOEFL, or equivalent proof of English language proficiency." },
-                  { title: "Academic Transcripts", desc: "Official transcripts from all previously attended educational institutions." },
-                  { title: "Identification", desc: "A valid passport copy and recent passport-sized photographs." }
-                ].map((req, i) => (
-                  <div key={i} className="flex gap-4 items-start">
-                    <div className="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0 mt-1 border border-purple-500/30">
-                      <CheckCircle2 size={16} className="text-purple-400" />
+
+              <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-lg">
+                <h4 className="font-bold text-gray-900 text-sm mb-4 flex items-center gap-2">
+                  <Award size={16} style={{ color }} /> Accreditation
+                </h4>
+                <div className="space-y-3">
+                  {accreditation.map((a) => (
+                    <div key={a.title} className="flex items-start gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
+                      <BadgeCheck size={16} className="flex-shrink-0 mt-0.5" style={{ color }} />
+                      <div>
+                        <div className="text-gray-900 text-sm font-semibold">{a.title}</div>
+                        <div className="text-gray-400 text-xs">{a.desc}</div>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-white font-bold text-lg mb-1">{req.title}</h4>
-                      <p className="text-slate-400 text-sm">{req.desc}</p>
-                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl p-6 border shadow-lg" style={{ background: `linear-gradient(135deg, ${color}08, ${color}04)`, borderColor: `${color}20` }}>
+                <Rocket size={24} className="mb-3" style={{ color }} />
+                <h4 className="font-bold text-gray-900 text-sm mb-2">SkillDad Placement</h4>
+                <p className="text-gray-500 text-xs leading-relaxed mb-4">Complete your course and get guaranteed placement access with 500+ companies worldwide.</p>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="rounded-xl p-3 bg-white border border-gray-100 text-center">
+                    <div className="font-black text-lg" style={{ color }}>500+</div>
+                    <div className="text-gray-400 text-[9px] uppercase">Companies</div>
                   </div>
-                ))}
+                  <div className="rounded-xl p-3 bg-white border border-gray-100 text-center">
+                    <div className="font-black text-lg" style={{ color }}>95%</div>
+                    <div className="text-gray-400 text-[9px] uppercase">Success</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── Campus & Facilities ── */}
-      <section className="py-24 bg-[#0a0726] border-t border-white/5 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16" data-aos="fade-up">
-            <h2 className="text-3xl lg:text-5xl font-display font-black text-white mb-4">Campus & <span className="text-purple-400">Facilities</span></h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Experience a modern, vibrant campus equipped with everything you need to succeed academically and socially.</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { icon: <Library />, title: "Modern Library", desc: "Access to thousands of physical books and a vast digital library for research." },
-              { icon: <Monitor />, title: "High-Tech Labs", desc: "State-of-the-art computer labs with the latest software and hardware." },
-              { icon: <Wifi />, title: "Campus-Wide Wi-Fi", desc: "High-speed internet access available throughout the entire campus." },
-              { icon: <Coffee />, title: "Student Cafeteria", desc: "A great place to relax, eat, and socialize with fellow students between classes." },
-              { icon: <Users />, title: "Study Lounges", desc: "Quiet and collaborative spaces dedicated for group work and individual study." },
-              { icon: <Building2 />, title: "Central Location", desc: "Located in the heart of Tirana with easy access to public transportation." }
-            ].map((facility, i) => (
-              <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors" data-aos="fade-up" data-aos-delay={i * 100}>
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4 border border-purple-500/20">
-                  {facility.icon}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2">{facility.title}</h3>
-                <p className="text-slate-400 text-sm">{facility.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Tuition Fees ── */}
-      <section className="py-24 border-t border-white/5 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div data-aos="fade-right">
-              <h2 className="text-3xl lg:text-4xl font-display font-black text-white mb-6">Tuition & <span className="text-purple-400">Financial Aid</span></h2>
-              <p className="text-slate-300 text-lg mb-6 leading-relaxed">
-                We believe that quality education should be accessible. CIT offers competitive tuition rates and various scholarship opportunities to support our students.
+        {/* ── Final CTA ── */}
+        <section className="px-4 sm:px-6 lg:px-8 py-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="rounded-3xl p-10 text-center shadow-lg" style={{ background: `linear-gradient(135deg, ${color}, ${color}CC)` }}>
+              <h2 className="font-black text-2xl sm:text-3xl text-white mb-3">Ready to Start Your Journey?</h2>
+              <p className="text-white/70 max-w-lg mx-auto mb-6 text-sm">
+                Enroll in an ECTS-certified program from Canadian Institute of Technology and launch your global career with SkillDad placement.
               </p>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center gap-3 text-slate-300">
-                  <CheckCircle2 size={20} className="text-purple-400" /> Merit-based scholarships up to 100%
-                </li>
-                <li className="flex items-center gap-3 text-slate-300">
-                  <CheckCircle2 size={20} className="text-purple-400" /> Early registration discounts
-                </li>
-                <li className="flex items-center gap-3 text-slate-300">
-                  <CheckCircle2 size={20} className="text-purple-400" /> Flexible installment payment plans
-                </li>
-              </ul>
-            </div>
-            
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm" data-aos="fade-left">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-14 h-14 rounded-full bg-purple-500/20 flex items-center justify-center text-purple-400 border border-purple-500/30">
-                  <DollarSign size={28} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-white">Estimated Fees</h3>
-                  <p className="text-slate-400 text-sm">Per Academic Year</p>
-                </div>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <a href="/skills#contact" className="px-8 py-3.5 rounded-full font-bold text-gray-900 bg-white shadow-lg flex items-center gap-2 text-sm hover:scale-105 transition-transform">
+                  Apply Now <ArrowRight size={15} />
+                </a>
+                <Link href="/skills" className="px-8 py-3.5 rounded-full font-semibold text-white/80 border border-white/30 hover:bg-white/10 text-sm flex items-center gap-2">
+                  <BookOpen size={15} /> Browse All Courses
+                </Link>
               </div>
-              
-              <div className="space-y-4">
-                <div className="flex justify-between items-center p-4 rounded-xl bg-white/5 border border-white/10">
-                  <span className="text-white font-medium">Bachelor Programs</span>
-                  <span className="text-purple-400 font-bold text-lg">€2,500 - €3,000</span>
-                </div>
-                <div className="flex justify-between items-center p-4 rounded-xl bg-white/5 border border-white/10">
-                  <span className="text-white font-medium">Master Programs</span>
-                  <span className="text-purple-400 font-bold text-lg">€3,000 - €3,500</span>
-                </div>
-              </div>
-              
-              <p className="text-xs text-slate-500 mt-6 text-center">
-                *Fees are indicative and subject to change. Please contact admissions for exact figures.
-              </p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── Contact Details ── */}
-      <section className="py-24 bg-[#0a0726] border-t border-white/5 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
-          <h2 className="text-3xl lg:text-4xl font-display font-black text-white mb-4">Get in <span className="text-purple-400">Touch</span></h2>
-          <p className="text-slate-400 text-lg mb-12 max-w-2xl mx-auto">Have questions about admissions, programs, or campus life? Our admissions team is here to help.</p>
-          
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex flex-col items-center">
-              <Phone className="text-purple-400 mb-4" size={28} />
-              <h4 className="text-white font-bold mb-2">Phone</h4>
-              <p className="text-slate-400">+355 (0) 4 222 2222</p>
-            </div>
-            <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex flex-col items-center">
-              <Mail className="text-purple-400 mb-4" size={28} />
-              <h4 className="text-white font-bold mb-2">Email</h4>
-              <p className="text-slate-400">info@cit.edu.al</p>
-            </div>
-            <div className="bg-white/5 border border-white/10 p-6 rounded-2xl flex flex-col items-center">
-              <MapPin className="text-purple-400 mb-4" size={28} />
-              <h4 className="text-white font-bold mb-2">Address</h4>
-              <p className="text-slate-400 text-sm">Rruga Xhanfize Keko, Tirana, Albania</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div>
+        <Footer />
+      </div>
+    </main>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, GraduationCap, Monitor, Briefcase, BookOpen } from "lucide-react";
+import { Building2, GraduationCap, Monitor, Briefcase, BookOpen, Award, Globe, FlaskConical } from "lucide-react";
 
 const universities = [
   {
@@ -15,10 +15,15 @@ const universities = [
       { name: "Prof. Dr. Ramiz Zekaj", role: "President" },
       { name: "Prof. Dr. Ismail Kocayusufoglu", role: "Rector" },
     ],
+    highlights: [
+      { icon: <Award size={16} />, title: "Internationally Recognised", desc: "Accredited private higher education institution" },
+      { icon: <FlaskConical size={16} />, title: "Research Driven", desc: "Strong focus on research & academic development" },
+      { icon: <Globe size={16} />, title: "Global Cooperation", desc: "Active international partnership network" },
+    ],
     stats: [
-      { icon: <BookOpen size={18} />, value: "6", label: "Programs" },
-      { icon: <Monitor size={18} />, value: "Online", label: "Delivery Mode" },
-      { icon: <Briefcase size={18} />, value: "Yes", label: "Career Support" },
+      { icon: <BookOpen size={15} />, value: "6", label: "Programs" },
+      { icon: <Monitor size={15} />, value: "Online", label: "Delivery Mode" },
+      { icon: <Briefcase size={15} />, value: "Yes", label: "Career Support" },
     ],
     color: "#7c3aed", glow: "rgba(124,58,237,0.08)"
   },
@@ -34,10 +39,15 @@ const universities = [
       { name: "Prof. Dr. Anastas Angjeli", role: "Honorary President" },
       { name: "Prof. Dr. Adrian Civici", role: "Rector" },
     ],
+    highlights: [
+      { icon: <Award size={16} />, title: "Internationally Recognised", desc: "Accredited private higher education institution" },
+      { icon: <FlaskConical size={16} />, title: "Research Driven", desc: "Strong focus on research & academic development" },
+      { icon: <Globe size={16} />, title: "Global Cooperation", desc: "Active international partnership network" },
+    ],
     stats: [
-      { icon: <BookOpen size={18} />, value: "4", label: "Programs" },
-      { icon: <Monitor size={18} />, value: "Online", label: "Delivery Mode" },
-      { icon: <Briefcase size={18} />, value: "Yes", label: "Career Support" },
+      { icon: <BookOpen size={15} />, value: "4", label: "Programs" },
+      { icon: <Monitor size={15} />, value: "Online", label: "Delivery Mode" },
+      { icon: <Briefcase size={15} />, value: "Yes", label: "Career Support" },
     ],
     color: "#3b82f6", glow: "rgba(59,130,246,0.08)"
   },
@@ -46,9 +56,6 @@ const universities = [
 export default function UniversityPartners() {
   return (
     <section id="universities" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
-      {/* Background grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
         style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
@@ -147,22 +154,44 @@ export default function UniversityPartners() {
                   </div>
                 </div>
 
+                {/* Highlights */}
+                <div className="p-5 border-b border-slate-100">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Award size={16} style={{ color: uni.color }} />
+                    <h4 className="font-display font-bold text-xs uppercase tracking-wider text-slate-500">
+                      Program Highlights
+                    </h4>
+                  </div>
+                  <div className="grid sm:grid-cols-3 gap-3">
+                    {uni.highlights.map((item) => (
+                      <div key={item.title} className="flex flex-col gap-1.5 p-3 rounded-xl bg-white border border-slate-200/60">
+                        <div className="w-7 h-7 rounded-lg flex items-center justify-center"
+                          style={{ background: `${uni.color}10`, color: uni.color, border: `1px solid ${uni.color}20` }}>
+                          {item.icon}
+                        </div>
+                        <p className="font-bold text-slate-800 text-xs leading-tight">{item.title}</p>
+                        <p className="text-xs leading-snug text-slate-500">{item.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Stats */}
-                <div className="grid grid-cols-3 divide-x divide-slate-100 flex-1">
+                <div className="grid grid-cols-3 divide-x divide-slate-100">
                   {uni.stats.map((stat) => (
                     <div
                       key={stat.label}
-                      className="flex flex-col items-center justify-center gap-2 p-6 transition-colors bg-white/40"
+                      className="flex flex-col items-center justify-center gap-1 p-2.5 transition-colors bg-white/40"
                     >
-                      <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                      <div className="w-6 h-6 rounded-lg flex items-center justify-center"
                         style={{ background: `${uni.color}10`, color: uni.color, border: `1px solid ${uni.color}20` }}
                       >
                         {stat.icon}
                       </div>
-                      <p className="font-display font-black text-xl text-slate-800">
+                      <p className="font-display font-black text-sm text-slate-800">
                         {stat.value}
                       </p>
-                      <p className="text-xs font-semibold text-center text-slate-500">{stat.label}</p>
+                      <p className="text-[10px] font-semibold text-center text-slate-500">{stat.label}</p>
                     </div>
                   ))}
                 </div>

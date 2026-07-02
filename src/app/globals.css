@@ -405,17 +405,12 @@ body, main, section, footer, [style*="background: #060418"], [style*="background
   color: #334155 !important;
 }
 
-/* Grid pattern for light mode */
-main::before, section::before, .dark-section::before, [style*="background-image: linear-gradient"]::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(120,110,90,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(120,110,90,0.03) 1px, transparent 1px) !important;
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
+/* University detail pages: fixed background photo (higher specificity beats the base override above) */
+.cit-bg-image {
+  background-image: url('/page-bg-skill.jpg') !important;
+}
+.med-bg-image {
+  background-image: url('/mediterranean.png') !important;
 }
 
 /* Star particles and dark ambient glow circles hidden or faded */
