@@ -601,3 +601,40 @@ div.bg-brand-blue .btn-outline-white:hover {
   background: rgba(255, 255, 255, 0.13) !important;
   border-color: rgba(255, 255, 255, 0.4) !important;
 }
+
+/* ─── Shared site Footer (<footer class="bg-brand-blue">) — same restoration as the
+   div.bg-brand-blue rules above, plus the background itself since the base override
+   near the top of this file targets the bare `footer` tag directly ─── */
+footer.bg-brand-blue {
+  background-color: #0F2537 !important;
+}
+footer.bg-brand-blue,
+footer.bg-brand-blue h1,
+footer.bg-brand-blue h2,
+footer.bg-brand-blue h3,
+footer.bg-brand-blue h4,
+footer.bg-brand-blue h5,
+footer.bg-brand-blue h6,
+footer.bg-brand-blue p,
+footer.bg-brand-blue span,
+footer.bg-brand-blue div,
+footer.bg-brand-blue a,
+footer.bg-brand-blue li,
+footer.bg-brand-blue svg {
+  color: #ffffff !important;
+}
+footer.bg-brand-blue .text-brand-teal {
+  color: #a78bfa !important;
+}
+footer.bg-brand-blue .text-slate-300 {
+  color: #cbd5e1 !important;
+}
+footer.bg-brand-blue .text-slate-400 {
+  color: #94a3b8 !important;
+}
+footer.bg-brand-blue .text-slate-500 {
+  color: #64748b !important;
+}
+footer.bg-brand-blue a:hover {
+  color: #5eead4 !important;
+}

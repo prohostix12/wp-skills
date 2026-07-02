@@ -1,21 +1,25 @@
+import fs from "fs";
+import path from "path";
 import type { Metadata } from "next";
 import StickyBar from "@/components/skills/StickyBar";
 import Footer from "@/components/skills/Footer";
 import PlacementPlatform from "@/components/skills/PlacementPlatform";
 import {
-  Award,
   Target,
-  MapPin,
   Building2,
-  Users,
-  Briefcase,
-  GraduationCap
+  GraduationCap,
+  ShieldCheck,
+  BadgeCheck,
+  Globe,
+  Quote,
+  CheckCircle2,
+  TrendingUp,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Us | World Passport — Your Gateway to World-Class Education",
   description:
-    "Founded in 2015, World Passport is dedicated to making international education accessible. Discover our values, mission, awards, and leadership team.",
+    "World Passport is dedicated to making international education accessible. Discover our values, accreditations, and leadership team.",
   keywords:
     "global education, study abroad, European universities, overseas education, India, about World Passport",
   openGraph: {
@@ -30,18 +34,69 @@ const team = [
   {
     name: "Edwin C Benny",
     role: "CEO",
-    desc: "Visionary leader driving World Passport's mission to make international education accessible to every student.",
+    desc: "Visionary leader driving World Passport's mission to make international education accessible to every student, regardless of background.",
     image: "/assets/team/edwin.jpeg",
-    fallbackColor: "#7c3aed"
+    fallbackColor: "#7c3aed",
+    quote: "Every student deserves a real shot at a global career — not just the ones who can afford it.",
   },
   {
     name: "Mujeeb T",
     role: "Director",
-    desc: "Guiding strategic direction and partnerships to expand World Passport's global education network.",
+    desc: "Guiding strategic direction and partnerships to expand World Passport's global education network across Europe and the Gulf.",
     image: "/assets/team/mujeeb-t.jpg",
-    fallbackColor: "#D9383A"
-  }
+    fallbackColor: "#0F2537",
+    quote: "We built our university partnerships to be transparent, accredited, and outcome-driven — nothing else earns trust.",
+  },
 ];
+
+const impactStats = [
+  { val: "20K", suffix: "+", label: "Students Recruited", icon: <GraduationCap size={22} /> },
+  { val: "200", suffix: "+", label: "Partner Universities", icon: <Building2 size={22} /> },
+  { val: "95", suffix: "%", label: "Placement Success Rate", icon: <TrendingUp size={22} /> },
+];
+
+const accreditations = [
+  { label: "ECTS Certified Programs", icon: <ShieldCheck size={18} /> },
+  { label: "Canadian Institute of Technology", icon: <Building2 size={18} /> },
+  { label: "Mediterranean University of Albania", icon: <Building2 size={18} /> },
+  { label: "SkillDad Placement Network", icon: <BadgeCheck size={18} /> },
+  { label: "Offices in Kerala & Dubai", icon: <Globe size={18} /> },
+];
+
+const values = [
+  {
+    title: "Verified Partnerships",
+    desc: "Every university we represent is accredited and vetted before it reaches our students — no unlicensed institutions, ever.",
+    icon: <ShieldCheck size={22} className="text-purple-600" />,
+  },
+  {
+    title: "Transparent Pricing",
+    desc: "No hidden fees, no surprise charges after enrollment. What we quote is what you pay, start to finish.",
+    icon: <CheckCircle2 size={22} className="text-purple-600" />,
+  },
+  {
+    title: "Outcome-Focused",
+    desc: "From application to graduation to placement — we stay accountable for the result, not just the enrollment.",
+    icon: <Target size={22} className="text-purple-600" />,
+  },
+];
+
+function hasLocalAsset(relPath: string) {
+  try {
+    return fs.existsSync(path.join(process.cwd(), "public", relPath));
+  } catch {
+    return false;
+  }
+}
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
 
 export default function AboutPage() {
   return (
@@ -55,86 +110,145 @@ export default function AboutPage() {
           }}
         />
       </div>
-      
-      {/* Radial lighting highlights */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(124,58,237,0.04) 0%, transparent 70%)" }} />
-      <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(217,56,58,0.02) 0%, transparent 70%)" }} />
 
-      {/* Sticky Navigation */}
       <StickyBar />
 
-      {/* ── Header Section (Redesigned) ── */}
-      <section className="relative w-full min-h-[85vh] flex items-center pt-32 pb-20 overflow-hidden">
-        {/* Background Image & Overlay */}
+      {/* ── Hero (background image kept, centered title treatment) ── */}
+      <section className="relative w-full min-h-[75vh] flex items-center justify-center pt-32 pb-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1920" 
-            alt="University Campus" 
+          <img
+            src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1920"
+            alt="University Campus"
             className="w-full h-full object-cover"
           />
-          {/* Gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col lg:flex-row justify-between items-end gap-12 lg:gap-8 mt-12">
-          
-          {/* Left Content */}
-          <div className="max-w-2xl text-left w-full lg:mb-12">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-bold text-slate-800 bg-white shadow-sm mb-6">
-              <span className="text-purple-600 font-black text-lg leading-none">*</span> About Us
-            </span>
-            <h1 className="font-display font-black text-white leading-tight mb-6 tracking-tight uppercase" style={{ fontSize: "clamp(2.2rem, 4vw, 3.5rem)" }}>
-              24 Years of Proven Excellence
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
+          <div className="max-w-2xl mx-auto flex flex-col items-center text-white">
+            <h1
+              className="font-display font-black leading-tight tracking-tight"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}
+            >
+              Who We Are
             </h1>
-            <p className="text-base sm:text-lg leading-relaxed text-white font-medium max-w-xl">
-              Since 2001, we have been inspiring students to excel in their higher education aspirations by helping them choose the right university abroad. Being an award-winning education consultant, we are the official representative for a wide range of well-reputed universities globally.
-            </p>
           </div>
+        </div>
+      </section>
 
-          {/* Right Floating Stats Card */}
-          <div className="w-full max-w-md bg-white rounded-2xl p-7 sm:p-9 shadow-2xl relative lg:translate-y-16">
-            <div className="flex flex-col gap-6">
-              
-              {/* Stat 1 */}
-              <div className="flex items-center justify-between border-b border-slate-100 pb-5">
-                <div className="flex items-center gap-6">
-                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">20K</span>
-                  <span className="text-sm font-semibold text-slate-600 leading-tight w-32">Students Recruited</span>
+      {/* ── Impact stat band (dark, full-width, replaces the old floating card).
+           Uses a <div> (not <section>) with the bg-brand-blue class so the site's
+           dark-card color-restoration rules in globals.css apply correctly ── */}
+      <div className="relative z-10 bg-brand-blue">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 divide-y-0">
+            {impactStats.map((s) => (
+              <div key={s.label} className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-brand-teal flex-shrink-0">
+                  {s.icon}
                 </div>
-                <GraduationCap size={32} strokeWidth={1.5} className="text-slate-800" />
-              </div>
-
-              {/* Stat 2 */}
-              <div className="flex items-center justify-between border-b border-slate-100 pb-5">
-                <div className="flex items-center gap-6">
-                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">60 +</span>
-                  <span className="text-sm font-semibold text-slate-600 leading-tight w-32">Prestigious Awards Won</span>
+                <div>
+                  <div className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight leading-none">
+                    {s.val}<span className="text-brand-teal">{s.suffix}</span>
+                  </div>
+                  <div className="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider mt-1">{s.label}</div>
                 </div>
-                <Award size={32} strokeWidth={1.5} className="text-amber-500" />
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-              {/* Stat 3 */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-6">
-                  <span className="font-display font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">200 +</span>
-                  <span className="text-sm font-semibold text-slate-600 leading-tight w-32">Universities to Choose</span>
-                </div>
-                <Building2 size={32} strokeWidth={1.5} className="text-red-500" />
-              </div>
+      {/* ── Accreditation / trust bar ── */}
+      <section className="relative z-10 border-b border-slate-200 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-4">
+            <span className="text-[11px] font-bold text-black/40 uppercase tracking-wider flex-shrink-0">
+              Accredited &amp; Trusted By
+            </span>
+            <div className="flex flex-wrap gap-x-8 gap-y-3">
+              {accreditations.map((a) => (
+                <span key={a.label} className="inline-flex items-center gap-2 text-sm font-semibold text-black/70">
+                  <span className="text-purple-600">{a.icon}</span> {a.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
+      {/* ── Our Story ── */}
+      <section className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
+              Our Approach
+            </span>
+            <h2 className="font-display font-black text-black text-3xl md:text-4xl mb-5 leading-tight">
+              Built Around <span className="text-purple-700">Verified Partnerships</span>
+            </h2>
+            <div className="space-y-4 text-black/70 text-sm sm:text-base leading-relaxed">
+              <p>
+                World Passport exists to close a specific gap: talented students missing out on international education, not because they lack ability, but because the process is often opaque, expensive, and full of unverified agents promising things they can&apos;t deliver.
+              </p>
+              <p>
+                We&apos;re the official representative for accredited institutions including the Canadian Institute of Technology and Mediterranean University of Albania — pairing ECTS-certified academic programs with real placement support through our SkillDad partnership network.
+              </p>
+              <p>
+                We deliberately work with a short list of vetted universities rather than a long list of unverified ones. Every partnership on this site is one our own team has reviewed for accreditation status before a single student enrolls.
+              </p>
             </div>
           </div>
 
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-[0.05] pointer-events-none"
+              style={{ background: "radial-gradient(circle, #7c3aed, transparent 70%)" }} />
+            <Quote size={28} className="text-purple-200 mb-4" />
+            <p className="text-black/80 text-base sm:text-lg leading-relaxed font-medium mb-6">
+              &quot;We don&apos;t measure success by enrollment numbers. We measure it by how many students actually graduate, get certified, and get placed.&quot;
+            </p>
+            <div className="flex items-center gap-3 pt-5 border-t border-slate-100">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style={{ background: "#0F2537" }}>
+                MT
+              </div>
+              <div>
+                <div className="font-bold text-black text-sm">Mujeeb T</div>
+                <div className="text-black/50 text-xs">Director, World Passport</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Our Values ── */}
+      <section className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white/60 rounded-[2.5rem]">
+        <div className="mb-14 max-w-2xl">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
+            Why Students Trust Us
+          </span>
+          <h2 className="font-display font-black text-black text-3xl md:text-4xl mb-3">
+            Built on <span className="text-purple-700">Accountability</span>, Not Just Promises
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {values.map((v) => (
+            <div key={v.title} className="bg-white border border-slate-200 rounded-3xl p-7 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+              <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center mb-5">
+                {v.icon}
+              </div>
+              <h3 className="font-display font-black text-black text-lg mb-2">{v.title}</h3>
+              <p className="text-black/60 text-sm leading-relaxed">{v.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* ── Placement Platform Section ── */}
       <PlacementPlatform />
 
-      {/* ── Leadership Section ── */}
+      {/* ── Leadership Section — profile rows instead of a card grid ── */}
       <section className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200">
         <div className="mb-14">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
@@ -144,57 +258,76 @@ export default function AboutPage() {
             Meet the <span className="text-purple-700">Team</span>
           </h2>
           <p className="text-black/60 text-sm sm:text-base mt-2 max-w-md">
-            Experienced counsellors who've lived the international education journey
+            Experienced counsellors who&apos;ve lived the international education journey
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl">
-          {team.map((member, i) => (
-            <div
-              key={member.name}
-              className="bg-white border border-slate-200 rounded-3xl overflow-hidden hover:scale-[1.02] hover:border-purple-500/30 transition-all duration-300 shadow-sm"
-            >
-              {/* Fallback color visual card block since local assets might not resolve initially */}
-              <div className="h-64 relative flex items-center justify-center bg-slate-50 border-b border-slate-200 overflow-hidden">
-                <div className="absolute inset-0 bg-cover bg-center opacity-90" style={{ backgroundImage: `url(${member.image})` }} />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
-                <Users size={48} className="text-black/10 absolute" />
+        <div className="space-y-6 max-w-4xl">
+          {team.map((member, i) => {
+            const photoAvailable = hasLocalAsset(member.image);
+            return (
+              <div
+                key={member.name}
+                className={`flex flex-col ${i % 2 === 1 ? "sm:flex-row-reverse" : "sm:flex-row"} gap-0 sm:gap-8 bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-lg hover:border-purple-500/30 transition-all duration-300 shadow-sm`}
+              >
+                <div className="w-full sm:w-56 h-56 sm:h-auto relative flex-shrink-0 overflow-hidden" style={{ background: `${member.fallbackColor}0d` }}>
+                  {photoAvailable ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="absolute inset-0 w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div
+                        className="w-20 h-20 rounded-full flex items-center justify-center text-white font-display font-black text-xl shadow-lg"
+                        style={{ background: member.fallbackColor }}
+                      >
+                        {initials(member.name)}
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="p-7 sm:py-8 flex-1 flex flex-col justify-center">
+                  <h3 className="font-display font-black text-black text-xl">{member.name}</h3>
+                  <div className="text-purple-700 text-sm font-bold mt-0.5 mb-3">{member.role}</div>
+                  <p className="text-black/70 text-sm leading-relaxed mb-4">{member.desc}</p>
+                  <div className="flex items-start gap-2.5 pt-4 border-t border-slate-100">
+                    <Quote size={16} className="text-purple-300 flex-shrink-0 mt-0.5" />
+                    <p className="text-black/50 text-xs italic leading-relaxed">{member.quote}</p>
+                  </div>
+                </div>
               </div>
-              <div className="p-6 relative z-10">
-                <h3 className="font-display font-black text-black text-xl">{member.name}</h3>
-                <div className="text-purple-700 text-sm font-bold mt-1 mb-3">{member.role}</div>
-                <p className="text-black/70 text-sm leading-relaxed">{member.desc}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
       {/* ── CTA Section ── */}
       <section className="py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="relative rounded-3xl p-10 md:p-14 text-center overflow-hidden bg-white border border-slate-200 shadow-sm"
-          style={{ backdropFilter: "blur(12px)" }}>
-          
-          <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-[0.03] pointer-events-none" 
+        <div className="relative rounded-3xl p-10 md:p-14 text-center overflow-hidden text-white"
+          style={{ background: "linear-gradient(135deg, #0F2537 0%, #1E293B 100%)" }}>
+
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-[0.08] pointer-events-none"
             style={{ background: "radial-gradient(circle, #7c3aed, transparent 70%)" }} />
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-[0.03] pointer-events-none" 
+          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-[0.06] pointer-events-none"
             style={{ background: "radial-gradient(circle, #D9383A, transparent 70%)" }} />
 
           <div className="relative z-10">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 bg-purple-50 border border-purple-100">
-              <Target size={28} className="text-purple-600" />
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 bg-white/10 border border-white/15">
+              <Target size={28} className="text-purple-300" />
             </div>
-            <h2 className="font-display font-black text-black text-2xl sm:text-3xl md:text-4xl mb-4">
-              Ready to Begin Your <span className="text-purple-700">Journey?</span>
+            <h2 className="font-display font-black text-white text-2xl sm:text-3xl md:text-4xl mb-4">
+              Ready to Begin Your <span className="text-purple-300">Journey?</span>
             </h2>
-            <p className="text-black/60 text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
+            <p className="text-white/70 text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
               Join 10,000+ students who trusted World Passport to guide them to world-class universities. Your story starts here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a href="/skills#contact" className="btn-primary w-full sm:w-auto">
                 Book Free Consultation
               </a>
-              <a href="/programs" className="btn-outline w-full sm:w-auto">
+              <a href="/programs" className="px-8 py-3.5 rounded-full font-semibold text-white border border-white/25 hover:bg-white/10 transition-all w-full sm:w-auto text-center">
                 Explore Programs
               </a>
             </div>

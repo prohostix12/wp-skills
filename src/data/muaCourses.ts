@@ -8,6 +8,8 @@ export interface MuaCourse {
   slug: string;
   color: string;
   title: string;
+  category: string;
+  image: string;
   totalHours: string;
   overview: string[];
   modules: MuaModule[];
@@ -24,6 +26,8 @@ export const muaCourses: MuaCourse[] = [
     slug: "real-estate-broker",
     color: "#F59E0B",
     title: "Real Estate Broker",
+    category: "Real Estate & Property Management",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80&auto=format&fit=crop",
     totalHours: "60 Hours",
     overview: [
       "The Mediterranean University of Albania is licensed by Order of the Minister of Justice of the Republic of Albania No. 214, dated 22 April 2024, as one of the higher education institutions in the country authorized to deliver the mandatory training program for candidates who intend to become licensed real estate brokers. This program prepares candidates as qualified specialists capable of operating in the real estate market with comprehensive legal, economic, and practical knowledge.",
@@ -49,6 +53,8 @@ export const muaCourses: MuaCourse[] = [
     slug: "data-science-ai",
     color: "#3B82F6",
     title: "Data Science & AI",
+    category: "AI",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80&auto=format&fit=crop",
     totalHours: "40 Hours",
     overview: [
       "This professional training prepares qualified experts in the field of Data Science and Artificial Intelligence, providing in-depth knowledge of data analysis, statistical modeling, machine learning, and practical applications of AI in the public and private sectors. The program covers basic and advanced concepts of Data Science and AI, including data cleaning and processing, data visualization, building predictive models, analyzing big data, and implementing machine learning and AI algorithms.",
@@ -74,6 +80,8 @@ export const muaCourses: MuaCourse[] = [
     slug: "digital-marketing",
     color: "#FF3B3B",
     title: "Digital Marketing",
+    category: "Digital Marketing & E-Commerce",
+    image: "https://images.unsplash.com/photo-1557838923-2985c318be48?w=600&q=80&auto=format&fit=crop",
     totalHours: "40 Hours",
     overview: [
       "In the digital era, Digital Marketing has become a necessity for every business, standing at the core of every successful strategy. This program prepares participants to master the key skills of digital marketing, from website development and SEO optimization to the strategic use of platforms such as Google, Facebook, Instagram, and LinkedIn to create successful marketing campaigns.",
@@ -99,6 +107,8 @@ export const muaCourses: MuaCourse[] = [
     slug: "health-administrator",
     color: "#10B981",
     title: "Health Administrator (Hospital Administration & Management)",
+    category: "Hospital Administration",
+    image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&q=80&auto=format&fit=crop",
     totalHours: "60 Hours",
     overview: [
       "The Health Administration Training Program is designed to prepare qualified professionals capable of managing, administering, and leading healthcare institutions in accordance with national legislation, international standards, and best practices in healthcare management. This program equips participants with comprehensive knowledge of healthcare systems, hospital operations, health law, medical ethics, financial management, quality assurance, and patient-centered care.",

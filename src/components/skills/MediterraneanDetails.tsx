@@ -19,6 +19,7 @@ import {
   FileCheck,
   GraduationCap,
   Globe,
+  Layers,
   MapPin,
   MessageCircle,
   Plane,
@@ -48,7 +49,10 @@ const programs = muaCourses.map((c) => ({
   title: c.title,
   hours: c.totalHours,
   color: c.color,
-  desc: c.overview[0].slice(0, 140).replace(/\s+\S*$/, "") + "…",
+  image: c.image,
+  sessions: c.schedule.sessions,
+  points: c.modules.slice(0, 3).map((m) => m.title),
+  href: `/skills/mua-course/${c.slug}`,
 }));
 
 const admissionRequirements = [
@@ -180,25 +184,49 @@ export default function MediterraneanDetails() {
                   <BookOpen size={20} style={{ color }} /> Professional Training Programs
                 </h2>
                 <p className="text-gray-500 text-sm mb-5">Delivered by the Training and Professional Development Department at Mediterranean University of Albania.</p>
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {programs.map((p) => (
-                    <Link
-                      key={p.slug}
-                      href={`/skills/mua-course/${p.slug}`}
-                      className="group flex items-center gap-4 p-4 rounded-2xl border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all"
-                    >
-                      <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${p.color}15`, color: p.color }}>
-                        <GraduationCap size={18} />
+                    <div key={p.slug} className="group rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all">
+                      <div className="flex flex-col sm:flex-row">
+                        <div className="relative w-full sm:w-48 h-36 sm:h-auto flex-shrink-0 overflow-hidden">
+                          <div
+                            className="absolute inset-0 transition-transform duration-500 group-hover:scale-110"
+                            style={{ backgroundImage: `url('${p.image}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+                          />
+                          <div className="absolute inset-0" style={{ background: `linear-gradient(135deg, ${p.color}80, ${p.color}40)` }} />
+                        </div>
+                        <div className="flex-1 p-5">
+                          <div className="flex items-start justify-between gap-3 mb-3">
+                            <h4 className="font-bold text-gray-900 text-base">{p.title}</h4>
+                            <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: `${p.color}15`, color: p.color }}>
+                              <GraduationCap size={16} />
+                            </div>
+                          </div>
+                          <div className="flex flex-wrap gap-2 mb-3">
+                            <span className="text-[10px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1" style={{ background: `${p.color}10`, color: p.color }}>
+                              <Clock size={9} /> {p.hours}
+                            </span>
+                            <span className="text-[10px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1" style={{ background: `${p.color}10`, color: p.color }}>
+                              <Building2 size={9} /> In-Person
+                            </span>
+                            <span className="text-[10px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 bg-gray-100 text-gray-600">
+                              <Layers size={9} /> {p.sessions}
+                            </span>
+                          </div>
+                          <div className="flex flex-wrap gap-x-4 gap-y-1.5 mb-4">
+                            {p.points.map((pt) => (
+                              <div key={pt} className="flex items-center gap-1.5">
+                                <CircleCheckBig size={11} className="flex-shrink-0" style={{ color: p.color }} />
+                                <span className="text-gray-600 text-xs">{pt}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <Link href={p.href} className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors" style={{ color: p.color }}>
+                            View Course Details <ChevronRight size={14} />
+                          </Link>
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="text-gray-900 text-sm font-bold">{p.title}</h4>
-                        <p className="text-gray-500 text-xs mt-0.5 line-clamp-1">{p.desc}</p>
-                      </div>
-                      <span className="text-[10px] px-2.5 py-1 rounded-full font-bold flex items-center gap-1 flex-shrink-0" style={{ background: `${p.color}10`, color: p.color }}>
-                        <Clock size={9} /> {p.hours}
-                      </span>
-                      <ChevronRight size={16} className="text-gray-300 group-hover:text-gray-500 flex-shrink-0 transition-colors" />
-                    </Link>
+                    </div>
                   ))}
                 </div>
               </div>

@@ -9,9 +9,9 @@ const certs: {
 }[] = [
   {
     title:    "University Certificate",
-    issuer:   "Canadian Institute of Technology (CIT)",
+    issuer:   "Canadian Institute of Technology (CIT) · Mediterranean University of Albania",
     location: "Tirana, Albania",
-    desc:     "Internationally recognised university certificate from our partner institution CIT, validating your academic achievement.",
+    desc:     "Internationally recognised university certificate from our partner institutions CIT and Mediterranean University of Albania, validating your academic achievement.",
     icon:  <Building2 size={22} />,
     color: "#0F2537",
     badge: "International",
@@ -19,7 +19,7 @@ const certs: {
   },
   {
     title:    "Course Completion Certificate",
-    issuer:   "World Passport · SkillDad",
+    issuer:   "SkillDad",
     location: "Kerala, India",
     desc:     "Professional course completion certificate acknowledging your mastery of the full 6-month program curriculum.",
     icon:  <ScrollText size={22} />,

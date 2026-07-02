@@ -1,13 +1,57 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import StickyBar from "@/components/skills/StickyBar";
 import Footer from "@/components/skills/Footer";
 import { BookOpen, Layers, BadgeCheck, Monitor } from "lucide-react";
 
-import { Program, getProgramSlug } from "@/lib/programsData";
+import { citCourses } from "@/data/citCourses";
+import { muaCourses } from "@/data/muaCourses";
+
+// ── Unified program shape, built from the same data that powers the
+//    CIT and Mediterranean University course detail pages ──────────────────
+
+type UnifiedProgram = {
+  title: string;
+  category: string;
+  description: string;
+  university: string;
+  universityInitial: string;
+  duration: string;
+  image: string;
+  href: string;
+};
+
+function truncate(text: string, max: number) {
+  if (text.length <= max) return text;
+  return text.slice(0, max).replace(/\s+\S*$/, "") + "…";
+}
+
+const citPrograms: UnifiedProgram[] = citCourses.map((c) => ({
+  title: c.title,
+  category: c.category,
+  description: truncate(c.points.join(". ") + ".", 160),
+  university: "Canadian Institute of Technology (CIT)",
+  universityInitial: "C",
+  duration: c.duration,
+  image: c.image,
+  href: `/skills/course/${c.slug}`,
+}));
+
+const muaPrograms: UnifiedProgram[] = muaCourses.map((c) => ({
+  title: c.title,
+  category: c.category,
+  description: truncate(c.overview[0], 160),
+  university: "Mediterranean University",
+  universityInitial: "M",
+  duration: c.totalHours,
+  image: c.image,
+  href: `/skills/mua-course/${c.slug}`,
+}));
+
+const allPrograms: UnifiedProgram[] = [...citPrograms, ...muaPrograms];
 
 // ── Sub-components ─────────────────────────────────────────────────────────
 
@@ -23,12 +67,9 @@ function UniversityAvatar({ initial }: { initial: string }) {
   );
 }
 
-function ProgramCard({ program }: { program: Program }) {
-  const slug = getProgramSlug(program.title);
-  const linkHref = `/programs/${slug}`;
-
+function ProgramCard({ program }: { program: UnifiedProgram }) {
   return (
-    <Link href={linkHref} className="flex flex-col flex-1 h-full">
+    <Link href={program.href} className="flex flex-col flex-1 h-full">
       <article
         className="flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 h-full w-full cursor-pointer"
         style={{
@@ -53,9 +94,8 @@ function ProgramCard({ program }: { program: Program }) {
           >
             {program.category}
           </span>
-          {/* Rating / Duration row */}
-          <div className="absolute bottom-3 left-3 right-3 flex justify-between text-white text-sm">
-            <span>⭐ {program.rating}</span>
+          {/* Duration */}
+          <div className="absolute bottom-3 left-3 right-3 flex justify-end text-white text-sm">
             <span>🕐 {program.duration}</span>
           </div>
         </div>
@@ -97,67 +137,17 @@ function ProgramCard({ program }: { program: Program }) {
 // ── Main export ────────────────────────────────────────────────────────────
 
 export default function ProgramsClient() {
-  const [programs, setPrograms] = useState<Program[]>([]);
-  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
 
-  useEffect(() => {
-    async function loadPrograms() {
-      try {
-        const res = await fetch("/api/programs");
-        if (res.ok) {
-          const data = await res.json();
-          const list = data.programs || [];
-          
-          // Sort programs as requested:
-          // 1. Digital Marketing
-          // 2. Hospital Administration
-          // 3. Data Science & AI
-          // 4. Logistics
-          // Then others
-          const sorted = [...list].sort((a, b) => {
-            const getOrderIndex = (p: Program) => {
-              const title = p.title.toLowerCase();
-              const category = p.category.toLowerCase();
-              
-              if (title.includes("digital marketing") && !title.includes("with ai")) return 1;
-              if (title.includes("hospital administration") || category.includes("hospital administration")) return 2;
-              if (title.includes("data science & ai") || title.includes("data science and ai") || category.includes("ai")) {
-                if (title.includes("digital marketing")) return 99; // skip "digital marketing with ai" from slot 3
-                return 3;
-              }
-              if (title.includes("logistics") || category.includes("logistics")) return 4;
-              return 99;
-            };
-            
-            const orderA = getOrderIndex(a);
-            const orderB = getOrderIndex(b);
-            
-            if (orderA !== orderB) {
-              return orderA - orderB;
-            }
-            return a.title.localeCompare(b.title);
-          });
-          setPrograms(sorted);
-        }
-      } catch (err) {
-        console.error("Failed to load programs:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadPrograms();
-  }, []);
-
   const uniqueCategories = Array.from(
-    new Set(programs.map((p) => p.category))
+    new Set(allPrograms.map((p) => p.category))
   );
   const filterTabs = ["ALL", ...uniqueCategories];
 
   const filtered =
     activeFilter === "ALL"
-      ? programs
-      : programs.filter((p) => p.category === activeFilter);
+      ? allPrograms
+      : allPrograms.filter((p) => p.category === activeFilter);
 
   return (
     <main
@@ -194,10 +184,10 @@ export default function ProgramsClient() {
         >
           <source src="/animation.mp4" type="video/mp4" />
         </video>
-        
+
         {/* Soft overlay to ensure text readability */}
         <div className="absolute inset-0 bg-[#faf8f5]/20 z-10 pointer-events-none backdrop-blur-[1px]" />
-        
+
         <div className="relative z-20 text-center px-4 max-w-3xl mx-auto">
           <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold uppercase tracking-widest shadow-sm">
             Explore Our Courses
@@ -212,8 +202,8 @@ export default function ProgramsClient() {
           {/* Quick stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
             {[
-              { icon: <BookOpen size={18} />, value: loading ? "—" : `${programs.length}+`, label: "Programs" },
-              { icon: <Layers size={18} />, value: loading ? "—" : `${uniqueCategories.length}`, label: "Categories" },
+              { icon: <BookOpen size={18} />, value: `${allPrograms.length}+`, label: "Programs" },
+              { icon: <Layers size={18} />, value: `${uniqueCategories.length}`, label: "Categories" },
               { icon: <BadgeCheck size={18} />, value: "Certified", label: "Credentials" },
               { icon: <Monitor size={18} />, value: "Online", label: "Delivery Mode" },
             ].map((s) => (
@@ -240,39 +230,35 @@ export default function ProgramsClient() {
           role="tablist"
           aria-label="Filter programs by category"
         >
-          {loading ? (
-            <div className="text-slate-400 text-xs font-bold py-2">Loading categories...</div>
-          ) : (
-            filterTabs.map((tab) => {
-              const isActive = activeFilter === tab;
-              return (
-                <button
-                  key={tab}
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActiveFilter(tab)}
-                  className="flex-shrink-0 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-200 cursor-pointer"
-                  style={{
-                    background: isActive
-                      ? "#7c3aed"
-                      : "transparent",
-                    border: isActive
-                      ? "1px solid #7c3aed"
-                      : "1px solid rgba(0,0,0,0.15)",
-                    color: isActive ? "#fff" : "rgba(0,0,0,0.7)",
-                  }}
-                >
-                  {tab}
-                </button>
-              );
-            })
-          )}
+          {filterTabs.map((tab) => {
+            const isActive = activeFilter === tab;
+            return (
+              <button
+                key={tab}
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActiveFilter(tab)}
+                className="flex-shrink-0 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-200 cursor-pointer"
+                style={{
+                  background: isActive
+                    ? "#7c3aed"
+                    : "transparent",
+                  border: isActive
+                    ? "1px solid #7c3aed"
+                    : "1px solid rgba(0,0,0,0.15)",
+                  color: isActive ? "#fff" : "rgba(0,0,0,0.7)",
+                }}
+              >
+                {tab}
+              </button>
+            );
+          })}
         </div>
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((program) => (
-            <ProgramCard key={program.title} program={program} />
+            <ProgramCard key={program.href} program={program} />
           ))}
         </div>
 
