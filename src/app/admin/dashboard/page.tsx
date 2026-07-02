@@ -390,7 +390,7 @@ export default function AdminDashboard() {
                   </p>
                   <Link
                     href="/"
-                    className="inline-flex items-center gap-2 bg-white text-blue-600 px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-blue-50 transition-all shadow-sm"
+                    className="admin-cta-btn inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-blue-50 transition-all shadow-sm"
                   >
                     View Website <ArrowRight size={14} />
                   </Link>

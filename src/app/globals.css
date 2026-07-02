@@ -425,6 +425,12 @@ body, main, section, footer, [style*="background: #060418"], [style*="background
   color: #ffffff !important;
 }
 
+/* Admin dashboard: buttons with their own light background nested inside a text-white banner
+   need their own text color, not the white forced above */
+.admin-cta-btn, .admin-cta-btn * {
+  color: #000000 !important;
+}
+
 /* Fix for catalog View buttons and navigation active badge */
 .badge-teal, .badge-blue, .badge-red {
   color: inherit !important;
