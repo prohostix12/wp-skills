@@ -56,7 +56,20 @@ const universities = [
 export default function UniversityPartners() {
   return (
     <section id="universities" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
+      {/* Background video (section backdrop only — not inside the university cards) */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0"
+        style={{ opacity: 0.25 }}
+      >
+        <source src="/animation.mp4" type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: "rgba(6,4,24,0.75)" }} />
+
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full pointer-events-none z-0"
         style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
