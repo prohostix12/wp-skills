@@ -8,10 +8,10 @@ const certs: {
   icon: ReactNode; color: string; badge: string; seal: ReactNode;
 }[] = [
   {
-    title:    "University Certificate",
+    title:    "University Certificates",
     issuer:   "Canadian Institute of Technology (CIT) · Mediterranean University of Albania",
     location: "Tirana, Albania",
-    desc:     "Internationally recognised university certificate from our partner institutions CIT and Mediterranean University of Albania, validating your academic achievement.",
+    desc:     "Internationally recognised university certificates from our partner institutions CIT and Mediterranean University of Albania, validating your academic achievement.",
     icon:  <Building2 size={22} />,
     color: "#0F2537",
     badge: "International",
@@ -137,19 +137,7 @@ export default function Certificates() {
                   </p>
                 </div>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-4 mt-4 border-t border-[#D0CBBf]">
-                  <span className="text-slate-400 text-xs font-semibold">{cert.location}</span>
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, j) => (
-                      <div
-                        key={j}
-                        className="w-1.5 h-1.5 rounded-full"
-                        style={{ background: j < 4 ? cert.color : `${cert.color}25` }}
-                      />
-                    ))}
-                  </div>
-                </div>
+
               </div>
             </div>
           ))}
