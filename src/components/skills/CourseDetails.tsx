@@ -126,10 +126,10 @@ export default function CourseDetails({ slug }: { slug: string }) {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { icon: <Clock size={18} />, sColor: "#F59E0B", value: course.duration, label: "Duration" },
-                { icon: <Monitor size={18} />, sColor: "#3B82F6", value: "Online", label: "Delivery" },
+                { icon: <Clock size={18} />, sColor: "#F59E0B", value: "3 Month Course + 3 Month Internship", label: "Duration" },
+                { icon: <Monitor size={18} />, sColor: "#3B82F6", value: "Free IELTS", label: "Coaching" },
                 { icon: <BadgeCheck size={18} />, sColor: "#8B5CF6", value: "ECTS Credits", label: "Certificate" },
-                { icon: <Rocket size={18} />, sColor: "#10B981", value: "Guaranteed", label: "Placement" },
+                { icon: <Rocket size={18} />, sColor: "#10B981", value: "Placement Assurance", label: "Placement" },
               ].map((s) => (
                 <div key={s.label} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${s.sColor}15`, color: s.sColor }}>
@@ -296,9 +296,12 @@ export default function CourseDetails({ slug }: { slug: string }) {
                   <p className="text-gray-400 text-xs mt-1">Start your career transformation</p>
                 </div>
                 <div className="space-y-2.5 mb-6">
-                  <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 border border-gray-100">
-                    <span className="text-gray-500 text-sm flex items-center gap-2"><Clock size={14} /> Duration</span>
-                    <span className="font-semibold text-sm text-gray-900">{course.duration}</span>
+                  <div className="flex items-start justify-between px-4 py-3 rounded-xl bg-gray-50 border border-gray-100">
+                    <span className="text-gray-500 text-sm flex items-center gap-2 mt-0.5"><Clock size={14} /> Duration</span>
+                    <div className="text-right">
+                      <span className="font-semibold text-sm text-gray-900 block">3 Month Course +</span>
+                      <span className="font-semibold text-sm text-gray-900 block">3 Month Internship</span>
+                    </div>
                   </div>
                   <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-gray-50 border border-gray-100">
                     <span className="text-gray-500 text-sm flex items-center gap-2"><Monitor size={14} /> Mode</span>
@@ -355,40 +358,40 @@ export default function CourseDetails({ slug }: { slug: string }) {
         </section>
 
         {/* ── Footer ── */}
-        <footer className="bg-gray-900 text-white">
+        <footer className="bg-transparent text-gray-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
               <div className="col-span-2 md:col-span-1">
                 <Link href="/" className="inline-block mb-4">
-                  <img src="/logo.png" alt="World Passport" className="h-8 w-auto object-contain brightness-0 invert" />
+                  <img src="/logo.png" alt="World Passport" className="h-8 w-auto object-contain brightness-0" />
                 </Link>
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-white mb-4">Pages</h4>
+                <h4 className="text-sm font-bold text-gray-900 mb-4">Pages</h4>
                 <ul className="space-y-2.5">
-                  <li><Link href="/" className="text-gray-400 text-sm hover:text-white transition-colors">Home</Link></li>
-                  <li><Link href="/skills" className="text-gray-400 text-sm hover:text-white transition-colors">Skills</Link></li>
-                  <li><Link href="/about" className="text-gray-400 text-sm hover:text-white transition-colors">About Us</Link></li>
-                  <li><Link href="/skills#contact" className="text-gray-400 text-sm hover:text-white transition-colors">Contact</Link></li>
+                  <li><Link href="/" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">Home</Link></li>
+                  <li><Link href="/skills" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">Skills</Link></li>
+                  <li><Link href="/about" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">About Us</Link></li>
+                  <li><Link href="/skills#contact" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">Contact</Link></li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-white mb-4">Legal</h4>
+                <h4 className="text-sm font-bold text-gray-900 mb-4">Legal</h4>
                 <ul className="space-y-2.5">
-                  <li><a href="#" className="text-gray-400 text-sm hover:text-white transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="text-gray-400 text-sm hover:text-white transition-colors">Terms &amp; Conditions</a></li>
+                  <li><a href="#" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">Privacy Policy</a></li>
+                  <li><a href="#" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">Terms &amp; Conditions</a></li>
                 </ul>
               </div>
               <div>
-                <h4 className="text-sm font-semibold text-white mb-4">Contact</h4>
+                <h4 className="text-sm font-bold text-gray-900 mb-4">Contact</h4>
                 <ul className="space-y-2.5">
-                  <li><a href="tel:+919292173857" className="text-gray-400 text-sm hover:text-white transition-colors">+91 9292173857</a></li>
-                  <li><a href="mailto:smworldpassportskillacademy@gmail.com" className="text-gray-400 text-sm hover:text-white transition-colors">smworldpassportskillacademy@gmail.com</a></li>
+                  <li><a href="tel:+919292173857" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">+91 9292173857</a></li>
+                  <li><a href="mailto:smworldpassportskillacademy@gmail.com" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">smworldpassportskillacademy@gmail.com</a></li>
                 </ul>
               </div>
             </div>
-            <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p className="text-gray-500 text-sm">© {new Date().getFullYear()} All Rights Reserved.</p>
+            <div className="border-t border-gray-300 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p className="text-gray-600 text-sm font-medium">© {new Date().getFullYear()} All Rights Reserved.</p>
             </div>
           </div>
         </footer>

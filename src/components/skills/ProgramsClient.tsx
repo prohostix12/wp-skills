@@ -46,7 +46,7 @@ const muaPrograms: UnifiedProgram[] = muaCourses.map((c) => ({
   description: truncate(c.overview[0], 160),
   university: "Mediterranean University",
   universityInitial: "M",
-  duration: c.totalHours,
+  duration: "6 Months",
   image: c.image,
   href: `/skills/mua-course/${c.slug}`,
 }));

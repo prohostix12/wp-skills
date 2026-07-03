@@ -11,6 +11,7 @@ export interface MuaCourse {
   category: string;
   image: string;
   totalHours: string;
+  tools: string[];
   overview: string[];
   modules: MuaModule[];
   schedule: {
@@ -29,6 +30,7 @@ export const muaCourses: MuaCourse[] = [
     category: "Real Estate & Property Management",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80&auto=format&fit=crop",
     totalHours: "60 Hours",
+    tools: ["CRM Systems", "Property Management Software", "Excel", "Google Earth", "MLS Systems", "Canva", "DocuSign"],
     overview: [
       "The Mediterranean University of Albania is licensed by Order of the Minister of Justice of the Republic of Albania No. 214, dated 22 April 2024, as one of the higher education institutions in the country authorized to deliver the mandatory training program for candidates who intend to become licensed real estate brokers. This program prepares candidates as qualified specialists capable of operating in the real estate market with comprehensive legal, economic, and practical knowledge.",
       "It includes modules on property valuation, purchase, sale, lease, and exchange procedures, as well as aspects related to registration with the Real Estate Registration Office. The training introduces participants to relevant legislation, tax obligations, and the rules of professional ethics — covering negotiation and communication in real estate, tax legislation, civil and commercial law, professional ethics, mediation and liberal professions, practical training, basic principles of property valuation, management and maintenance, criminal offenses related to real estate, organized crime and money laundering, the legal regime of real estate, contract drafting, marketing, and sales.",
@@ -56,6 +58,7 @@ export const muaCourses: MuaCourse[] = [
     category: "AI",
     image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&q=80&auto=format&fit=crop",
     totalHours: "40 Hours",
+    tools: ["Python", "SQL", "TensorFlow", "Jupyter Notebook", "Pandas", "Keras", "Tableau", "ChatGPT"],
     overview: [
       "This professional training prepares qualified experts in the field of Data Science and Artificial Intelligence, providing in-depth knowledge of data analysis, statistical modeling, machine learning, and practical applications of AI in the public and private sectors. The program covers basic and advanced concepts of Data Science and AI, including data cleaning and processing, data visualization, building predictive models, analyzing big data, and implementing machine learning and AI algorithms.",
       "Participants are introduced to industry best practices for data analysis and management, ethics in the use of artificial intelligence, privacy protection, and information security according to international standards (ISO, GDPR, IEEE). The program combines theoretical lectures with practical exercises, real-world data analysis, and the use of professional tools such as Python, R, TensorFlow, and other machine learning libraries — including a dedicated module on ChatGPT and modern AI tools for Data Science.",
@@ -83,6 +86,7 @@ export const muaCourses: MuaCourse[] = [
     category: "Digital Marketing & E-Commerce",
     image: "https://images.unsplash.com/photo-1557838923-2985c318be48?w=600&q=80&auto=format&fit=crop",
     totalHours: "40 Hours",
+    tools: ["Google Analytics", "Google Ads", "SEMrush", "WordPress", "Mailchimp", "Canva", "Meta Ads Manager", "ChatGPT"],
     overview: [
       "In the digital era, Digital Marketing has become a necessity for every business, standing at the core of every successful strategy. This program prepares participants to master the key skills of digital marketing, from website development and SEO optimization to the strategic use of platforms such as Google, Facebook, Instagram, and LinkedIn to create successful marketing campaigns.",
       "Participants gain a solid understanding of Digital Marketing fundamentals and market research, learning how to analyze consumer behavior and create effective audience personas, alongside the fair, transparent, and responsible use of data and technology. Key skills covered include data analysis using Excel, website creation, SEO optimization, Google Analytics, and Google Ads for targeted advertising campaigns.",
@@ -110,6 +114,7 @@ export const muaCourses: MuaCourse[] = [
     category: "Hospital Administration",
     image: "https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&q=80&auto=format&fit=crop",
     totalHours: "60 Hours",
+    tools: ["Hospital Information Systems (HIS)", "Electronic Health Records (EHR)", "Excel", "Data Analytics Tools", "HR Management Software", "Google Workspace", "Slack"],
     overview: [
       "The Health Administration Training Program is designed to prepare qualified professionals capable of managing, administering, and leading healthcare institutions in accordance with national legislation, international standards, and best practices in healthcare management. This program equips participants with comprehensive knowledge of healthcare systems, hospital operations, health law, medical ethics, financial management, quality assurance, and patient-centered care.",
       "Participants gain both theoretical knowledge and practical skills required to operate in complex healthcare environments, addressing administrative, legal, financial, and ethical challenges — including healthcare legislation, organizational management, hospital governance, health economics, patient rights, quality standards, risk management, digital health systems, and leadership in healthcare.",
