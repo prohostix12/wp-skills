@@ -6,14 +6,9 @@ import Footer from "@/components/skills/Footer";
 import PlacementPlatform from "@/components/skills/PlacementPlatform";
 import {
   Target,
-  Building2,
-  GraduationCap,
   ShieldCheck,
-  BadgeCheck,
-  Globe,
   Quote,
   CheckCircle2,
-  TrendingUp,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -49,19 +44,6 @@ const team = [
   },
 ];
 
-const impactStats = [
-  { val: "20K", suffix: "+", label: "Students Recruited", icon: <GraduationCap size={22} /> },
-  { val: "200", suffix: "+", label: "Partner Universities", icon: <Building2 size={22} /> },
-  { val: "95", suffix: "%", label: "Placement Success Rate", icon: <TrendingUp size={22} /> },
-];
-
-const accreditations = [
-  { label: "ECTS Certified Programs", icon: <ShieldCheck size={18} /> },
-  { label: "Canadian Institute of Technology", icon: <Building2 size={18} /> },
-  { label: "Mediterranean University of Albania", icon: <Building2 size={18} /> },
-  { label: "SkillDad Placement Network", icon: <BadgeCheck size={18} /> },
-  { label: "Offices in Kerala & Dubai", icon: <Globe size={18} /> },
-];
 
 const values = [
   {
@@ -114,7 +96,7 @@ export default function AboutPage() {
       <StickyBar />
 
       {/* ── Hero (background image kept, centered title treatment) ── */}
-      <section className="relative w-full min-h-[75vh] flex items-center justify-center pt-32 pb-16 overflow-hidden">
+      <section className="relative w-full min-h-[100vh] flex items-center justify-center pt-32 pb-16 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&q=80&w=1920"
@@ -133,47 +115,6 @@ export default function AboutPage() {
             >
               Who We Are
             </h1>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Impact stat band (dark, full-width, replaces the old floating card).
-           Uses a <div> (not <section>) with the bg-brand-blue class so the site's
-           dark-card color-restoration rules in globals.css apply correctly ── */}
-      <div className="relative z-10 bg-brand-blue">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 divide-y-0">
-            {impactStats.map((s) => (
-              <div key={s.label} className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-brand-teal flex-shrink-0">
-                  {s.icon}
-                </div>
-                <div>
-                  <div className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight leading-none">
-                    {s.val}<span className="text-brand-teal">{s.suffix}</span>
-                  </div>
-                  <div className="text-[11px] sm:text-xs font-semibold text-slate-400 uppercase tracking-wider mt-1">{s.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* ── Accreditation / trust bar ── */}
-      <section className="relative z-10 border-b border-slate-200 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-            <span className="text-[11px] font-bold text-black/40 uppercase tracking-wider flex-shrink-0">
-              Accredited &amp; Trusted By
-            </span>
-            <div className="flex flex-wrap gap-x-8 gap-y-3">
-              {accreditations.map((a) => (
-                <span key={a.label} className="inline-flex items-center gap-2 text-sm font-semibold text-black/70">
-                  <span className="text-purple-600">{a.icon}</span> {a.label}
-                </span>
-              ))}
-            </div>
           </div>
         </div>
       </section>
