@@ -119,9 +119,9 @@ export default function Footer() {
             <ul className="flex flex-col gap-4">
               <li className="flex items-start gap-3">
                 <Mail size={14} className="text-brand-teal mt-0.5 flex-shrink-0" />
-                <a href="mailto:smworldpassportskillacademy@gmail.com"
+                <a href="mailto:salesheadworldpassportskills@gmail.com"
                   className="text-slate-300 text-sm hover:text-brand-teal transition-colors">
-                  smworldpassportskillacademy@gmail.com
+                  salesheadworldpassportskills@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">

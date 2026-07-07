@@ -181,7 +181,7 @@ export default function Contact() {
           <div className="flex flex-col gap-6">
             {[
               { icon: <Phone size={20} />, label: "Phone / WhatsApp", value: "+91 9292173857", href: "tel:+919292173857", color: "#60a5fa" },
-              { icon: <Mail size={20} />, label: "Email", value: "smworldpassportskillacademy@gmail.com", href: "mailto:smworldpassportskillacademy@gmail.com", color: "#a78bfa" },
+              { icon: <Mail size={20} />, label: "Email", value: "salesheadworldpassportskills@gmail.com", href: "mailto:salesheadworldpassportskills@gmail.com", color: "#a78bfa" },
               { icon: <MapPin size={20} />, label: "Office Address", value: "St.george forane Church Building ,Palarivattam,Edappally ,Kochi,Eranakulam,Kerala 682024", href: "#", color: "#34d399" },
             ].map((c) => (
               <a

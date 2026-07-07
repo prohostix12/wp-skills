@@ -386,7 +386,7 @@ export default function CourseDetails({ slug }: { slug: string }) {
                 <h4 className="text-sm font-bold text-gray-900 mb-4">Contact</h4>
                 <ul className="space-y-2.5">
                   <li><a href="tel:+919292173857" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">+91 9292173857</a></li>
-                  <li><a href="mailto:smworldpassportskillacademy@gmail.com" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">smworldpassportskillacademy@gmail.com</a></li>
+                  <li><a href="mailto:salesheadworldpassportskills@gmail.com" className="text-gray-600 text-sm hover:text-black transition-colors font-medium">salesheadworldpassportskills@gmail.com</a></li>
                 </ul>
               </div>
             </div>
