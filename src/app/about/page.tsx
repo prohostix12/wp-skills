@@ -265,38 +265,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── CTA Section ── */}
-      <section className="py-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="relative rounded-3xl p-10 md:p-14 text-center overflow-hidden text-white"
-          style={{ background: "linear-gradient(135deg, #0F2537 0%, #1E293B 100%)" }}>
-
-          <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-[0.08] pointer-events-none"
-            style={{ background: "radial-gradient(circle, #7c3aed, transparent 70%)" }} />
-          <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-[0.06] pointer-events-none"
-            style={{ background: "radial-gradient(circle, #D9383A, transparent 70%)" }} />
-
-          <div className="relative z-10">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 bg-white/10 border border-white/15">
-              <Target size={28} className="text-purple-300" />
-            </div>
-            <h2 className="font-display font-black text-white text-2xl sm:text-3xl md:text-4xl mb-4">
-              Ready to Begin Your <span className="text-purple-300">Journey?</span>
-            </h2>
-            <p className="text-white/70 text-base sm:text-lg mb-8 max-w-xl mx-auto leading-relaxed">
-              Join 10,000+ students who trusted World Passport to guide them to world-class universities. Your story starts here.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a href="/skills#contact" className="btn-primary w-full sm:w-auto">
-                Book Free Consultation
-              </a>
-              <a href="/programs" className="px-8 py-3.5 rounded-full font-semibold text-white border border-white/25 hover:bg-white/10 transition-all w-full sm:w-auto text-center">
-                Explore Programs
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
       <Footer />
     </main>
