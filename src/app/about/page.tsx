@@ -9,6 +9,9 @@ import {
   ShieldCheck,
   Quote,
   CheckCircle2,
+  Monitor,
+  BadgeCheck,
+  Rocket,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -115,6 +118,24 @@ export default function AboutPage() {
             >
               Who We Are
             </h1>
+            <p className="mt-6 text-white/85 text-sm sm:text-base leading-relaxed max-w-xl">
+              Empowering learners with globally recognized skill programs, international faculty, European university collaborations, and career-focused education for global opportunities.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              {[
+                { icon: <Monitor size={16} />, value: "Free IELTS", label: "Coaching" },
+                { icon: <BadgeCheck size={16} />, value: "ECTS Credits", label: "Certificate" },
+                { icon: <Rocket size={16} />, value: "Placement Assurance", label: "Placement" },
+              ].map((s) => (
+                <div key={s.label} className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-sm">
+                  <div className="text-white">{s.icon}</div>
+                  <div className="text-left">
+                    <div className="text-white font-bold text-xs sm:text-sm">{s.value}</div>
+                    <div className="text-white/60 text-[10px] uppercase tracking-wider">{s.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
