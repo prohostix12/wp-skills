@@ -115,10 +115,11 @@ export default function AboutPage() {
             <h1
               className="font-display font-black leading-tight tracking-tight"
               style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", textShadow: "0 4px 30px rgba(0,0,0,0.5)" }}
+              data-aos="fade-up"
             >
               Who We Are
             </h1>
-            <p className="mt-6 text-white/85 text-sm sm:text-base leading-relaxed max-w-xl">
+            <p className="mt-6 text-white/85 text-sm sm:text-base leading-relaxed max-w-xl" data-aos="fade-up" data-aos-delay="100">
               Empowering learners with globally recognized skill programs, international faculty, European university collaborations, and career-focused education for global opportunities.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -126,8 +127,13 @@ export default function AboutPage() {
                 { icon: <Monitor size={16} />, value: "Free IELTS", label: "Coaching" },
                 { icon: <BadgeCheck size={16} />, value: "ECTS Credits", label: "Certificate" },
                 { icon: <Rocket size={16} />, value: "Placement Assurance", label: "Placement" },
-              ].map((s) => (
-                <div key={s.label} className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-sm">
+              ].map((s, i) => (
+                <div
+                  key={s.label}
+                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-sm"
+                  data-aos="fade-up"
+                  data-aos-delay={200 + i * 100}
+                >
                   <div className="text-white">{s.icon}</div>
                   <div className="text-left">
                     <div className="text-white font-bold text-xs sm:text-sm">{s.value}</div>
@@ -143,7 +149,7 @@ export default function AboutPage() {
       {/* ── Our Story ── */}
       <section className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <div data-aos="fade-right">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
               Our Approach
             </span>
@@ -163,7 +169,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm relative overflow-hidden">
+          <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm relative overflow-hidden" data-aos="fade-left">
             <div className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-[0.05] pointer-events-none"
               style={{ background: "radial-gradient(circle, #7c3aed, transparent 70%)" }} />
             <Quote size={28} className="text-purple-200 mb-4" />
@@ -185,7 +191,7 @@ export default function AboutPage() {
 
       {/* ── Our Values ── */}
       <section className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white/60 rounded-[2.5rem]">
-        <div className="mb-14 max-w-2xl">
+        <div className="mb-14 max-w-2xl" data-aos="fade-up">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
             Why Students Trust Us
           </span>
@@ -195,8 +201,13 @@ export default function AboutPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {values.map((v) => (
-            <div key={v.title} className="bg-white border border-slate-200 rounded-3xl p-7 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
+          {values.map((v, i) => (
+            <div
+              key={v.title}
+              className="bg-white border border-slate-200 rounded-3xl p-7 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
+              data-aos="fade-up"
+              data-aos-delay={i * 100}
+            >
               <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center mb-5">
                 {v.icon}
               </div>
@@ -212,7 +223,7 @@ export default function AboutPage() {
 
       {/* ── Leadership Section — profile rows instead of a card grid ── */}
       <section className="py-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200">
-        <div className="mb-14">
+        <div className="mb-14" data-aos="fade-up">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
             Leadership
           </span>
@@ -231,6 +242,8 @@ export default function AboutPage() {
               <div
                 key={member.name}
                 className={`flex flex-col ${i % 2 === 1 ? "sm:flex-row-reverse" : "sm:flex-row"} gap-0 sm:gap-8 bg-white border border-slate-200 rounded-3xl overflow-hidden hover:shadow-lg hover:border-purple-500/30 transition-all duration-300 shadow-sm`}
+                data-aos="fade-up"
+                data-aos-delay={i * 100}
               >
                 <div className="w-full sm:w-56 h-56 sm:h-auto relative flex-shrink-0 overflow-hidden" style={{ background: `${member.fallbackColor}0d` }}>
                   {photoAvailable ? (
