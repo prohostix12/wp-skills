@@ -46,6 +46,23 @@ export default function Problem() {
               className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col"
               style={{ backgroundColor: "#faf3e8", borderColor: "#e8dacc", borderWidth: "1px" }}
             >
+              {/* Animated Snake Border Overlay (Visible on Hover) */}
+              <div className="absolute inset-0 z-50 pointer-events-none rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div 
+                  className="absolute inset-0 rounded-2xl overflow-hidden"
+                  style={{
+                    padding: "3px",
+                    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                >
+                  <div 
+                    className="absolute top-1/2 left-1/2 w-[300%] h-[300%] -translate-x-1/2 -translate-y-1/2 animate-[spin_2.5s_linear_infinite]"
+                    style={{ background: "conic-gradient(from 0deg, transparent 65%, #2563EB 75%, #DC2626 87%, #2563EB 100%)" }} 
+                  />
+                </div>
+              </div>
               {/* Image Section */}
               <div className="h-40 overflow-hidden relative">
                 <img 
@@ -98,6 +115,18 @@ export default function Problem() {
           </div>
         </div>
       </div>
+
+      {/* Keyframes for border animation */}
+      <style>{`
+        @keyframes runningLine {
+          from {
+            stroke-dashoffset: 100;
+          }
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+      `}</style>
     </section>
   );
 }
