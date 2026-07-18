@@ -140,12 +140,19 @@ function ProgramCard({ program }: { program: UnifiedProgram }) {
 
 export default function ProgramsClient() {
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
+  const [activeUniFilter, setActiveUniFilter] = useState<string>("ALL");
+  const [showUniFilters, setShowUniFilters] = useState<boolean>(false);
+  const [showCourseFilters, setShowCourseFilters] = useState<boolean>(false);
   const quickStatsMeta = useContent("programsQuickStatsMeta", DEFAULT_PROGRAMS_QUICK_STATS_META);
 
   const uniqueCategories = Array.from(
     new Set(allPrograms.map((p) => p.category))
   );
+  const uniqueUniversities = Array.from(
+    new Set(allPrograms.map((p) => p.university))
+  );
   const filterTabs = ["ALL", ...uniqueCategories];
+  const uniFilterTabs = ["ALL", ...uniqueUniversities];
 
   const computedValues: Record<string, string> = {
     Programs: `${allPrograms.length}+`,
@@ -156,10 +163,11 @@ export default function ProgramsClient() {
     value: computedValues[s.label] ?? s.value,
   }));
 
-  const filtered =
-    activeFilter === "ALL"
-      ? allPrograms
-      : allPrograms.filter((p) => p.category === activeFilter);
+  const filtered = allPrograms.filter((p) => {
+    const matchCategory = activeFilter === "ALL" || p.category === activeFilter;
+    const matchUni = activeUniFilter === "ALL" || p.university === activeUniFilter;
+    return matchCategory && matchUni;
+  });
 
   return (
     <main
@@ -231,35 +239,104 @@ export default function ProgramsClient() {
       {/* Page content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-6 pb-24">
 
-        {/* Filter tabs */}
-        <div
-          className="flex gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none"
-          role="tablist"
-          aria-label="Filter programs by category"
-        >
-          {filterTabs.map((tab) => {
-            const isActive = activeFilter === tab;
-            return (
-              <button
-                key={tab}
-                role="tab"
-                aria-selected={isActive}
-                onClick={() => setActiveFilter(tab)}
-                className="flex-shrink-0 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-200 cursor-pointer"
-                style={{
-                  background: isActive
-                    ? "#1D4ED8"
-                    : "transparent",
-                  border: isActive
-                    ? "1px solid #1D4ED8"
-                    : "1px solid rgba(0,0,0,0.15)",
-                  color: isActive ? "#fff" : "rgba(0,0,0,0.7)",
-                }}
-              >
-                {tab}
-              </button>
-            );
-          })}
+        {/* Filters */}
+        <div className="flex flex-col gap-3 mb-6">
+          <div className="flex gap-2 pb-2">
+            <button
+              onClick={() => {
+                setShowUniFilters(!showUniFilters);
+                if (!showUniFilters) setShowCourseFilters(false);
+              }}
+              className="text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all duration-200 cursor-pointer shadow-sm"
+              style={{
+                background: showUniFilters ? "#D9383A" : "white",
+                border: showUniFilters ? "1px solid #D9383A" : "1px solid rgba(0,0,0,0.15)",
+                color: showUniFilters ? "#fff" : "rgba(0,0,0,0.7)",
+              }}
+            >
+              Universities
+            </button>
+            <button
+              onClick={() => {
+                setShowCourseFilters(!showCourseFilters);
+                if (!showCourseFilters) setShowUniFilters(false);
+              }}
+              className="text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-all duration-200 cursor-pointer shadow-sm"
+              style={{
+                background: showCourseFilters ? "#1D4ED8" : "white",
+                border: showCourseFilters ? "1px solid #1D4ED8" : "1px solid rgba(0,0,0,0.15)",
+                color: showCourseFilters ? "#fff" : "rgba(0,0,0,0.7)",
+              }}
+            >
+              Courses
+            </button>
+          </div>
+
+          {/* University Filters */}
+          {showUniFilters && (
+            <div
+              className="flex gap-2 overflow-x-auto pb-2 scrollbar-none animate-in fade-in slide-in-from-top-1"
+              role="tablist"
+              aria-label="Filter programs by university"
+            >
+              {uniFilterTabs.map((tab) => {
+                const isActive = activeUniFilter === tab;
+                return (
+                  <button
+                    key={tab}
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setActiveUniFilter(tab)}
+                    className="flex-shrink-0 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-200 cursor-pointer"
+                    style={{
+                      background: isActive
+                        ? "#D9383A"
+                        : "transparent",
+                      border: isActive
+                        ? "1px solid #D9383A"
+                        : "1px solid rgba(0,0,0,0.15)",
+                      color: isActive ? "#fff" : "rgba(0,0,0,0.7)",
+                    }}
+                  >
+                    {tab}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Category Filters (Courses) */}
+          {showCourseFilters && (
+            <div
+              className="flex gap-2 overflow-x-auto pb-2 scrollbar-none animate-in fade-in slide-in-from-top-1"
+              role="tablist"
+              aria-label="Filter programs by category"
+            >
+              {filterTabs.map((tab) => {
+                const isActive = activeFilter === tab;
+                return (
+                  <button
+                    key={tab}
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setActiveFilter(tab)}
+                    className="flex-shrink-0 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-200 cursor-pointer"
+                    style={{
+                      background: isActive
+                        ? "#1D4ED8"
+                        : "transparent",
+                      border: isActive
+                        ? "1px solid #1D4ED8"
+                        : "1px solid rgba(0,0,0,0.15)",
+                      color: isActive ? "#fff" : "rgba(0,0,0,0.7)",
+                    }}
+                  >
+                    {tab}
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Cards grid */}
