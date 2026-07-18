@@ -52,16 +52,16 @@ export default function Contact() {
 
       {/* Background grid */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]"
-        style={{ backgroundImage: "linear-gradient(rgba(124,58,237,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.3) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/10 to-transparent" />
+        style={{ backgroundImage: "linear-gradient(rgba(29,78,216,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(29,78,216,0.3) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/10 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-14">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-blue-700 bg-blue-100 border border-blue-200 uppercase tracking-wider mb-4">
             Get in Touch
           </span>
           <h2 className="font-display font-black text-black mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
-            Start Your Journey — <span className="text-purple-700">Talk to Us Today</span>
+            Start Your Journey — <span className="text-red-600">Talk to Us Today</span>
           </h2>
           <p className="text-base sm:text-lg max-w-xl mx-auto leading-relaxed text-black/60">
             Book your free career counselling call or send us a message. Our team responds within 24 hours.
@@ -82,7 +82,7 @@ export default function Contact() {
                 </p>
                 <button
                   onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", message: "" }); }}
-                  className="text-purple-700 text-sm font-semibold hover:underline mt-2 cursor-pointer"
+                  className="text-blue-700 text-sm font-semibold hover:underline mt-2 cursor-pointer"
                 >
                   Send another message
                 </button>
@@ -106,7 +106,7 @@ export default function Contact() {
                       value={form.name}
                       onChange={handleChange}
                       placeholder="Your full name"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all"
                     />
                   </div>
                   {/* Email */}
@@ -122,7 +122,7 @@ export default function Contact() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="your@email.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all"
                     />
                   </div>
                   {/* Phone */}
@@ -138,7 +138,7 @@ export default function Contact() {
                       value={form.phone}
                       onChange={handleChange}
                       placeholder="+91 XXXXX XXXXX"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all"
                     />
                   </div>
                   {/* Message */}
@@ -153,7 +153,7 @@ export default function Contact() {
                       value={form.message}
                       onChange={handleChange}
                       placeholder="Tell us about your career goals or ask any question..."
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-purple-600 focus:ring-1 focus:ring-purple-600 outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all resize-none"
                     />
                   </div>
                   {error && (
@@ -180,9 +180,9 @@ export default function Contact() {
           {/* Right — Info + Map */}
           <div className="flex flex-col gap-6">
             {[
-              { icon: <Phone size={20} />, label: "Phone / WhatsApp", value: "+91 9292173857", href: "tel:+919292173857", color: "#60a5fa" },
-              { icon: <Mail size={20} />, label: "Email", value: "salesheadworldpassportskills@gmail.com", href: "mailto:salesheadworldpassportskills@gmail.com", color: "#a78bfa" },
-              { icon: <MapPin size={20} />, label: "Office Address", value: "St.george forane Church Building ,Palarivattam,Edappally ,Kochi,Eranakulam,Kerala 682024", href: "#", color: "#34d399" },
+              { icon: <Phone size={20} />, label: "Phone / WhatsApp", value: "+91 9292173857", href: "tel:+919292173857", color: "#1D4ED8" },
+              { icon: <Mail size={20} />, label: "Email", value: "salesheadworldpassportskills@gmail.com", href: "mailto:salesheadworldpassportskills@gmail.com", color: "#D9383A" },
+              { icon: <MapPin size={20} />, label: "Office Address", value: "St.george forane Church Building ,Palarivattam,Edappally ,Kochi,Eranakulam,Kerala 682024", href: "#", color: "#1D4ED8" },
             ].map((c) => (
               <a
                 key={c.label}

@@ -1,15 +1,12 @@
 "use client";
 
-import { ArrowRight, Globe, Sparkles, Building2, ScrollText, Briefcase, Rocket } from "lucide-react";
-
-const trustChips = [
-  { icon: <Building2 size={13} />, label: "CIT University Partner" },
-  { icon: <ScrollText size={13} />, label: "3 Certificates" },
-  { icon: <Briefcase size={13} />, label: "Internship Included" },
-  { icon: <Rocket size={13} />, label: "Placement Support" },
-];
+import { ArrowRight, Globe, Sparkles } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_CTA_TRUST_CHIPS } from "@/lib/contentDefaults";
 
 export default function CTA() {
+  const trustChips = useContent("ctaTrustChips", DEFAULT_CTA_TRUST_CHIPS);
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -70,7 +67,7 @@ export default function CTA() {
             <div className="flex flex-wrap items-center justify-center gap-6">
               {trustChips.map((item) => (
                 <div key={item.label} className="flex items-center gap-1.5 text-slate-400 text-sm font-semibold">
-                  <span className="text-slate-500">{item.icon}</span>
+                  <span className="text-slate-500"><Icon name={item.icon} size={13} /></span>
                   <span>{item.label}</span>
                 </div>
               ))}

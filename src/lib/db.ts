@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = "mongodb://project_db_user:DFHXBCNuL4Oi3DmX@ac-isqc8bl-shard-00-00.41y8sup.mongodb.net:27017,ac-isqc8bl-shard-00-01.41y8sup.mongodb.net:27017,ac-isqc8bl-shard-00-02.41y8sup.mongodb.net:27017/?ssl=true&replicaSet=atlas-17hqtw-shard-0&authSource=admin";
+const MONGODB_URI = process.env.MONGODB_URI!;
 
 declare global {
   // eslint-disable-next-line no-var

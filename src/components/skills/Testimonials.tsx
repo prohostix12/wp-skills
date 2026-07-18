@@ -1,14 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Star, Rocket, Building2, Briefcase, Globe, Quote, Play, User } from "lucide-react";
-
-const batchChips = [
-  { icon: <Building2 size={13} />, label: "CIT University Certificate" },
-  { icon: <Briefcase size={13} />, label: "Assured Internship" },
-  { icon: <Globe size={13} />,     label: "International Credits" },
-  { icon: <Rocket size={13} />,    label: "Placement Support" },
-];
+import { Star, Rocket, Quote, Play, User } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_TESTIMONIALS_BATCH_CHIPS } from "@/lib/contentDefaults";
 
 interface Testimonial {
   _id: string;
@@ -22,6 +18,7 @@ interface Testimonial {
 
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const batchChips = useContent("testimonialsBatchChips", DEFAULT_TESTIMONIALS_BATCH_CHIPS);
 
   useEffect(() => {
     fetch("/api/testimonials")
@@ -34,10 +31,10 @@ export default function Testimonials() {
     <section id="testimonials" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
       {/* Background grid */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
+        style={{ backgroundImage: "linear-gradient(rgba(29,78,216,1) 1px, transparent 1px), linear-gradient(90deg, rgba(29,78,216,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%)", filter: "blur(60px)" }} />
+        style={{ background: "radial-gradient(ellipse, rgba(217,56,58,0.08) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-14" data-aos="fade-up">
@@ -49,9 +46,9 @@ export default function Testimonials() {
             Your success story starts here. Join students who are building international careers
             right from Kerala.
           </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-purple-300"
-            style={{ background: "rgba(124,58,237,0.12)", border: "1px solid rgba(124,58,237,0.3)" }}>
-            <Star size={13} className="fill-purple-400 text-purple-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider text-red-300"
+            style={{ background: "rgba(217,56,58,0.12)", border: "1px solid rgba(217,56,58,0.3)" }}>
+            <Star size={13} className="fill-red-400 text-red-400" />
             Founding cohort — limited seats available
           </div>
         </div>
@@ -65,7 +62,7 @@ export default function Testimonials() {
                 className="rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:scale-[1.02]"
                 style={{
                   background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(167,139,250,0.15)",
+                  border: "1px solid rgba(217,56,58,0.15)",
                   boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
                 }}
               >
@@ -96,26 +93,26 @@ export default function Testimonials() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <User size={40} className="text-purple-400/40" />
+                      <User size={40} className="text-red-400/40" />
                     </div>
                   )}
                 </div>
 
                 {/* Content */}
                 <div className="p-5 flex flex-col gap-3 flex-1">
-                  <Quote size={18} className="text-purple-400/60 flex-shrink-0" />
+                  <Quote size={18} className="text-red-400/60 flex-shrink-0" />
                   <p className="text-sm leading-relaxed flex-1" style={{ color: "rgba(255,255,255,0.7)" }}>
                     {t.text}
                   </p>
                   <div className="flex items-center gap-3 pt-2 border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
                     <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-black text-white flex-shrink-0"
-                      style={{ background: "linear-gradient(135deg, #7c3aed, #5b21b6)" }}>
+                      style={{ background: "linear-gradient(135deg, #D9383A, #0F2537)" }}>
                       {t.name.charAt(0).toUpperCase()}
                     </div>
                     <div>
                       <p className="text-sm font-bold text-white">{t.name}</p>
                       {t.designation && (
-                        <p className="text-xs font-medium" style={{ color: "rgba(167,139,250,0.8)" }}>{t.designation}</p>
+                        <p className="text-xs font-medium" style={{ color: "rgba(248,113,113,0.85)" }}>{t.designation}</p>
                       )}
                     </div>
                   </div>
@@ -128,15 +125,15 @@ export default function Testimonials() {
         {/* Founding batch banner */}
         <div className="rounded-2xl p-8 md:p-12 text-center relative overflow-hidden" data-aos="zoom-in" data-aos-delay="100"
           style={{
-            background: "linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(99,102,241,0.05) 100%)",
-            border: "1px solid rgba(167,139,250,0.2)",
-            boxShadow: "0 0 60px rgba(124,58,237,0.15), 0 20px 50px rgba(0,0,0,0.4)"
+            background: "linear-gradient(135deg, rgba(217,56,58,0.1) 0%, rgba(29,78,216,0.06) 100%)",
+            border: "1px solid rgba(217,56,58,0.25)",
+            boxShadow: "0 0 60px rgba(217,56,58,0.15), 0 20px 50px rgba(0,0,0,0.4)"
           }}>
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] rounded-full blur-3xl pointer-events-none bg-purple-500/10" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[200px] rounded-full blur-3xl pointer-events-none bg-red-500/10" />
           <div className="relative z-10">
             <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center animate-bounce"
-              style={{ background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)" }}>
-              <Rocket size={30} className="text-purple-300" />
+              style={{ background: "rgba(217,56,58,0.15)", border: "1px solid rgba(217,56,58,0.3)" }}>
+              <Rocket size={30} className="text-red-300" />
             </div>
             <h3 className="font-display font-black text-white text-2xl md:text-3xl mb-4 leading-tight">
               Join Students Building International Careers
@@ -148,7 +145,7 @@ export default function Testimonials() {
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               {batchChips.map((chip) => (
                 <span key={chip.label} className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white/80 bg-white/5 border border-white/10">
-                  {chip.icon} {chip.label}
+                  <Icon name={chip.icon} size={13} /> {chip.label}
                 </span>
               ))}
             </div>

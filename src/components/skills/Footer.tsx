@@ -1,18 +1,14 @@
 "use client";
 
-import { Phone, Mail, MapPin, GraduationCap, ExternalLink, Share2, Link2, Play, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import Link from "next/link";
-
-const quickLinks = [
-  { label: "Home", href: "/" },
-  { label: "Skills Program", href: "/skills" },
-  { label: "Universities", href: "/skills#universities" },
-  { label: "Overseas Education", href: "#" },
-  { label: "About Us", href: "/about" },
-  { label: "Contact", href: "/skills#contact" },
-];
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_FOOTER_QUICK_LINKS, DEFAULT_FOOTER_SOCIAL_LINKS } from "@/lib/contentDefaults";
 
 export default function Footer() {
+  const quickLinks = useContent("footerQuickLinks", DEFAULT_FOOTER_QUICK_LINKS);
+  const socialLinks = useContent("footerSocialLinks", DEFAULT_FOOTER_SOCIAL_LINKS);
   return (
     <footer className="relative overflow-hidden bg-brand-blue">
       {/* Decorative background */}
@@ -65,21 +61,16 @@ export default function Footer() {
             </p>
             {/* Social Icons */}
             <div className="flex gap-2.5">
-              {[
-                { icon: <ExternalLink size={15} />, label: "Instagram", href: "#" },
-                { icon: <Link2 size={15} />, label: "LinkedIn", href: "#" },
-                { icon: <Share2 size={15} />, label: "Twitter", href: "#" },
-                { icon: <Play size={15} />, label: "YouTube", href: "#" },
-              ].map((s) => (
+              {socialLinks.map((s) => (
                 <a
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
                   className="w-9 h-9 rounded-lg flex items-center justify-center transition-all hover:-translate-y-0.5 bg-white/5 border border-white/10 text-slate-300"
                   onMouseEnter={e => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = "rgba(91, 33, 182, 0.25)";
+                    (e.currentTarget as HTMLAnchorElement).style.background = "rgba(217, 56, 58, 0.25)";
                     (e.currentTarget as HTMLAnchorElement).style.color = "#fff";
-                    (e.currentTarget as HTMLAnchorElement).style.borderColor = "#5B21B6";
+                    (e.currentTarget as HTMLAnchorElement).style.borderColor = "#D9383A";
                   }}
                   onMouseLeave={e => {
                     (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.05)";
@@ -87,7 +78,7 @@ export default function Footer() {
                     (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.1)";
                   }}
                 >
-                  {s.icon}
+                  <Icon name={s.icon} size={15} />
                 </a>
               ))}
             </div>

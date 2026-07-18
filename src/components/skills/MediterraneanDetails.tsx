@@ -25,24 +25,15 @@ import {
   Plane,
   Star,
 } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import {
+  DEFAULT_MED_DETAILS_QUICK_STATS,
+  DEFAULT_MED_DETAILS_WHY_CHOOSE,
+  DEFAULT_MED_DETAILS_ADMISSION_REQUIREMENTS,
+  DEFAULT_MED_DETAILS_FAQS,
+} from "@/lib/contentDefaults";
 
 const color = "#A855F7";
-
-const quickStats = [
-  { value: "€2k–5k/yr", label: "Tuition" },
-  { value: "12+", label: "Programs" },
-  { value: "English/Albanian", label: "Language" },
-  { value: "ECTS", label: "Accreditation" },
-];
-
-const whyChoose = [
-  "New Faculty of Medical Sciences building",
-  "Central Tirana location",
-  "Modern laboratory infrastructure",
-  "Research development focus",
-  "International cooperation programs",
-  "SkillDad placement support",
-];
 
 const programs = muaCourses.map((c) => ({
   slug: c.slug,
@@ -55,26 +46,12 @@ const programs = muaCourses.map((c) => ({
   href: `/skills/mua-course/${c.slug}`,
 }));
 
-const admissionRequirements = [
-  "High school diploma or equivalent for Bachelor programs",
-  "Bachelor degree for Master programs",
-  "English proficiency (IELTS/TOEFL or equivalent)",
-  "Valid passport and student visa eligibility",
-  "Academic transcripts and recommendation letters",
-  "Statement of purpose / motivation letter",
-];
-
-const faqs = [
-  { q: "What are the entry requirements?", a: "Applicants need a high school diploma for Bachelor programs (or a Bachelor's degree for Master programs), proof of English proficiency, a valid passport, academic transcripts, and a statement of purpose." },
-  { q: "Is the degree internationally recognized?", a: "Yes. Mediterranean University of Albania is an accredited institution and its ECTS-based programs are recognized across the European Higher Education Area and beyond." },
-  { q: "What is the cost of living?", a: "Tirana is an affordable European capital — students typically budget €300–€500 per month for accommodation, food, and daily expenses, on top of tuition." },
-  { q: "Do you help with visa applications?", a: "Yes, our GEC support team assists with the full visa process — documentation, appointment scheduling, and interview preparation — with a 98% visa success rate." },
-  { q: "Will I get placement or internship support?", a: "Yes. Students get access to SkillDad placement support and MUA's central Tirana location, which connects students with neighboring companies and organizations for internships." },
-  { q: "Can I work while studying?", a: "International students in Albania can generally work part-time alongside their studies, subject to visa conditions — our advisors can walk you through the specifics." },
-];
-
 export default function MediterraneanDetails() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const quickStats = useContent("medDetailsQuickStats", DEFAULT_MED_DETAILS_QUICK_STATS);
+  const whyChoose = useContent("medDetailsWhyChoose", DEFAULT_MED_DETAILS_WHY_CHOOSE);
+  const admissionRequirements = useContent("medDetailsAdmissionRequirements", DEFAULT_MED_DETAILS_ADMISSION_REQUIREMENTS);
+  const faqs = useContent("medDetailsFaqs", DEFAULT_MED_DETAILS_FAQS);
 
   return (
     <main

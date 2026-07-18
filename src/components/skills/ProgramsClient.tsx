@@ -5,7 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import StickyBar from "@/components/skills/StickyBar";
 import Footer from "@/components/skills/Footer";
-import { BookOpen, Layers, BadgeCheck, Monitor } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_PROGRAMS_QUICK_STATS_META } from "@/lib/contentDefaults";
 
 import { citCourses } from "@/data/citCourses";
 import { muaCourses } from "@/data/muaCourses";
@@ -59,7 +61,7 @@ function UniversityAvatar({ initial }: { initial: string }) {
   return (
     <div
       className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 text-white font-bold text-base"
-      style={{ background: "linear-gradient(135deg, #7c3aed 0%, #4f1d96 100%)" }}
+      style={{ background: "linear-gradient(135deg, #1D4ED8 0%, #0F2537 100%)" }}
       aria-hidden="true"
     >
       {initial}
@@ -123,7 +125,7 @@ function ProgramCard({ program }: { program: UnifiedProgram }) {
           {/* CTA */}
           <div className="mt-auto pt-2">
             <div
-              className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs px-5 py-2.5 rounded-full transition-all duration-200"
+              className="inline-block bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-5 py-2.5 rounded-full transition-all duration-200"
             >
               VIEW →
             </div>
@@ -138,11 +140,21 @@ function ProgramCard({ program }: { program: UnifiedProgram }) {
 
 export default function ProgramsClient() {
   const [activeFilter, setActiveFilter] = useState<string>("ALL");
+  const quickStatsMeta = useContent("programsQuickStatsMeta", DEFAULT_PROGRAMS_QUICK_STATS_META);
 
   const uniqueCategories = Array.from(
     new Set(allPrograms.map((p) => p.category))
   );
   const filterTabs = ["ALL", ...uniqueCategories];
+
+  const computedValues: Record<string, string> = {
+    Programs: `${allPrograms.length}+`,
+    Categories: `${uniqueCategories.length}`,
+  };
+  const quickStats = quickStatsMeta.map((s) => ({
+    ...s,
+    value: computedValues[s.label] ?? s.value,
+  }));
 
   const filtered =
     activeFilter === "ALL"
@@ -189,11 +201,11 @@ export default function ProgramsClient() {
         <div className="absolute inset-0 bg-[#faf8f5]/20 z-10 pointer-events-none backdrop-blur-[1px]" />
 
         <div className="relative z-20 text-center px-4 max-w-3xl mx-auto">
-          <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold uppercase tracking-widest shadow-sm">
+          <div className="inline-block mb-4 px-4 py-1.5 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-widest shadow-sm">
             Explore Our Courses
           </div>
           <h1 className="font-display font-black text-5xl sm:text-7xl text-slate-900 mb-6 tracking-tight leading-tight">
-            Our <span className="text-purple-700">Programs</span>
+            Our <span className="text-red-600">Programs</span>
           </h1>
           <p className="text-slate-700 text-lg sm:text-xl font-medium leading-relaxed mb-10">
             Industry-aligned courses designed to accelerate your global career. Master new skills with our international university training.
@@ -201,15 +213,10 @@ export default function ProgramsClient() {
 
           {/* Quick stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-2xl mx-auto">
-            {[
-              { icon: <BookOpen size={18} />, value: `${allPrograms.length}+`, label: "Programs" },
-              { icon: <Layers size={18} />, value: `${uniqueCategories.length}`, label: "Categories" },
-              { icon: <BadgeCheck size={18} />, value: "Certified", label: "Credentials" },
-              { icon: <Monitor size={18} />, value: "Online", label: "Delivery Mode" },
-            ].map((s) => (
+            {quickStats.map((s) => (
               <div key={s.label} className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-slate-200/60 shadow-sm flex items-center gap-3 text-left">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-100 text-purple-700">
-                  {s.icon}
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${s.color === "blue" ? "bg-blue-100 text-blue-700" : "bg-red-100 text-red-700"}`}>
+                  <Icon name={s.icon} size={18} />
                 </div>
                 <div>
                   <div className="text-slate-900 font-bold text-sm">{s.value}</div>
@@ -241,10 +248,10 @@ export default function ProgramsClient() {
                 className="flex-shrink-0 text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-all duration-200 cursor-pointer"
                 style={{
                   background: isActive
-                    ? "#7c3aed"
+                    ? "#1D4ED8"
                     : "transparent",
                   border: isActive
-                    ? "1px solid #7c3aed"
+                    ? "1px solid #1D4ED8"
                     : "1px solid rgba(0,0,0,0.15)",
                   color: isActive ? "#fff" : "rgba(0,0,0,0.7)",
                 }}

@@ -4,16 +4,11 @@ import { useState } from "react";
 import { Phone, Menu, X, GraduationCap, LogIn, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Programs", href: "/programs" },
-  { label: "Universities", href: "/skills#universities" },
-  { label: "Certificates", href: "/skills#certificates" },
-  { label: "Contact", href: "/skills#contact" },
-];
+import { useContent } from "@/hooks/useContent";
+import { DEFAULT_NAV_LINKS } from "@/lib/contentDefaults";
 
 export default function StickyBar() {
+  const navLinks = useContent("navLinks", DEFAULT_NAV_LINKS);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
   const [username, setUsername] = useState("");
@@ -50,14 +45,14 @@ export default function StickyBar() {
     <>
       {/* Top announcement bar */}
       <div className="fixed top-0 left-0 right-0 z-[60] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-bold flex items-center justify-center gap-3"
-        style={{ background: "linear-gradient(135deg, #1a0a4a 0%, #0d0a2e 100%)", borderBottom: "1px solid rgba(124,58,237,0.3)" }}>
+        style={{ background: "linear-gradient(135deg, #1a0a4a 0%, #0d0a2e 100%)", borderBottom: "1px solid rgba(217,56,58,0.3)" }}>
         <GraduationCap size={15} className="text-yellow-400 animate-pulse flex-shrink-0" />
         <span>Free Career Counselling — Limited Spots Available!</span>
         <a
           href="#contact"
           className="inline-flex items-center gap-1 text-white text-xs font-bold px-4 py-1.5 rounded-full transition-all ml-2"
           style={{
-            background: "linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)"
+            background: "linear-gradient(135deg, #F87171 0%, #D9383A 100%)"
           }}
         >
           Book Free Call →
@@ -93,12 +88,13 @@ export default function StickyBar() {
               href="tel:+919292173857"
               className="flex items-center gap-1.5 text-sm font-semibold text-white/70 hover:text-white transition-all"
             >
-              <Phone size={14} className="text-purple-400" />
+              <Phone size={14} className="text-red-400" />
               +91 9292173857
             </a>
             <button
               onClick={() => { setLoginOpen(true); setAuthError(""); }}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white bg-purple-600 hover:bg-purple-700 transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white transition-all cursor-pointer"
+              style={{ background: "#5b21b6" }}
             >
               <LogIn size={13} /> Login
             </button>
@@ -126,7 +122,7 @@ export default function StickyBar() {
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="px-4 py-3 rounded-xl text-sm font-semibold text-white/80 hover:bg-white/5 hover:text-purple-400 transition-all"
+                className="px-4 py-3 rounded-xl text-sm font-semibold text-white/80 hover:bg-white/5 hover:text-red-400 transition-all"
               >
                 {link.label}
               </Link>
@@ -136,11 +132,12 @@ export default function StickyBar() {
                 href="tel:+919292173857"
                 className="flex items-center gap-2 px-4 py-3 text-sm font-semibold text-white/80"
               >
-                <Phone size={14} className="text-purple-400" /> +91 9292173857
+                <Phone size={14} className="text-red-400" /> +91 9292173857
               </a>
               <button
                 onClick={() => { setMobileOpen(false); setLoginOpen(true); setAuthError(""); }}
-                className="flex items-center gap-2 mx-4 px-4 py-2.5 rounded-full text-xs font-bold text-white bg-purple-600 hover:bg-purple-700 transition-all justify-center"
+                className="flex items-center gap-2 mx-4 px-4 py-2.5 rounded-full text-xs font-bold text-white transition-all justify-center"
+                style={{ background: "#5b21b6" }}
               >
                 <LogIn size={13} /> Login
               </button>
@@ -174,8 +171,8 @@ export default function StickyBar() {
 
             {/* Icon + Title */}
             <div className="flex flex-col items-center mb-8">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{ background: "rgba(124,58,237,0.08)", border: "1px solid rgba(124,58,237,0.15)" }}>
-                <LogIn size={24} style={{ color: "#7c3aed" }} />
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style={{ background: "rgba(29,78,216,0.08)", border: "1px solid rgba(29,78,216,0.15)" }}>
+                <LogIn size={24} style={{ color: "#1D4ED8" }} />
               </div>
               <h2 className="font-display font-black text-black text-2xl">Admin Login</h2>
               <p className="text-slate-500 text-sm mt-1">Sign in to access your dashboard</p>
@@ -196,7 +193,7 @@ export default function StickyBar() {
                     background: "#ffffff",
                     border: "1px solid #cbd5e1",
                   }}
-                  onFocus={(e) => { e.currentTarget.style.borderColor = "#7c3aed"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(124,58,237,0.12)"; }}
+                  onFocus={(e) => { e.currentTarget.style.borderColor = "#1D4ED8"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(29,78,216,0.12)"; }}
                   onBlur={(e) => { e.currentTarget.style.borderColor = "#cbd5e1"; e.currentTarget.style.boxShadow = "none"; }}
                 />
               </div>
@@ -216,7 +213,7 @@ export default function StickyBar() {
                       background: "#ffffff",
                       border: "1px solid #cbd5e1",
                     }}
-                    onFocus={(e) => { e.currentTarget.style.borderColor = "#7c3aed"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(124,58,237,0.12)"; }}
+                    onFocus={(e) => { e.currentTarget.style.borderColor = "#1D4ED8"; e.currentTarget.style.boxShadow = "0 0 0 3px rgba(29,78,216,0.12)"; }}
                     onBlur={(e) => { e.currentTarget.style.borderColor = "#cbd5e1"; e.currentTarget.style.boxShadow = "none"; }}
                   />
                   <button
@@ -241,7 +238,7 @@ export default function StickyBar() {
               <button
                 type="submit"
                 disabled={authLoading}
-                className="mt-2 w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed hover:bg-purple-700 cursor-pointer"
+                className="mt-2 w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white text-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed hover:bg-[#4c1d95] cursor-pointer"
                 style={{ background: "#5b21b6", boxShadow: "0 6px 20px rgba(91,33,182,0.25)" }}
               >
                 {authLoading ? (

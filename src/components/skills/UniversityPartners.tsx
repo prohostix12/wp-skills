@@ -1,59 +1,12 @@
 "use client";
 
-import { Building2, GraduationCap, Monitor, Briefcase, BookOpen, Award, Globe, FlaskConical } from "lucide-react";
-
-const universities = [
-  {
-    id: "cit",
-    label: "CIT",
-    name: "Canadian Institute of Technology",
-    location: "Tirana, Albania",
-    image: "/canedian.png",
-    desc: "The Canadian Institute of Technology, based in Tirana, is a recognised international private higher education institution dedicated to academic excellence, research development, and international cooperation.",
-    websiteUrl: "/skills/cit",
-    leadership: [
-      { name: "Prof. Dr. Ramiz Zekaj", role: "President" },
-      { name: "Prof. Dr. Ismail Kocayusufoglu", role: "Rector" },
-    ],
-    highlights: [
-      { icon: <Award size={16} />, title: "Internationally Recognised", desc: "Accredited private higher education institution" },
-      { icon: <FlaskConical size={16} />, title: "Research Driven", desc: "Strong focus on research & academic development" },
-      { icon: <Globe size={16} />, title: "Global Cooperation", desc: "Active international partnership network" },
-    ],
-    stats: [
-      { icon: <BookOpen size={15} />, value: "6", label: "Programs" },
-      { icon: <Monitor size={15} />, value: "Online", label: "Delivery Mode" },
-      { icon: <Briefcase size={15} />, value: "Yes", label: "Career Support" },
-    ],
-    color: "#7c3aed", glow: "rgba(124,58,237,0.08)"
-  },
-  {
-    id: "mesdhetar",
-    label: "Mesdhetar",
-    name: "Mediterranean University Albania",
-    location: "Tirana, Albania",
-    image: "/mediterranean.png",
-    desc: "The Mediterranean University of Albania, based in Tirana, is a recognized private higher education institution dedicated to academic excellence, research development, and international cooperation.",
-    websiteUrl: "/skills/mediterranean",
-    leadership: [
-      { name: "Prof. Dr. Anastas Angjeli", role: "Honorary President" },
-      { name: "Prof. Dr. Adrian Civici", role: "Rector" },
-    ],
-    highlights: [
-      { icon: <Award size={16} />, title: "Internationally Recognised", desc: "Accredited private higher education institution" },
-      { icon: <FlaskConical size={16} />, title: "Research Driven", desc: "Strong focus on research & academic development" },
-      { icon: <Globe size={16} />, title: "Global Cooperation", desc: "Active international partnership network" },
-    ],
-    stats: [
-      { icon: <BookOpen size={15} />, value: "4", label: "Programs" },
-      { icon: <Monitor size={15} />, value: "Online", label: "Delivery Mode" },
-      { icon: <Briefcase size={15} />, value: "Yes", label: "Career Support" },
-    ],
-    color: "#3b82f6", glow: "rgba(59,130,246,0.08)"
-  },
-];
+import { Building2, GraduationCap, Award } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_UNIVERSITY_PARTNERS } from "@/lib/contentDefaults";
 
 export default function UniversityPartners() {
+  const universities = useContent("universityPartners", DEFAULT_UNIVERSITY_PARTNERS);
   return (
     <section id="universities" className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
       {/* Background video (section backdrop only — not inside the university cards) */}
@@ -70,7 +23,7 @@ export default function UniversityPartners() {
       <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: "rgba(6,4,24,0.75)" }} />
 
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full pointer-events-none z-0"
-        style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%)", filter: "blur(60px)" }} />
+        style={{ background: "radial-gradient(ellipse, rgba(29,78,216,0.08) 0%, transparent 70%)", filter: "blur(60px)" }} />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Heading */}
@@ -94,7 +47,7 @@ export default function UniversityPartners() {
               data-aos-delay={120 + idx * 50}
               className="grid lg:grid-cols-5 gap-0 rounded-3xl overflow-hidden bg-white border border-slate-200"
               style={{
-                boxShadow: "0 10px 30px -10px rgba(124, 58, 237, 0.08), 0 1px 3px rgba(0, 0, 0, 0.02)"
+                boxShadow: "0 10px 30px -10px rgba(15, 37, 55, 0.1), 0 1px 3px rgba(0, 0, 0, 0.02)"
               }}
             >
               {/* Left — Image & info */}
@@ -180,7 +133,7 @@ export default function UniversityPartners() {
                       <div key={item.title} className="flex flex-col gap-1.5 p-3 rounded-xl bg-white border border-slate-200/60">
                         <div className="w-7 h-7 rounded-lg flex items-center justify-center"
                           style={{ background: `${uni.color}10`, color: uni.color, border: `1px solid ${uni.color}20` }}>
-                          {item.icon}
+                          <Icon name={item.icon} size={16} />
                         </div>
                         <p className="font-bold text-slate-800 text-xs leading-tight">{item.title}</p>
                         <p className="text-xs leading-snug text-slate-500">{item.desc}</p>
@@ -199,7 +152,7 @@ export default function UniversityPartners() {
                       <div className="w-6 h-6 rounded-lg flex items-center justify-center"
                         style={{ background: `${uni.color}10`, color: uni.color, border: `1px solid ${uni.color}20` }}
                       >
-                        {stat.icon}
+                        <Icon name={stat.icon} size={15} />
                       </div>
                       <p className="font-display font-black text-sm text-slate-800">
                         {stat.value}

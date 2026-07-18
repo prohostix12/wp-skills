@@ -1,43 +1,12 @@
 "use client";
 
-import { CheckCircle2, Building2, Monitor, Briefcase, Rocket, GraduationCap } from "lucide-react";
-
-const steps = [
-  {
-    month: "Months 1–3", phase: "Phase 1",
-    title: "CIT International Training + IELTS",
-    desc: "University-affiliated training with the Canadian Institute of Technology (CIT), Tirana, Albania. Includes IELTS coaching and international academic credits.",
-    bullets: ["CIT international faculty", "Academic credit pathway", "IELTS integrated coaching"],
-    color: "#8b5cf6", glow: "rgba(139,92,246,0.25)",
-    icon: <Building2 size={20} />,
-  },
-  {
-    month: "Month 4", phase: "Phase 2",
-    title: "Skill Development & Live Projects",
-    desc: "Intensive hands-on skill building with industry tools and live project experience. Build a portfolio that stands out to employers.",
-    bullets: ["Industry-standard tools", "Live project experience", "Portfolio building"],
-    color: "#3b82f6", glow: "rgba(59,130,246,0.25)",
-    icon: <Monitor size={20} />,
-  },
-  {
-    month: "Month 5", phase: "Phase 3",
-    title: "Assured Internship",
-    desc: "3-month guaranteed internship with partner companies. Real work experience that transforms your resume and professional profile.",
-    bullets: ["Internship with partner firms", "Real work environment", "Professional mentoring"],
-    color: "#10b981", glow: "rgba(16,185,129,0.25)",
-    icon: <Briefcase size={20} />,
-  },
-  {
-    month: "Month 6", phase: "Phase 4",
-    title: "Placement Support",
-    desc: "Resume building, mock interviews, career counselling, and job-opportunity coordination. Our team supports you until you land your role.",
-    bullets: ["Resume & LinkedIn building", "Mock interview training", "Job opportunity support"],
-    color: "#f59e0b", glow: "rgba(245,158,11,0.25)",
-    icon: <Rocket size={20} />,
-  },
-];
+import { CheckCircle2, GraduationCap } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_SOLUTION_TIMELINE } from "@/lib/contentDefaults";
 
 export default function SolutionTimeline() {
+  const steps = useContent("solutionTimeline", DEFAULT_SOLUTION_TIMELINE);
   return (
     <section id="pathway" className="py-24 relative overflow-hidden bg-[#faf8f5]">
       {/* Background Image */}
@@ -50,12 +19,12 @@ export default function SolutionTimeline() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16" data-aos="fade-up">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-blue-700 bg-blue-100 border border-blue-200 uppercase tracking-wider mb-4">
             The 6-Month Pathway
           </span>
           <h2 className="font-display font-black text-slate-900 mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
             From Student to{" "}
-            <span className="text-purple-700">Global Professional</span>
+            <span className="text-red-600">Global Professional</span>
           </h2>
           <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-600 font-medium">
             A structured, step-by-step program that takes you from your current degree to a
@@ -95,7 +64,7 @@ export default function SolutionTimeline() {
                       <div className={`flex items-center gap-3 mb-4 ${isLeft ? "lg:flex-row-reverse" : ""}`}>
                         <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                           style={{ background: `${step.color}15`, border: `1px solid ${step.color}30`, color: step.color }}>
-                          {step.icon}
+                          <Icon name={step.icon} size={20} />
                         </div>
                         <div>
                           <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: step.color }}>{step.phase}</span>
@@ -141,9 +110,9 @@ export default function SolutionTimeline() {
 
         {/* Completion card */}
         <div className="mt-20 text-center" data-aos="zoom-in" data-aos-delay="100">
-          <div className="inline-flex flex-col items-center gap-4 px-12 py-10 rounded-3xl bg-purple-50 border border-purple-100 shadow-sm">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-purple-100 border border-purple-200">
-              <GraduationCap size={32} className="text-purple-600" />
+          <div className="inline-flex flex-col items-center gap-4 px-12 py-10 rounded-3xl bg-blue-50 border border-blue-100 shadow-sm">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center bg-blue-100 border border-blue-200">
+              <GraduationCap size={32} className="text-blue-600" />
             </div>
             <h3 className="font-display font-black text-slate-900 text-2xl">On Completion</h3>
             <p className="text-base max-w-md text-center leading-relaxed text-slate-600 font-medium">

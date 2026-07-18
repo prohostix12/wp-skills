@@ -1,36 +1,13 @@
 "use client";
 
-import { Briefcase, Globe, Award, BookOpen, CheckCircle2, ArrowRight, GraduationCap } from "lucide-react";
+import { Briefcase, Award, BookOpen, CheckCircle2, ArrowRight } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_PLACEMENT_PLATFORM_FEATURES, DEFAULT_PLACEMENT_PLATFORM_STATS } from "@/lib/contentDefaults";
 
 export default function PlacementPlatform() {
-  const features = [
-    {
-      title: "Internship Facilitation",
-      desc: "Aligned with your specialization",
-      icon: <Briefcase size={18} className="text-purple-600" />,
-    },
-    {
-      title: "Global Industry Exposure",
-      desc: "Work with leading companies worldwide",
-      icon: <Globe size={18} className="text-purple-600" />,
-    },
-    {
-      title: "Professional Profiling",
-      desc: "CV, LinkedIn, interview coaching",
-      icon: <GraduationCap size={18} className="text-purple-600" />,
-    },
-    {
-      title: "ECTS + Job Placement",
-      desc: "European certificate + real-world placement",
-      icon: <Award size={18} className="text-purple-600" />,
-    },
-  ];
-
-  const stats = [
-    { val: "100%", label: "Placement Support" },
-    { val: "500+", label: "Partner Companies" },
-    { val: "95%", label: "Success Rate" },
-  ];
+  const features = useContent("placementPlatformFeatures", DEFAULT_PLACEMENT_PLATFORM_FEATURES);
+  const stats = useContent("placementPlatformStats", DEFAULT_PLACEMENT_PLATFORM_STATS);
 
   return (
     <section className="pt-36 pb-20 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,7 +35,7 @@ export default function PlacementPlatform() {
                 className="flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-200 shadow-sm"
               >
                 <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0 border border-purple-100">
-                  {f.icon}
+                  <Icon name={f.icon} size={18} className="text-purple-600" />
                 </div>
                 <div>
                   <h4 className="font-bold text-black text-sm sm:text-base leading-none mb-1">{f.title}</h4>

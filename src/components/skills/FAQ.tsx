@@ -2,17 +2,11 @@
 
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
-
-const faqs = [
-  { q: "What skills are included in the program?", a: "The program covers AI tools, digital marketing, data analytics, business intelligence, supply chain management, virtual reality for business, and more. All curricula are designed in collaboration with CIT (Canadian Institute of Technology) and aligned with current industry demands. You'll also get IELTS coaching and live project experience." },
-  { q: "How long is the program?",                 a: "The full program runs for 6 months: Months 1–3 cover CIT international university training + IELTS coaching, Months 4–5 involve intensive skill development and live projects, and Month 6 is dedicated to internship and placement support. The program is designed for online delivery, so you can participate from anywhere in Kerala." },
-  { q: "Will I receive certificates?",             a: "Yes! You will receive 3 certificates upon successful completion: (1) University Certificate from CIT, (2) Course Completion Certificate from World Passport / SkillDad, and (3) Internship Certificate from your host company. All certificates are digitally verifiable." },
-  { q: "Is internship included?",                  a: "Yes, the program includes an internship facilitated by World Passport with our partner companies. The internship is aligned with your program specialisation and provides real work experience. This is coordinated and assisted — work timelines and placements depend on partner availability." },
-  { q: "Who can join this program?",               a: "The program is open to final year students, fresh graduates, working professionals looking to upskill, career switchers wanting international credentials, students planning to pursue higher studies abroad, and anyone interested in building a global career. If you want international-grade skills, this program is for you." },
-  { q: "How does placement assistance work?",      a: "Placement assistance includes one-on-one career counselling, professional resume and LinkedIn profile building, mock interview training, access to job opportunities through our partner network, and ongoing guidance through the job search process. We actively support and guide you, though job outcomes depend on individual performance and market conditions." },
-];
+import { useContent } from "@/hooks/useContent";
+import { DEFAULT_FAQ } from "@/lib/contentDefaults";
 
 export default function FAQ() {
+  const faqs = useContent("faq", DEFAULT_FAQ);
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (

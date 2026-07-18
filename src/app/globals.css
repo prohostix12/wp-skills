@@ -4,10 +4,12 @@
 @theme inline {
   --color-brand-blue: #0F2537;
   --color-brand-blue-dark: #0A1C2A;
+  --color-brand-blue-accent: #1D4ED8;
   --color-brand-red: #D9383A;
+  --color-brand-red-dark: #A82C2E;
   --color-brand-dark: #0F2537;
-  --color-brand-teal: #5B21B6;
-  /* violet replaces teal */
+  --color-brand-teal: #D9383A;
+  /* logo red replaces violet/teal accent */
   --color-brand-yellow: #FFB800;
   --color-surface: #F8FAFC;
   --color-background: #ffffff;
@@ -38,7 +40,7 @@ body {
 
 /* ─── Gradient Text ─────────────────────────────────────── */
 .text-gradient {
-  background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 50%, #6366f1 100%);
+  background: linear-gradient(135deg, #1D4ED8 0%, #0F2537 50%, #D9383A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -52,7 +54,7 @@ body {
 }
 
 .text-gradient-mixed {
-  background: linear-gradient(135deg, #a78bfa, #60a5fa);
+  background: linear-gradient(135deg, #D9383A, #1D4ED8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -69,8 +71,8 @@ body {
 
 .dark-card:hover {
   background: rgba(255,255,255,0.07);
-  border-color: rgba(167,139,250,0.3);
-  box-shadow: 0 0 30px rgba(124,58,237,0.15), 0 12px 40px rgba(0,0,0,0.3);
+  border-color: rgba(29,78,216,0.35);
+  box-shadow: 0 0 30px rgba(29,78,216,0.18), 0 12px 40px rgba(0,0,0,0.3);
   transform: translateY(-3px);
 }
 
@@ -88,21 +90,21 @@ body {
 }
 
 .badge-blue {
-  background: rgba(99,102,241,0.12);
-  color: #a5b4fc;
-  border: 1px solid rgba(99,102,241,0.25);
+  background: rgba(29,78,216,0.12);
+  color: #93c5fd;
+  border: 1px solid rgba(29,78,216,0.28);
 }
 
 .badge-red {
-  background: rgba(239,68,68,0.12);
-  color: #fca5a5;
-  border: 1px solid rgba(239,68,68,0.25);
+  background: rgba(217,56,58,0.12);
+  color: #f5a3a3;
+  border: 1px solid rgba(217,56,58,0.28);
 }
 
 .badge-teal {
-  background: rgba(124,58,237,0.15);
-  color: #c4b5fd;
-  border: 1px solid rgba(124,58,237,0.3);
+  background: rgba(217,56,58,0.15);
+  color: #f5a3a3;
+  border: 1px solid rgba(217,56,58,0.3);
 }
 
 /* ─── Card Styles ────────────────────────────────────────── */
@@ -115,7 +117,7 @@ body {
 }
 
 .card-white:hover {
-  box-shadow: 0 12px 40px rgba(124,58,237,0.2);
+  box-shadow: 0 12px 40px rgba(29,78,216,0.2);
   transform: translateY(-3px);
 }
 
@@ -126,21 +128,21 @@ body {
   gap: 0.5rem;
   padding: 0.875rem 2rem;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+  background: linear-gradient(135deg, #D9383A 0%, #A82C2E 100%);
   color: #fff;
   font-weight: 600;
   font-size: 0.9375rem;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 24px rgba(124,58,237,0.4);
+  box-shadow: 0 6px 24px rgba(217,56,58,0.4);
   cursor: pointer;
   border: none;
   text-decoration: none;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
+  background: linear-gradient(135deg, #c53133 0%, #8a2325 100%);
   transform: translateY(-2px);
-  box-shadow: 0 10px 32px rgba(124,58,237,0.6);
+  box-shadow: 0 10px 32px rgba(217,56,58,0.6);
 }
 
 .btn-navy {
@@ -149,19 +151,19 @@ body {
   gap: 0.5rem;
   padding: 0.875rem 2rem;
   border-radius: 9999px;
-  background: rgba(99,102,241,0.15);
+  background: rgba(29,78,216,0.15);
   color: #fff;
   font-weight: 600;
   font-size: 0.9375rem;
-  border: 1px solid rgba(99,102,241,0.3);
+  border: 1px solid rgba(29,78,216,0.3);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .btn-navy:hover {
-  background: rgba(99,102,241,0.25);
+  background: rgba(29,78,216,0.25);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(99,102,241,0.3);
+  box-shadow: 0 6px 20px rgba(29,78,216,0.3);
 }
 
 .btn-outline {
@@ -183,7 +185,7 @@ body {
 
 .btn-outline:hover {
   background: rgba(255,255,255,0.13);
-  border-color: rgba(167,139,250,0.5);
+  border-color: rgba(29,78,216,0.5);
 }
 
 .btn-outline-white {
@@ -225,9 +227,9 @@ body {
 }
 
 .btn-outline-dark:hover {
-  border-color: rgba(167,139,250,0.5);
-  color: #c4b5fd;
-  background: rgba(124,58,237,0.1);
+  border-color: rgba(29,78,216,0.5);
+  color: #93c5fd;
+  background: rgba(29,78,216,0.1);
 }
 
 /* ─── Dark Section Base ──────────────────────────────────── */
@@ -242,8 +244,8 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(150,120,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(150,120,255,0.06) 1px, transparent 1px);
+    linear-gradient(rgba(29,78,216,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(29,78,216,0.06) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
 }
@@ -285,8 +287,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(124,58,237,0.25); }
-  50%       { box-shadow: 0 0 40px rgba(124,58,237,0.5), 0 0 80px rgba(124,58,237,0.2); }
+  0%, 100% { box-shadow: 0 0 20px rgba(217,56,58,0.25); }
+  50%       { box-shadow: 0 0 40px rgba(217,56,58,0.5), 0 0 80px rgba(217,56,58,0.2); }
 }
 
 @keyframes spin-slow {
@@ -336,7 +338,7 @@ body {
 /* ─── Section Divider ────────────────────────────────────── */
 .section-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(124,58,237,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(29,78,216,0.3), transparent);
 }
 
 /* ─── Glassmorphism ──────────────────────────────────────── */
@@ -355,8 +357,8 @@ body {
 /* ─── Scrollbar ──────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: #0a0620; }
-::-webkit-scrollbar-thumb { background: #3b1d8a; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+::-webkit-scrollbar-thumb { background: #0A1C2A; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #D9383A; }
 
 /* ─── Timeline connector line ────────────────────────────── */
 .timeline-line {
@@ -365,7 +367,7 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, #0F2537, #5B21B6);
+  background: linear-gradient(180deg, #0F2537, #D9383A);
   transform: translateX(-50%);
 }
 
@@ -381,8 +383,8 @@ body {
 
 .cert-card:hover {
   transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 15px 45px rgba(91, 33, 182, 0.08);
-  border-color: #5B21B6;
+  box-shadow: 0 15px 45px rgba(217, 56, 58, 0.1);
+  border-color: #D9383A;
 }
 
 /* ─── FAQ Accordion ──────────────────────────────────────── */
@@ -421,7 +423,7 @@ body, main, section, footer, [style*="background: #060418"], [style*="background
 
 
 /* Except inside elements requiring white text (like buttons or colored badges) */
-.btn-primary, .btn-primary *, .badge, .badge *, .btn-navy *, .text-white, .text-white *, .bg-purple-600, .bg-purple-600 *, .bg-purple-500, .bg-purple-500 *, [style*="background: #5b21b6"] *, [style*="background:#5b21b6"] * {
+.btn-primary, .btn-primary *, .badge, .badge *, .btn-navy *, .text-white, .text-white *, .bg-red-600, .bg-red-600 *, .bg-red-500, .bg-red-500 *, .bg-blue-600, .bg-blue-600 *, .bg-blue-700, .bg-blue-700 *, [style*="background: #D9383A"] *, [style*="background:#D9383A"] * {
   color: #ffffff !important;
 }
 
@@ -436,13 +438,13 @@ body, main, section, footer, [style*="background: #060418"], [style*="background
   color: inherit !important;
 }
 
-/* Text Gradient overrides (so they stand out on light background as solid dark violet) */
+/* Text Gradient overrides (so they stand out on light background as solid brand red) */
 .text-gradient {
   background: none !important;
   -webkit-background-clip: initial !important;
   -webkit-text-fill-color: initial !important;
   background-clip: initial !important;
-  color: #5b21b6 !important;
+  color: #D9383A !important;
 }
 
 /* Cards (Glassmorphism & dark cards converted to clean white cards) */
@@ -471,8 +473,8 @@ body, main, section, footer, [style*="background: #060418"], [style*="background
 [style*="background: rgba(255,255,255,0.04)"]:hover,
 [style*="background: #0d0a2e"]:hover {
   background-color: #ffffff !important;
-  border-color: rgba(91, 33, 182, 0.3) !important;
-  box-shadow: 0 10px 30px rgba(91, 33, 182, 0.08) !important;
+  border-color: rgba(29, 78, 216, 0.3) !important;
+  box-shadow: 0 10px 30px rgba(29, 78, 216, 0.08) !important;
 }
 
 /* Only style grid items as cards if they have styling classes like rounded-2xl, border, or padding */
@@ -492,7 +494,7 @@ header.fixed a, header.fixed button {
   color: #475569 !important;
 }
 header.fixed a:hover, header.fixed button:hover {
-  color: #5b21b6 !important;
+  color: #1D4ED8 !important;
 }
 
 /* Input Fields (Contact form) */
@@ -512,17 +514,25 @@ input::placeholder, textarea::placeholder {
 
 /* Solutions Timeline page layout */
 .timeline-line {
-  background: linear-gradient(180deg, #e2e8f0, #818cf8) !important;
+  background: linear-gradient(180deg, #e2e8f0, #D9383A) !important;
 }
 
-/* Primary Violet Buttons Override */
-[style*="background: linear-gradient(135deg,#7c3aed"], [style*="background: linear-gradient(135deg, #7c3aed"], .bg-purple-600, .bg-purple-500 {
-  background: #5b21b6 !important;
+/* Primary Brand Button Overrides (enforce exact brand hex over Tailwind defaults) */
+[style*="background: linear-gradient(135deg,#D9383A"], [style*="background: linear-gradient(135deg, #D9383A"], .bg-red-600, .bg-red-500 {
+  background: #D9383A !important;
   color: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(91, 33, 182, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(217, 56, 58, 0.3) !important;
 }
-[style*="background: linear-gradient(135deg,#7c3aed"]:hover, [style*="background: linear-gradient(135deg, #7c3aed"]:hover, .bg-purple-600:hover, .bg-purple-500:hover {
-  background: #4c1d95 !important;
+[style*="background: linear-gradient(135deg,#D9383A"]:hover, [style*="background: linear-gradient(135deg, #D9383A"]:hover, .bg-red-600:hover, .bg-red-500:hover {
+  background: #A82C2E !important;
+}
+.bg-blue-600, .bg-blue-700 {
+  background: #1D4ED8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.3) !important;
+}
+.bg-blue-600:hover, .bg-blue-700:hover {
+  background: #1E40AF !important;
 }
 
 /* Fix for footer text */
@@ -530,7 +540,7 @@ footer, footer a, footer p, footer span {
   color: #64748b !important;
 }
 footer a:hover {
-  color: #5b21b6 !important;
+  color: #D9383A !important;
 }
 
 /* ─── Final Priority Overrides for Headings ─── */
@@ -545,16 +555,26 @@ p, span, li, div, label, input, textarea, select, a, td, th {
   color: #000000 !important;
 }
 
-h1 .text-purple-700, h2 .text-purple-700, h3 .text-purple-700, h4 .text-purple-700, h5 .text-purple-700, h6 .text-purple-700,
-h1 .text-purple-600, h2 .text-purple-600, h3 .text-purple-600, h4 .text-purple-600, h5 .text-purple-600, h6 .text-purple-600,
-h1 .text-gradient, h2 .text-gradient, h3 .text-gradient, h4 .text-gradient, h5 .text-gradient, h6 .text-gradient,
-.text-purple-700, span.text-purple-700, .text-purple-600, span.text-purple-600, .text-gradient {
-  color: #5b21b6 !important;
+h1 .text-blue-700, h2 .text-blue-700, h3 .text-blue-700, h4 .text-blue-700, h5 .text-blue-700, h6 .text-blue-700,
+h1 .text-blue-600, h2 .text-blue-600, h3 .text-blue-600, h4 .text-blue-600, h5 .text-blue-600, h6 .text-blue-600,
+.text-blue-700, span.text-blue-700, .text-blue-600, span.text-blue-600 {
+  color: #1D4ED8 !important;
 }
 
-/* Force navbar purple login button text to remain white */
-header.fixed button.bg-purple-600, header.fixed button.bg-purple-600 * {
+h1 .text-gradient, h2 .text-gradient, h3 .text-gradient, h4 .text-gradient, h5 .text-gradient, h6 .text-gradient,
+h1 .text-red-600, h2 .text-red-600, h3 .text-red-600, h4 .text-red-600, h5 .text-red-600, h6 .text-red-600,
+.text-gradient, .text-red-600, span.text-red-600, p.text-red-600, a.text-red-600 {
+  color: #D9383A !important;
+}
+
+/* Force navbar login button text to remain white by default */
+header.fixed button.bg-blue-600, header.fixed button.bg-blue-600 *,
+header.fixed button[style*="background:#5b21b6"], header.fixed button[style*="background:#5b21b6"] * {
   color: #ffffff !important;
+}
+/* On hover, login button font turns red (not the default blue header link hover) */
+header.fixed button[style*="background:#5b21b6"]:hover, header.fixed button[style*="background:#5b21b6"]:hover * {
+  color: #dc2626 !important;
 }
 
 /* ─── CTA Section Dark Card Theme Overrides (Bypasses Final Priority Overrides) ─── */
@@ -576,7 +596,7 @@ div.bg-brand-blue svg {
 
 /* Specific inner overrides */
 div.bg-brand-blue .text-brand-teal {
-  color: #a78bfa !important; /* light purple color for better contrast on dark blue */
+  color: #F87171 !important; /* light red for contrast on dark navy */
 }
 div.bg-brand-blue .text-slate-300 {
   color: #cbd5e1 !important;
@@ -624,7 +644,7 @@ footer.bg-brand-blue svg {
   color: #ffffff !important;
 }
 footer.bg-brand-blue .text-brand-teal {
-  color: #a78bfa !important;
+  color: #F87171 !important;
 }
 footer.bg-brand-blue .text-slate-300 {
   color: #cbd5e1 !important;
@@ -636,5 +656,5 @@ footer.bg-brand-blue .text-slate-500 {
   color: #64748b !important;
 }
 footer.bg-brand-blue a:hover {
-  color: #5eead4 !important;
+  color: #F87171 !important;
 }

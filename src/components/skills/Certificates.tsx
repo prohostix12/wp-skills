@@ -1,45 +1,11 @@
 "use client";
 
-import { Building2, ScrollText, Briefcase, Medal, Star, CheckCircle } from "lucide-react";
-import { ReactNode } from "react";
-
-const certs: {
-  title: string; issuer: string; location: string; desc: string;
-  icon: ReactNode; color: string; badge: string; seal: ReactNode;
-}[] = [
-  {
-    title:    "University Certificates",
-    issuer:   "Canadian Institute of Technology (CIT) · Mediterranean University of Albania",
-    location: "Tirana, Albania",
-    desc:     "Internationally recognised university certificates from our partner institutions CIT and Mediterranean University of Albania, validating your academic achievement.",
-    icon:  <Building2 size={22} />,
-    color: "#0F2537",
-    badge: "International",
-    seal:  <Medal size={26} />,
-  },
-  {
-    title:    "Course Completion Certificate",
-    issuer:   "SkillDad",
-    location: "Kerala, India",
-    desc:     "Professional course completion certificate acknowledging your mastery of the full 6-month program curriculum.",
-    icon:  <ScrollText size={22} />,
-    color: "#5B21B6",
-    badge: "Professional",
-    seal:  <Star size={26} />,
-  },
-  {
-    title:    "Internship Certificate",
-    issuer:   "Partner Company",
-    location: "Industry Partner",
-    desc:     "Verified internship certificate from your host company, proving your real-world work experience to future employers.",
-    icon:  <Briefcase size={22} />,
-    color: "#5B21B6",
-    badge: "Verified",
-    seal:  <CheckCircle size={26} />,
-  },
-];
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_CERTIFICATES } from "@/lib/contentDefaults";
 
 export default function Certificates() {
+  const certs = useContent("certificates", DEFAULT_CERTIFICATES);
   return (
     <section id="certificates" className="py-24 relative overflow-hidden">
       {/* Dividers */}
@@ -116,9 +82,9 @@ export default function Certificates() {
                       color: cert.color,
                     }}
                   >
-                    {cert.icon}
+                    <Icon name={cert.icon} size={22} />
                   </div>
-                  <div style={{ color: cert.color }}>{cert.seal}</div>
+                  <div style={{ color: cert.color }}><Icon name={cert.seal} size={26} /></div>
                 </div>
 
                 {/* Content */}

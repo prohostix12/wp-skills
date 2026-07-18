@@ -23,39 +23,27 @@ import {
   Rocket,
   Star,
   Target,
-  TrendingUp,
-  Users,
   Wrench,
 } from "lucide-react";
-
-const learningOutcomes = [
-  { icon: <TrendingUp size={18} />, title: "Industry-Ready Skills", desc: "Master practical skills demanded by top employers worldwide" },
-  { icon: <Globe size={18} />, title: "Global Recognition", desc: "ECTS certificate recognized across 48+ countries" },
-  { icon: <Briefcase size={18} />, title: "Portfolio Projects", desc: "Build real-world projects to showcase to employers" },
-  { icon: <Users size={18} />, title: "Professional Network", desc: "Connect with peers and industry mentors globally" },
-];
-
-const careerRoles = ["Industry Professional", "Freelance Consultant", "Team Lead", "Project Manager", "Domain Specialist", "Startup Founder"];
-
-const eligibility = [
-  "Open to all nationalities — no geographic restrictions",
-  "Basic computer literacy and internet access",
-  "English proficiency (intermediate level or above)",
-  "No prior domain experience needed",
-  "Minimum age: 18 years",
-  "Commitment to complete coursework",
-];
-
-const faqs = [
-  { q: "What certificate will I receive?", a: "You'll receive an internationally recognized ECTS certificate from Canadian Institute of Technology, valid across 48+ European countries." },
-  { q: "Is this course fully online?", a: "Yes, the program is delivered fully online with live instructor sessions, hands-on projects, and mentorship." },
-  { q: "What are the prerequisites?", a: "No prior domain experience is needed for most learners — just basic computer literacy, internet access, and intermediate English proficiency." },
-  { q: "Will I get placement support?", a: "Yes. SkillDad provides dedicated placement support with access to 500+ partner companies after certification." },
-  { q: "How long does the course take?", a: "Course duration varies by program — see the duration badge above for this course's exact length." },
-];
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import {
+  DEFAULT_COURSE_DETAILS_LEARNING_OUTCOMES,
+  DEFAULT_COURSE_DETAILS_CAREER_ROLES,
+  DEFAULT_COURSE_DETAILS_ELIGIBILITY,
+  DEFAULT_COURSE_DETAILS_FAQS,
+  DEFAULT_COURSE_DETAILS_QUICK_STATS,
+  DEFAULT_COURSE_DETAILS_CAREER_STATS,
+} from "@/lib/contentDefaults";
 
 export default function CourseDetails({ slug }: { slug: string }) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const learningOutcomes = useContent("courseDetailsLearningOutcomes", DEFAULT_COURSE_DETAILS_LEARNING_OUTCOMES);
+  const careerRoles = useContent("courseDetailsCareerRoles", DEFAULT_COURSE_DETAILS_CAREER_ROLES);
+  const eligibility = useContent("courseDetailsEligibility", DEFAULT_COURSE_DETAILS_ELIGIBILITY);
+  const faqs = useContent("courseDetailsFaqs", DEFAULT_COURSE_DETAILS_FAQS);
+  const quickStatsMeta = useContent("courseDetailsQuickStats", DEFAULT_COURSE_DETAILS_QUICK_STATS);
+  const careerStats = useContent("courseDetailsCareerStats", DEFAULT_COURSE_DETAILS_CAREER_STATS);
   const course = getCitCourse(slug);
 
   if (!course) {
@@ -125,15 +113,10 @@ export default function CourseDetails({ slug }: { slug: string }) {
         <section className="px-4 sm:px-6 lg:px-8 py-3">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {[
-                { icon: <Clock size={18} />, sColor: "#F59E0B", value: "3 Month Course + 3 Month Internship", label: "Duration" },
-                { icon: <Monitor size={18} />, sColor: "#3B82F6", value: "Free IELTS", label: "Coaching" },
-                { icon: <BadgeCheck size={18} />, sColor: "#8B5CF6", value: "ECTS Credits", label: "Certificate" },
-                { icon: <Rocket size={18} />, sColor: "#10B981", value: "Placement Assurance", label: "Placement" },
-              ].map((s) => (
+              {quickStatsMeta.map((s) => (
                 <div key={s.label} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${s.sColor}15`, color: s.sColor }}>
-                    {s.icon}
+                    <Icon name={s.icon} size={18} />
                   </div>
                   <div>
                     <div className="text-gray-900 font-bold text-sm">{s.value}</div>
@@ -204,7 +187,7 @@ export default function CourseDetails({ slug }: { slug: string }) {
                   {learningOutcomes.map((item) => (
                     <div key={item.title} className="rounded-2xl p-5 bg-gray-50 border border-gray-100 hover:shadow-md transition-all">
                       <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background: `${color}15`, color }}>
-                        {item.icon}
+                        <Icon name={item.icon} size={18} />
                       </div>
                       <h4 className="font-bold text-gray-900 text-sm mb-1">{item.title}</h4>
                       <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>
@@ -219,14 +202,10 @@ export default function CourseDetails({ slug }: { slug: string }) {
                   <Briefcase size={20} style={{ color }} /> Career Opportunities
                 </h2>
                 <div className="grid sm:grid-cols-3 gap-4 mb-6">
-                  {[
-                    { icon: <Award size={20} />, title: "European ECTS", desc: "Recognized in 48+ countries" },
-                    { icon: <Rocket size={20} />, title: "SkillDad Placement", desc: "500+ partner companies" },
-                    { icon: <Star size={20} />, title: "95% Success Rate", desc: "Students placed after completion" },
-                  ].map((stat) => (
+                  {careerStats.map((stat) => (
                     <div key={stat.title} className="text-center p-5 rounded-2xl bg-gray-50 border border-gray-100">
                       <div className="w-11 h-11 rounded-xl flex items-center justify-center mx-auto mb-3" style={{ background: `${color}15`, color }}>
-                        {stat.icon}
+                        <Icon name={stat.icon} size={20} />
                       </div>
                       <h4 className="font-bold text-gray-900 text-sm">{stat.title}</h4>
                       <p className="text-gray-500 text-xs mt-1">{stat.desc}</p>

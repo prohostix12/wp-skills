@@ -22,27 +22,18 @@ import {
   Rocket,
   Shield,
   Star,
-  Users,
   Zap,
 } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import {
+  DEFAULT_CIT_DETAILS_QUICK_STATS,
+  DEFAULT_CIT_DETAILS_WHY_CHOOSE,
+  DEFAULT_CIT_DETAILS_ELIGIBILITY,
+  DEFAULT_CIT_DETAILS_ACCREDITATION,
+} from "@/lib/contentDefaults";
 
 const CIT_LOGO = "https://upload.wikimedia.org/wikipedia/en/thumb/d/d9/Logo_of_the_Canadian_Institute_of_Technology.svg/250px-Logo_of_the_Canadian_Institute_of_Technology.svg.png";
-
-const quickStats = [
-  { icon: <BookOpen size={18} />, color: "#3B82F6", value: "6 Courses", label: "Programs" },
-  { icon: <MapPin size={18} />, color: "#F59E0B", value: "Tirana, Albania", label: "Location" },
-  { icon: <BadgeCheck size={18} />, color: "#8B5CF6", value: "ECTS Credits", label: "Accreditation" },
-  { icon: <Rocket size={18} />, color: "#10B981", value: "SkillDad", label: "Placement" },
-];
-
-const whyChoose = [
-  { icon: <BadgeCheck size={18} />, title: "ECTS Accredited", desc: "European Credit Transfer System — recognized in 48+ countries" },
-  { icon: <Globe size={18} />, title: "Bologna Process", desc: "Part of the European Higher Education Area standards" },
-  { icon: <Award size={18} />, title: "Quality Education", desc: "Rigorous academic standards with industry-aligned curriculum" },
-  { icon: <Users size={18} />, title: "Expert Faculty", desc: "Learn from experienced professionals and academic researchers" },
-  { icon: <Rocket size={18} />, title: "SkillDad Placement", desc: "Guaranteed access to 500+ global companies after certification" },
-  { icon: <Shield size={18} />, title: "Recognized Globally", desc: "Employers worldwide value European university qualifications" },
-];
 
 const programs = citCourses.map((c) => ({
   color: c.color,
@@ -54,24 +45,13 @@ const programs = citCourses.map((c) => ({
   href: `/skills/course/${c.slug}`,
 }));
 
-const eligibility = [
-  "Open to all nationalities — no geographic restrictions",
-  "Basic computer literacy and internet access required",
-  "English proficiency (intermediate level or above)",
-  "No prior domain experience needed for most programs",
-  "Minimum age: 18 years",
-  "Commitment to complete coursework and assessments",
-];
-
-const accreditation = [
-  { title: "ECTS Credits", desc: "European Credit Transfer System" },
-  { title: "Bologna Process", desc: "European Higher Education Area" },
-  { title: "International Recognition", desc: "Valid in 48+ countries" },
-];
-
 const color = "#3B82F6";
 
 export default function CITDetails() {
+  const quickStats = useContent("citDetailsQuickStats", DEFAULT_CIT_DETAILS_QUICK_STATS);
+  const whyChoose = useContent("citDetailsWhyChoose", DEFAULT_CIT_DETAILS_WHY_CHOOSE);
+  const eligibility = useContent("citDetailsEligibility", DEFAULT_CIT_DETAILS_ELIGIBILITY);
+  const accreditation = useContent("citDetailsAccreditation", DEFAULT_CIT_DETAILS_ACCREDITATION);
   return (
     <main
       className="cit-bg-image min-h-screen bg-cover bg-center bg-fixed bg-no-repeat relative"
@@ -137,7 +117,7 @@ export default function CITDetails() {
               {quickStats.map((s) => (
                 <div key={s.label} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${s.color}15`, color: s.color }}>
-                    {s.icon}
+                    <Icon name={s.icon} size={18} />
                   </div>
                   <div>
                     <div className="text-gray-900 font-bold text-sm">{s.value}</div>
@@ -176,7 +156,7 @@ export default function CITDetails() {
                   {whyChoose.map((item) => (
                     <div key={item.title} className="rounded-2xl p-5 bg-gray-50 border border-gray-100 hover:shadow-md hover:-translate-y-0.5 transition-all">
                       <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background: `${color}15`, color }}>
-                        {item.icon}
+                        <Icon name={item.icon} size={18} />
                       </div>
                       <h4 className="font-bold text-gray-900 text-sm mb-1">{item.title}</h4>
                       <p className="text-gray-500 text-xs leading-relaxed">{item.desc}</p>

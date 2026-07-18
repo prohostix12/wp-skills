@@ -1,47 +1,12 @@
 "use client";
 
-import { AlertCircle, Zap, BookOpen, Globe, Briefcase, TrendingDown } from "lucide-react";
-
-const problems = [
-  { 
-    icon: <BookOpen size={20} />,     
-    title: "Only Theory",                 
-    desc: "Degrees full of theory with no hands-on application. Employers want skills, not just marks.",                
-    colorClass: "bg-red-50 text-red-700 ring-red-100", 
-    iconColor: "text-red-600",
-    tag: "Zero Practical Skills",
-    image: "https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?auto=format&fit=crop&q=80&w=600&h=400"
-  },
-  { 
-    icon: <Globe size={20} />,        
-    title: "No International Exposure",   
-    desc: "Without global exposure, your resume looks the same as thousands of other graduates.",                       
-    colorClass: "bg-amber-50 text-amber-700 ring-amber-100",  
-    iconColor: "text-amber-600",
-    tag: "Limited Global Reach",
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=600&h=400"
-  },
-  { 
-    icon: <Briefcase size={20} />,    
-    title: "No Internship Experience",    
-    desc: "Companies demand experience. But without experience, no one hires you — a painful catch-22.",               
-    colorClass: "bg-purple-50 text-purple-700 ring-purple-100", 
-    iconColor: "text-purple-600",
-    tag: "Catch-22 Trap",
-    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=600&h=400"
-  },
-  { 
-    icon: <TrendingDown size={20} />, 
-    title: "Low Placement", 
-    desc: "Generic degrees lead to generic outcomes. Without the right skills, placement remains a dream.",           
-    colorClass: "bg-orange-50 text-orange-700 ring-orange-100",  
-    iconColor: "text-orange-600",
-    tag: "Career Stagnation",
-    image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=600&h=400"
-  },
-];
+import { AlertCircle, Zap } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_PROBLEMS } from "@/lib/contentDefaults";
 
 export default function Problem() {
+  const problems = useContent("problems", DEFAULT_PROBLEMS);
   return (
     <section className="py-24 relative overflow-hidden bg-[#faf8f5]">
       {/* Background World Map Vector */}
@@ -64,7 +29,7 @@ export default function Problem() {
           </div>
           <h2 className="font-display font-black text-slate-900 mb-6" style={{ fontSize: "clamp(1.8rem, 4vw, 3.2rem)" }}>
             Why Students Struggle to{" "}
-            <span className="text-purple-700">Build Global Careers?</span>
+            <span className="text-red-600">Build Global Careers?</span>
           </h2>
           <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-slate-600 font-medium">
             A regular degree isn&apos;t getting interviews. Studying abroad costs ₹20–40 lakh. Most students
@@ -91,7 +56,7 @@ export default function Problem() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
                 <div className="absolute bottom-3 left-4 flex items-center gap-2">
                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center bg-white shadow-md ${p.iconColor}`}>
-                    {p.icon}
+                    <Icon name={p.icon} size={20} />
                   </div>
                 </div>
               </div>
@@ -122,12 +87,12 @@ export default function Problem() {
 
         {/* Bridge statement */}
         <div className="text-center" data-aos="zoom-in" data-aos-delay="200">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 px-8 py-6 rounded-2xl max-w-3xl bg-purple-50 border border-purple-100 shadow-sm">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-purple-100 border border-purple-200">
-              <Zap size={20} className="text-purple-600" />
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 px-8 py-6 rounded-2xl max-w-3xl bg-blue-50 border border-blue-100 shadow-sm">
+            <div className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-100 border border-blue-200">
+              <Zap size={20} className="text-blue-600" />
             </div>
             <p className="text-base sm:text-lg text-center sm:text-left font-semibold text-slate-700">
-              <span className="font-extrabold text-purple-700">World Passport</span> bridges this gap —
+              <span className="font-extrabold text-red-600">World Passport</span> bridges this gap —
               bringing international education within reach from Kerala.
             </p>
           </div>

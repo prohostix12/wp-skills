@@ -8,7 +8,6 @@ import {
   ArrowLeft,
   ArrowRight,
   Award,
-  BadgeCheck,
   Building2,
   CalendarDays,
   ChevronDown,
@@ -17,13 +16,15 @@ import {
   FileCheck,
   GraduationCap,
   Layers,
-  Monitor,
-  Rocket,
   Wrench,
 } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_COURSE_DETAILS_QUICK_STATS } from "@/lib/contentDefaults";
 
 export default function MuaCourseDetails({ slug }: { slug: string }) {
   const [openModule, setOpenModule] = useState<number | null>(0);
+  const quickStatsMeta = useContent("courseDetailsQuickStats", DEFAULT_COURSE_DETAILS_QUICK_STATS);
   const course = getMuaCourse(slug);
 
   if (!course) {
@@ -90,15 +91,10 @@ export default function MuaCourseDetails({ slug }: { slug: string }) {
         <section className="px-4 sm:px-6 lg:px-8 py-3">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {[
-                { icon: <Clock size={18} />, sColor: "#F59E0B", value: "3 Month Course + 3 Month Internship", label: "Duration" },
-                { icon: <Monitor size={18} />, sColor: "#3B82F6", value: "Free IELTS", label: "Coaching" },
-                { icon: <BadgeCheck size={18} />, sColor: "#8B5CF6", value: "ECTS Credits", label: "Certificate" },
-                { icon: <Rocket size={18} />, sColor: "#10B981", value: "Placement Assurance", label: "Placement" },
-              ].map((s) => (
+              {quickStatsMeta.map((s) => (
                 <div key={s.label} className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${s.sColor}15`, color: s.sColor }}>
-                    {s.icon}
+                    <Icon name={s.icon} size={18} />
                   </div>
                   <div>
                     <div className="text-gray-900 font-bold text-sm">{s.value}</div>

@@ -1,24 +1,12 @@
 "use client";
 
-import {
-  Building2, Languages, Briefcase, Compass, Rocket,
-  Award, GraduationCap, Wrench, FileText, Mic, Lightbulb,
-} from "lucide-react";
-
-const values = [
-  { icon: <Building2 size={28} strokeWidth={1.5} />,    title: "International University Training", desc: "CIT-certified curriculum with internationally aligned academic excellence.",            color: "#a78bfa" },
-  { icon: <Languages size={28} strokeWidth={1.5} />,    title: "IELTS Coaching",                    desc: "Integrated IELTS preparation with expert trainers to open global doors.",              color: "#60a5fa" },
-  { icon: <Briefcase size={28} strokeWidth={1.5} />,    title: "Assured Internship",                desc: "3-month internship with partner companies. Real work experience for your resume.",     color: "#34d399" },
-  { icon: <Compass size={28} strokeWidth={1.5} />,      title: "Career Guidance",                   desc: "One-on-one career counselling from experienced mentors. Find your path with clarity.", color: "#fbbf24" },
-  { icon: <Rocket size={28} strokeWidth={1.5} />,       title: "Placement Support",                 desc: "Structured placement assistance — coordination, guidance, and job-opportunity support.", color: "#f472b6" },
-  { icon: <Award size={28} strokeWidth={1.5} />,        title: "Global Certifications",             desc: "3 certificates: University Certificate, Course Completion, and Internship Certificate.", color: "#a78bfa" },
-  { icon: <GraduationCap size={28} strokeWidth={1.5} />,title: "Academic Credits",                  desc: "International academic credits that count toward higher studies abroad.",               color: "#60a5fa" },
-  { icon: <Wrench size={28} strokeWidth={1.5} />,       title: "Live Projects",                     desc: "Build a strong portfolio with real-world projects guided by industry professionals.",   color: "#34d399" },
-  { icon: <FileText size={28} strokeWidth={1.5} />,     title: "Resume Building",                   desc: "Professional resume, LinkedIn, and personal branding to stand out.",                    color: "#fbbf24" },
-  { icon: <Mic size={28} strokeWidth={1.5} />,          title: "Interview Training",                desc: "Mock interviews, HR preparation, and communication coaching. Walk in confident.",       color: "#f472b6" },
-];
+import { Lightbulb } from "lucide-react";
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_VALUE_STACK } from "@/lib/contentDefaults";
 
 export default function ValueStack() {
+  const values = useContent("valueStack", DEFAULT_VALUE_STACK);
   return (
     <section id="value-stack" className="py-24 relative overflow-hidden bg-[#faf8f5]">
       {/* Grid overlay */}
@@ -29,20 +17,20 @@ export default function ValueStack() {
         {/* Heading */}
         <div className="grid lg:grid-cols-2 gap-10 items-end mb-16" data-aos="fade-up">
           <div>
-            <span className="inline-block text-[11px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5 rounded-full bg-purple-50 text-purple-700 border border-purple-200 shadow-sm">
+            <span className="inline-block text-[11px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 shadow-sm">
               What You Get
             </span>
             <h2 className="font-display font-black text-slate-900 leading-[1.1]" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
               Everything Included with{" "}
-              <span className="text-purple-700">World Passport</span>
+              <span className="text-red-600">World Passport</span>
             </h2>
           </div>
           <div className="lg:pb-2">
             <p className="text-base sm:text-lg leading-relaxed mb-4 text-slate-600 font-medium">
               Everything you need to launch an international career — bundled in one comprehensive 6-month program.
             </p>
-            <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-purple-50 border border-purple-100 shadow-sm">
-              <Lightbulb size={20} className="text-purple-600 flex-shrink-0" />
+            <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-blue-50 border border-blue-100 shadow-sm">
+              <Lightbulb size={20} className="text-blue-600 flex-shrink-0" />
               <p className="font-semibold text-sm text-slate-700">
                 Compare to studying abroad at{" "}
                 <span className="text-red-600 font-bold">₹10–15 lakh</span> — same edge, fraction of the cost.
@@ -75,7 +63,7 @@ export default function ValueStack() {
               {/* Icon */}
               <div className="mb-6 w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
                 style={{ background: `${v.color}20`, border: `1px solid ${v.color}40`, color: v.color }}>
-                {v.icon}
+                <Icon name={v.icon} size={28} strokeWidth={1.5} />
               </div>
 
               {/* Step badge */}

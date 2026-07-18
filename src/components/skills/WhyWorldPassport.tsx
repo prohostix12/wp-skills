@@ -1,23 +1,15 @@
 "use client";
 
-import { Building2, Users, Target, Award, GraduationCap, Compass, Wrench, Rocket } from "lucide-react";
-
-const features = [
-  { icon: <Building2 size={22} />, title: "International University Collaboration", desc: "Partnered with CIT (Canadian Institute of Technology), Tirana — a globally recognised higher education institution committed to academic excellence.", color: "#a78bfa" },
-  { icon: <Users size={22} />,     title: "Experienced International Trainers",    desc: "Learn from faculty with real international industry experience. Our trainers bring global classroom standards to Kerala.",                            color: "#60a5fa" },
-  { icon: <Target size={22} />,    title: "Industry-Focused Curriculum",           desc: "Every module is aligned with what employers actually need. No fluff — only skills that translate directly to career opportunities.",                   color: "#34d399" },
-  { icon: <Award size={22} />,     title: "International Certifications",          desc: "Receive 3 globally recognised certificates: University Certificate, Course Completion Certificate, and Internship Certificate.",                      color: "#fbbf24" },
-  { icon: <GraduationCap size={22} />, title: "Academic Credit Pathway",           desc: "Earn international academic credits that can be used as a pathway for higher education at universities abroad.",                                      color: "#f472b6" },
-  { icon: <Compass size={22} />,   title: "Career Mentorship",                     desc: "Dedicated mentors guide you through every stage — from program entry to job placement. You never walk alone.",                                        color: "#a78bfa" },
-  { icon: <Wrench size={22} />,    title: "Practical, Hands-On Training",          desc: "Learn by doing. Live projects, real tools, and industry simulations ensure you can apply what you learn from day one.",                               color: "#60a5fa" },
-  { icon: <Rocket size={22} />,    title: "Placement Guidance",                    desc: "Resume building, interview coaching, LinkedIn optimisation, and job-opportunity coordination — we support your career launch.",                       color: "#34d399" },
-];
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_WHY_WORLD_PASSPORT } from "@/lib/contentDefaults";
 
 export default function WhyWorldPassport() {
+  const features = useContent("whyWorldPassportFeatures", DEFAULT_WHY_WORLD_PASSPORT);
   return (
     <section className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
       <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        style={{ backgroundImage: "linear-gradient(rgba(29,78,216,1) 1px, transparent 1px), linear-gradient(90deg, rgba(29,78,216,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
       <div className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
         style={{ background: "radial-gradient(ellipse, rgba(96,165,250,0.08) 0%, transparent 70%)", filter: "blur(50px)" }} />
 
@@ -49,7 +41,7 @@ export default function WhyWorldPassport() {
                 style={{ background: `linear-gradient(90deg, transparent, ${f.color}, transparent)` }} />
               <div className="mb-4 w-10 h-10 rounded-xl flex items-center justify-center"
                 style={{ background: `${f.color}15`, border: `1px solid ${f.color}25`, color: f.color }}>
-                {f.icon}
+                <Icon name={f.icon} size={22} />
               </div>
               <h3 className="font-display font-bold text-white text-sm mb-2 leading-tight">{f.title}</h3>
               <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.4)" }}>{f.desc}</p>

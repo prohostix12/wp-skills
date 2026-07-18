@@ -1,23 +1,17 @@
 "use client";
 
-import { GraduationCap, UserCheck, Briefcase, RefreshCw, Plane, Globe } from "lucide-react";
-
-const audiences = [
-  { icon: <GraduationCap size={26} />, title: "Final Year Students",                    desc: "Prepare before graduation. Add international credentials to your degree and stand out on day one.",                  color: "#a78bfa", glow: "rgba(167,139,250,0.2)" },
-  { icon: <UserCheck size={26} />,     title: "Fresh Graduates",                        desc: "Bridge the gap between your degree and your first job with real skills and internship experience.",                   color: "#60a5fa", glow: "rgba(96,165,250,0.2)"  },
-  { icon: <Briefcase size={26} />,     title: "Working Professionals",                  desc: "Upskill and pivot your career with globally recognised certifications without quitting your job.",                    color: "#34d399", glow: "rgba(52,211,153,0.2)"  },
-  { icon: <RefreshCw size={26} />,     title: "Career Switchers",                       desc: "Changing fields? Our program gives you the credentials and experience to make a confident switch.",                  color: "#fbbf24", glow: "rgba(251,191,36,0.2)"  },
-  { icon: <Plane size={26} />,         title: "Students Planning Higher Studies Abroad", desc: "Earn academic credits and IELTS certification that open doors to universities worldwide.",                           color: "#f472b6", glow: "rgba(244,114,182,0.2)" },
-  { icon: <Globe size={26} />,         title: "International Career Aspirants",          desc: "Can't afford to study abroad? Get international exposure right here in Kerala, at a fraction of the cost.",         color: "#a78bfa", glow: "rgba(167,139,250,0.2)" },
-];
+import { useContent } from "@/hooks/useContent";
+import { Icon } from "@/lib/iconRegistry";
+import { DEFAULT_TARGET_AUDIENCES } from "@/lib/contentDefaults";
 
 export default function TargetAudience() {
+  const audiences = useContent("targetAudiences", DEFAULT_TARGET_AUDIENCES);
   return (
     <section className="py-24 relative overflow-hidden" style={{ background: "#060418" }}>
       <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: "linear-gradient(rgba(150,120,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(150,120,255,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        style={{ backgroundImage: "linear-gradient(rgba(29,78,216,1) 1px, transparent 1px), linear-gradient(90deg, rgba(29,78,216,1) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%)", filter: "blur(50px)" }} />
+        style={{ background: "radial-gradient(ellipse, rgba(217,56,58,0.08) 0%, transparent 70%)", filter: "blur(50px)" }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16" data-aos="fade-up">
@@ -53,7 +47,7 @@ export default function TargetAudience() {
                 style={{ background: `linear-gradient(90deg, transparent, ${a.color}, transparent)` }} />
               <div className="mb-5 w-12 h-12 rounded-xl flex items-center justify-center"
                 style={{ background: `${a.color}15`, border: `1px solid ${a.color}25`, color: a.color }}>
-                {a.icon}
+                <Icon name={a.icon} size={26} />
               </div>
               <h3 className="font-display font-bold text-white text-lg mb-3 leading-tight">{a.title}</h3>
               <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.45)" }}>{a.desc}</p>

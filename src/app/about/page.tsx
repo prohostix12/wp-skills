@@ -4,15 +4,10 @@ import type { Metadata } from "next";
 import StickyBar from "@/components/skills/StickyBar";
 import Footer from "@/components/skills/Footer";
 import PlacementPlatform from "@/components/skills/PlacementPlatform";
-import {
-  Target,
-  ShieldCheck,
-  Quote,
-  CheckCircle2,
-  Monitor,
-  BadgeCheck,
-  Rocket,
-} from "lucide-react";
+import { Quote } from "lucide-react";
+import { Icon } from "@/lib/iconRegistry";
+import { getContent } from "@/lib/getContent";
+import { DEFAULT_ABOUT_TEAM, DEFAULT_ABOUT_VALUES, DEFAULT_ABOUT_HERO_STATS } from "@/lib/contentDefaults";
 
 export const metadata: Metadata = {
   title: "About Us | World Passport — Your Gateway to World-Class Education",
@@ -27,44 +22,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
-const team = [
-  {
-    name: "Edwin C Benny",
-    role: "CEO",
-    desc: "Visionary leader driving World Passport's mission to make international education accessible to every student, regardless of background.",
-    image: "/assets/team/edwin.jpeg",
-    fallbackColor: "#7c3aed",
-    quote: "Every student deserves a real shot at a global career — not just the ones who can afford it.",
-  },
-  {
-    name: "Mujeeb T",
-    role: "Director",
-    desc: "Guiding strategic direction and partnerships to expand World Passport's global education network across Europe and the Gulf.",
-    image: "/assets/team/mujeeb-t.jpg",
-    fallbackColor: "#0F2537",
-    quote: "We built our university partnerships to be transparent, accredited, and outcome-driven — nothing else earns trust.",
-  },
-];
-
-
-const values = [
-  {
-    title: "Verified Partnerships",
-    desc: "Every university we represent is accredited and vetted before it reaches our students — no unlicensed institutions, ever.",
-    icon: <ShieldCheck size={22} className="text-purple-600" />,
-  },
-  {
-    title: "Transparent Pricing",
-    desc: "No hidden fees, no surprise charges after enrollment. What we quote is what you pay, start to finish.",
-    icon: <CheckCircle2 size={22} className="text-purple-600" />,
-  },
-  {
-    title: "Outcome-Focused",
-    desc: "From application to graduation to placement — we stay accountable for the result, not just the enrollment.",
-    icon: <Target size={22} className="text-purple-600" />,
-  },
-];
 
 function hasLocalAsset(relPath: string) {
   try {
@@ -83,7 +40,10 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const team = await getContent("aboutTeam", DEFAULT_ABOUT_TEAM);
+  const values = await getContent("aboutValues", DEFAULT_ABOUT_VALUES);
+  const heroStats = await getContent("aboutHeroStats", DEFAULT_ABOUT_HERO_STATS);
   return (
     <main className="text-black min-h-screen relative overflow-hidden bg-[#faf8f5]" style={{ background: "#faf8f5" }}>
       {/* ── Background Star Particles & Grids ── */}
@@ -123,18 +83,14 @@ export default function AboutPage() {
               Empowering learners with globally recognized skill programs, international faculty, European university collaborations, and career-focused education for global opportunities.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              {[
-                { icon: <Monitor size={16} />, value: "Free IELTS", label: "Coaching" },
-                { icon: <BadgeCheck size={16} />, value: "ECTS Credits", label: "Certificate" },
-                { icon: <Rocket size={16} />, value: "Placement Assurance", label: "Placement" },
-              ].map((s, i) => (
+              {heroStats.map((s, i) => (
                 <div
                   key={s.label}
                   className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-sm"
                   data-aos="fade-up"
                   data-aos-delay={200 + i * 100}
                 >
-                  <div className="text-white">{s.icon}</div>
+                  <div className="text-white"><Icon name={s.icon} size={16} /></div>
                   <div className="text-left">
                     <div className="text-white font-bold text-xs sm:text-sm">{s.value}</div>
                     <div className="text-white/60 text-[10px] uppercase tracking-wider">{s.label}</div>
@@ -209,7 +165,7 @@ export default function AboutPage() {
               data-aos-delay={i * 100}
             >
               <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center mb-5">
-                {v.icon}
+                <Icon name={v.icon} size={22} className="text-purple-600" />
               </div>
               <h3 className="font-display font-black text-black text-lg mb-2">{v.title}</h3>
               <p className="text-black/60 text-sm leading-relaxed">{v.desc}</p>

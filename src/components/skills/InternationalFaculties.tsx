@@ -1,53 +1,30 @@
 "use client";
 
-import { GraduationCap, Network, Cpu, Calendar } from "lucide-react";
-
-const faculties = [
-  {
-    name: "Florenc Hidri",
-    title: "Ph.D(c), Lecturer, Faculty of Engineering, CIT",
-    image: "/florenc.png",
-    division: "Department of Electronics and Telecommunications Engineering",
-    qualifications: "Ongoing Ph.D. studies in Information and Management Systems at South East European University. Holds a Master of Science (M.Sc.) in Business Informatics and a Professional Master (M.P) in Applied Informatics.",
-    specialization: "Web Development, IT Project Management, System Administration, Cloud Solutions",
-    experience: "17+ years",
-    color: "#60a5fa",
-    glow: "rgba(96,165,250,0.2)"
-  },
-  {
-    name: "Bernardo Gogollari",
-    title: "Creative Director, Digital Agency; Lecturer for AI Content Creation / Media & Creative Courses",
-    image: "/bernardo.png",
-    division: "Media, Design & Creative Technologies (Trainer, C-DATA Partner)",
-    qualifications: "Omega College, Athens, Greece",
-    specialization: "Strategy, Advertising, Creative Direction, Art Direction, Branding & Corporate ID, Illustration, Packaging Design, Product Design, Typography, Photography, 3D, Game Design",
-    experience: "12+ years in professional creative and design fields",
-    color: "#a78bfa",
-    glow: "rgba(167,139,250,0.2)"
-  }
-];
+import { useContent } from "@/hooks/useContent";
+import { DEFAULT_INTERNATIONAL_FACULTIES } from "@/lib/contentDefaults";
 
 export default function InternationalFaculties() {
+  const faculties = useContent("internationalFaculties", DEFAULT_INTERNATIONAL_FACULTIES);
   return (
     <section id="faculty" className="py-24 relative overflow-hidden bg-[#faf8f5]" style={{ background: "#faf8f5" }}>
       {/* Background grids & decorative highlights */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]"
         style={{ 
-          backgroundImage: "linear-gradient(rgba(124,58,237,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.3) 1px, transparent 1px)", 
-          backgroundSize: "60px 60px" 
-        }} 
+          backgroundImage: "linear-gradient(rgba(29,78,216,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(29,78,216,0.3) 1px, transparent 1px)",
+          backgroundSize: "60px 60px"
+        }}
       />
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[300px] pointer-events-none rounded-full"
-        style={{ background: "radial-gradient(circle, rgba(124,58,237,0.03) 0%, transparent 70%)", filter: "blur(65px)" }} />
+        style={{ background: "radial-gradient(circle, rgba(29,78,216,0.04) 0%, transparent 70%)", filter: "blur(65px)" }} />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center mb-16" data-aos="fade-up">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-100 border border-purple-200 uppercase tracking-wider mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-blue-700 bg-blue-100 border border-blue-200 uppercase tracking-wider mb-4">
             Expert Trainers
           </span>
           <h2 className="font-display font-black text-black mb-5" style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)" }}>
-            International <span className="text-purple-700">Faculties</span>
+            International <span className="text-red-600">Faculties</span>
           </h2>
           <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed text-black/60">
             Learn from global educators and industry pioneers who bring real-world international experience, academic excellence, and cutting-edge insights to your learning journey.
@@ -77,7 +54,7 @@ export default function InternationalFaculties() {
                 <h3 className="font-display font-black text-xl text-black mb-2 tracking-tight">
                   {fac.name}
                 </h3>
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold text-purple-700 bg-purple-50 border border-purple-100 uppercase tracking-wide">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold text-blue-700 bg-blue-50 border border-blue-100 uppercase tracking-wide">
                   {fac.experience} Experience
                 </span>
               </div>

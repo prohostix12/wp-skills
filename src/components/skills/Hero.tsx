@@ -4,83 +4,16 @@ import {
   ArrowRight,
   CheckCircle,
   Play,
-  Sparkles,
   Lock,
-  GraduationCap,
-  Shield,
-  ClipboardCheck,
-  CheckSquare,
   Globe,
 } from "lucide-react";
 import { useEffect, useRef } from "react";
-
-const trustChips = [
-  "International Credits",
-  "Industry Certification",
-  "Internship Support",
-  "Placement Assistance",
-];
-
-const stats = [
-  { value: "2", label: "Partner Universities", highlight: false },
-  { value: "10+", label: "Programs", highlight: false },
-  { value: "Online", label: "Delivery Mode", highlight: true },
-  { value: "100%", label: "Career Support", highlight: false },
-];
-
-const orbitIcons = [
-  { icon: ClipboardCheck, angle: -30 },
-  { icon: Shield, angle: 15 },
-  { icon: GraduationCap, angle: 60 },
-  { icon: CheckSquare, angle: 105 },
-  { icon: CheckCircle, angle: 150 },
-];
-
-/* Static star data — no Math.random in render to avoid hydration mismatch */
-const STARS = [
-  { w: 2.1, h: 1.4, t: 12.3, l: 45.6, o: 0.35, dur: 3.2, delay: 0.5 },
-  { w: 1.5, h: 1.5, t: 28.7, l: 72.1, o: 0.25, dur: 4.8, delay: 1.2 },
-  { w: 2.8, h: 2.8, t: 54.2, l: 18.9, o: 0.45, dur: 3.7, delay: 2.1 },
-  { w: 1.2, h: 1.2, t: 7.5, l: 88.4, o: 0.20, dur: 5.1, delay: 0.8 },
-  { w: 2.5, h: 2.5, t: 40.1, l: 33.7, o: 0.30, dur: 4.2, delay: 3.3 },
-  { w: 1.8, h: 1.8, t: 67.8, l: 61.2, o: 0.40, dur: 2.9, delay: 1.6 },
-  { w: 1.1, h: 1.1, t: 83.4, l: 5.8, o: 0.15, dur: 5.6, delay: 0.3 },
-  { w: 2.3, h: 2.3, t: 19.6, l: 53.0, o: 0.55, dur: 3.4, delay: 4.1 },
-  { w: 1.6, h: 1.6, t: 91.2, l: 79.3, o: 0.28, dur: 4.5, delay: 2.7 },
-  { w: 2.9, h: 2.9, t: 35.0, l: 26.4, o: 0.38, dur: 3.0, delay: 1.9 },
-  { w: 1.3, h: 1.3, t: 75.5, l: 42.8, o: 0.22, dur: 5.3, delay: 0.6 },
-  { w: 2.0, h: 2.0, t: 48.9, l: 95.1, o: 0.48, dur: 4.0, delay: 3.8 },
-  { w: 1.7, h: 1.7, t: 5.2, l: 14.7, o: 0.33, dur: 2.6, delay: 2.4 },
-  { w: 2.6, h: 2.6, t: 62.3, l: 68.5, o: 0.42, dur: 5.9, delay: 1.1 },
-  { w: 1.4, h: 1.4, t: 22.8, l: 37.9, o: 0.18, dur: 3.8, delay: 4.5 },
-  { w: 2.2, h: 2.2, t: 87.6, l: 56.3, o: 0.52, dur: 4.3, delay: 0.9 },
-  { w: 1.9, h: 1.9, t: 14.4, l: 82.6, o: 0.27, dur: 3.1, delay: 3.0 },
-  { w: 2.7, h: 2.7, t: 58.7, l: 28.1, o: 0.37, dur: 5.5, delay: 1.5 },
-  { w: 1.0, h: 1.0, t: 44.3, l: 10.5, o: 0.13, dur: 4.7, delay: 2.2 },
-  { w: 2.4, h: 2.4, t: 70.9, l: 47.2, o: 0.46, dur: 3.5, delay: 0.4 },
-  { w: 1.5, h: 1.5, t: 96.1, l: 21.8, o: 0.32, dur: 4.1, delay: 3.6 },
-  { w: 2.0, h: 2.0, t: 31.4, l: 63.9, o: 0.50, dur: 5.8, delay: 1.3 },
-  { w: 1.3, h: 1.3, t: 78.2, l: 91.4, o: 0.24, dur: 2.8, delay: 4.0 },
-  { w: 2.8, h: 2.8, t: 9.7, l: 39.5, o: 0.41, dur: 3.6, delay: 0.7 },
-  { w: 1.6, h: 1.6, t: 52.5, l: 75.8, o: 0.19, dur: 5.2, delay: 2.9 },
-  { w: 2.1, h: 2.1, t: 24.0, l: 0.9, o: 0.44, dur: 4.6, delay: 1.8 },
-  { w: 1.8, h: 1.8, t: 38.6, l: 57.4, o: 0.29, dur: 3.3, delay: 3.4 },
-  { w: 2.5, h: 2.5, t: 16.8, l: 84.0, o: 0.54, dur: 5.0, delay: 0.2 },
-  { w: 1.1, h: 1.1, t: 65.3, l: 32.3, o: 0.16, dur: 4.4, delay: 4.7 },
-  { w: 2.3, h: 2.3, t: 80.0, l: 16.0, o: 0.36, dur: 3.9, delay: 1.0 },
-  { w: 1.4, h: 1.4, t: 3.6, l: 50.7, o: 0.23, dur: 5.7, delay: 2.5 },
-  { w: 2.6, h: 2.6, t: 46.7, l: 70.6, o: 0.47, dur: 2.7, delay: 0.1 },
-  { w: 1.9, h: 1.9, t: 89.4, l: 24.5, o: 0.34, dur: 4.9, delay: 3.2 },
-  { w: 2.2, h: 2.2, t: 33.1, l: 97.2, o: 0.51, dur: 3.2, delay: 1.7 },
-  { w: 1.0, h: 1.0, t: 71.6, l: 44.1, o: 0.11, dur: 5.4, delay: 4.3 },
-  { w: 2.7, h: 2.7, t: 18.2, l: 7.6, o: 0.43, dur: 4.2, delay: 0.6 },
-  { w: 1.2, h: 1.2, t: 57.0, l: 89.0, o: 0.17, dur: 3.7, delay: 2.8 },
-  { w: 2.9, h: 2.9, t: 42.5, l: 55.3, o: 0.49, dur: 5.1, delay: 1.4 },
-  { w: 1.7, h: 1.7, t: 93.8, l: 38.7, o: 0.26, dur: 3.0, delay: 3.9 },
-  { w: 2.4, h: 2.4, t: 26.5, l: 11.2, o: 0.39, dur: 4.8, delay: 0.3 },
-];
+import { useContent } from "@/hooks/useContent";
+import { DEFAULT_HERO_TRUST_CHIPS, DEFAULT_HERO_STATS } from "@/lib/contentDefaults";
 
 export default function Hero() {
+  const trustChips = useContent("heroTrustChips", DEFAULT_HERO_TRUST_CHIPS);
+  const stats = useContent("heroStats", DEFAULT_HERO_STATS);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
   const chipsRef = useRef<HTMLDivElement>(null);
@@ -131,7 +64,7 @@ export default function Hero() {
 
       {/* Faint blueprint vector graphics in background */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] flex items-center justify-center">
-        <svg width="800" height="800" viewBox="0 0 800 800" fill="none" stroke="#8b5cf6" strokeWidth="1">
+        <svg width="800" height="800" viewBox="0 0 800 800" fill="none" stroke="#1D4ED8" strokeWidth="1">
           <circle cx="400" cy="400" r="300" />
           <circle cx="400" cy="400" r="200" />
           <line x1="100" y1="400" x2="700" y2="400" />
@@ -146,7 +79,7 @@ export default function Hero() {
           {/* ── Left column: Gold-bordered Image Card ── */}
           <div className="lg:col-span-5 flex justify-center relative order-2 lg:order-1 lg:-mt-12">
             <div 
-              className="relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-purple-900/10"
+              className="relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-blue-900/10"
               style={{
                 border: "4px solid #a8936d",
                 boxShadow: "0 25px 50px -12px rgba(168, 147, 109, 0.25)"
@@ -166,7 +99,7 @@ export default function Hero() {
                 border: "1px solid rgba(0,0,0,0.08)", backdropFilter: "blur(12px)",
                 boxShadow: "0 10px 25px rgba(0,0,0,0.1)", animation: "floatBadge 4s ease-in-out infinite"
               }}>
-              <Lock size={12} className="text-purple-600" /> CIT Certified
+              <Lock size={12} className="text-red-600" /> CIT Certified
             </div>
 
             {/* Floating badge: Global Exposure */}
@@ -190,7 +123,7 @@ export default function Hero() {
               className="font-display font-black text-slate-900 leading-[1.15] tracking-tight"
               style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
               Build Your{" "}
-              <span className="text-purple-700">
+              <span className="text-red-600">
                 Global Career
               </span>{" "}
               with International Skills & Industry Training
@@ -210,7 +143,7 @@ export default function Hero() {
                     background: "#ffffff", border: "1px solid #e2e8f0",
                     color: "#334155", boxShadow: "0 2px 10px rgba(0,0,0,0.02)"
                   }}>
-                  <CheckCircle size={14} className="text-purple-600 flex-shrink-0" />
+                  <CheckCircle size={14} className="text-blue-600 flex-shrink-0" />
                   {chip}
                 </div>
               ))}
@@ -221,14 +154,14 @@ export default function Hero() {
               <a href="#contact"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-white transition-all hover:scale-[1.02]"
                 style={{
-                  background: "#5b21b6",
-                  boxShadow: "0 6px 20px rgba(91,33,182,0.3)"
+                  background: "#D9383A",
+                  boxShadow: "0 6px 20px rgba(217,56,58,0.3)"
                 }}
               >
                 Book Free Consultation <ArrowRight size={16} />
               </a>
               <a href="#value-stack"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-slate-900 border-2 border-slate-900 transition-all hover:bg-slate-900 hover:text-white"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-slate-900 border-2 border-slate-900 transition-all hover:bg-red-600 hover:text-blue-600"
               >
                 <Play size={13} fill="currentColor" /> Explore Skills
               </a>
@@ -241,10 +174,8 @@ export default function Hero() {
               {stats.map((s, i) => (
                 <div key={s.label} className="flex-1 min-w-[120px] px-4 py-4 text-center"
                   style={{ borderRight: i < stats.length - 1 ? "1px solid #e2e8f0" : "none" }}>
-                  <div className="font-display font-extrabold text-xl sm:text-2xl"
-                    style={s.highlight
-                      ? { color: "#dc2626" }
-                      : { color: "#0f172a" }}>
+                  <div className={`font-display font-extrabold text-xl sm:text-2xl ${s.highlight ? "text-red-600" : ""}`}
+                    style={s.highlight ? {} : { color: "#0f172a" }}>
                     {s.value}
                   </div>
                   <div className="text-slate-500 text-[10px] sm:text-xs font-semibold mt-1">
