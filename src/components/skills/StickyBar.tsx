@@ -93,8 +93,16 @@ export default function StickyBar() {
             </a>
             <button
               onClick={() => { setLoginOpen(true); setAuthError(""); }}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold text-white transition-all cursor-pointer"
-              style={{ background: "#5b21b6" }}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer"
+              style={{ background: "#ffffff", border: "none", color: "red" }}
+              onMouseEnter={(e) => { 
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.setProperty("color", "red", "important");
+              }}
+              onMouseLeave={(e) => { 
+                e.currentTarget.style.background = "#ffffff";
+                e.currentTarget.style.color = "red";
+              }}
             >
               <LogIn size={13} /> Login
             </button>
@@ -136,8 +144,16 @@ export default function StickyBar() {
               </a>
               <button
                 onClick={() => { setMobileOpen(false); setLoginOpen(true); setAuthError(""); }}
-                className="flex items-center gap-2 mx-4 px-4 py-2.5 rounded-full text-xs font-bold text-white transition-all justify-center"
-                style={{ background: "#5b21b6" }}
+                className="flex items-center gap-2 mx-4 px-4 py-2.5 rounded-full text-xs font-bold transition-all justify-center"
+                style={{ background: "#ffffff", border: "none", color: "red" }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.setProperty("color", "red", "important");
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.background = "#ffffff";
+                  e.currentTarget.style.color = "red";
+                }}
               >
                 <LogIn size={13} /> Login
               </button>

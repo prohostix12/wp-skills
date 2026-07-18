@@ -161,7 +161,18 @@ export default function Hero() {
                 Book Free Consultation <ArrowRight size={16} />
               </a>
               <a href="#value-stack"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-slate-900 border-2 border-slate-900 transition-all hover:bg-red-600 hover:text-blue-600"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-bold text-slate-900 transition-all cursor-pointer"
+                style={{ background: "transparent" }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.background = "#D9383A";
+                  e.currentTarget.style.setProperty("color", "white", "important");
+                  e.currentTarget.style.boxShadow = "0 6px 20px rgba(217,56,58,0.3)";
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.background = "transparent";
+                  e.currentTarget.style.color = "#0f172a";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
               >
                 <Play size={13} fill="currentColor" /> Explore Skills
               </a>
