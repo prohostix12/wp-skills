@@ -7,7 +7,7 @@ import {
   Lock,
   Globe,
 } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useContent } from "@/hooks/useContent";
 import { DEFAULT_HERO_TRUST_CHIPS, DEFAULT_HERO_STATS } from "@/lib/contentDefaults";
 
@@ -15,6 +15,28 @@ export default function Hero() {
   const trustChips = useContent("heroTrustChips", DEFAULT_HERO_TRUST_CHIPS);
   const stats = useContent("heroStats", DEFAULT_HERO_STATS);
   const headingRef = useRef<HTMLHeadingElement>(null);
+
+  const [typedText, setTypedText] = useState("");
+  const fullText = "Build Your Global Career with International Skills & Industry Training";
+
+  useEffect(() => {
+    let currentText = "";
+    let i = 0;
+    const timeoutId = setTimeout(() => {
+      const intervalId = setInterval(() => {
+        if (i < fullText.length) {
+          currentText += fullText.charAt(i);
+          setTypedText(currentText);
+          i++;
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 40);
+      return () => clearInterval(intervalId);
+    }, 200);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
   const subRef = useRef<HTMLParagraphElement>(null);
   const chipsRef = useRef<HTMLDivElement>(null);
   const btnRef = useRef<HTMLDivElement>(null);
@@ -121,12 +143,13 @@ export default function Hero() {
             {/* Heading */}
             <h1 ref={headingRef}
               className="font-display font-black text-slate-900 leading-[1.15] tracking-tight"
-              style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)" }}>
-              Build Your{" "}
+              style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", minHeight: "110px" }}>
+              {typedText.slice(0, 11)}
               <span className="text-red-600">
-                Global Career
-              </span>{" "}
-              with International Skills & Industry Training
+                {typedText.slice(11, 24)}
+              </span>
+              {typedText.slice(24)}
+              <span className={`font-black text-red-600 ml-1 ${typedText.length === fullText.length ? 'animate-[cursorBlink_1s_step-end_infinite]' : ''}`}>|</span>
             </h1>
 
             {/* Sub */}
@@ -206,6 +229,10 @@ export default function Hero() {
         @keyframes floatBadge {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-8px); }
+        }
+        @keyframes cursorBlink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
         }
       `}</style>
     </section>
