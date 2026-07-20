@@ -11,6 +11,45 @@ import { useEffect, useRef, useState } from "react";
 import { useContent } from "@/hooks/useContent";
 import { DEFAULT_HERO_TRUST_CHIPS, DEFAULT_HERO_STATS } from "@/lib/contentDefaults";
 
+function AnimatedStat({ value }: { value: string }) {
+  const [count, setCount] = useState(0);
+  const isNumber = /^\d+/.test(value);
+  
+  useEffect(() => {
+    if (!isNumber) return;
+    const match = value.match(/^(\d+)(.*)$/);
+    if (!match) return;
+    
+    const target = parseInt(match[1], 10);
+    let start: number | null = null;
+    const duration = 2000;
+    
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      setCount(Math.floor(progress * target));
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
+    };
+    
+    window.requestAnimationFrame(step);
+  }, [value, isNumber]);
+
+  if (!isNumber) return <>{value}</>;
+  
+  const match = value.match(/^(\d+)(.*)$/);
+  return (
+    <>
+      {count}
+      {match ? match[2] : ""}
+    </>
+  );
+}
+
 export default function Hero() {
   const trustChips = useContent("heroTrustChips", DEFAULT_HERO_TRUST_CHIPS);
   const stats = useContent("heroStats", DEFAULT_HERO_STATS);
@@ -210,7 +249,7 @@ export default function Hero() {
                   style={{ borderRight: i < stats.length - 1 ? "1px solid #e2e8f0" : "none" }}>
                   <div className={`font-display font-extrabold text-xl sm:text-2xl ${s.highlight ? "text-red-600" : ""}`}
                     style={s.highlight ? {} : { color: "#0f172a" }}>
-                    {s.value}
+                    <AnimatedStat value={s.value} />
                   </div>
                   <div className="text-slate-500 text-[10px] sm:text-xs font-semibold mt-1">
                     {s.label}

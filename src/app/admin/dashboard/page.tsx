@@ -18,6 +18,45 @@ interface Lead {
   createdAt: string;
 }
 
+function AnimatedStat({ value }: { value: string }) {
+  const [count, setCount] = useState(0);
+  const isNumber = /^\d+/.test(value);
+  
+  useEffect(() => {
+    if (!isNumber) return;
+    const match = value.match(/^(\d+)(.*)$/);
+    if (!match) return;
+    
+    const target = parseInt(match[1], 10);
+    let start: number | null = null;
+    const duration = 2000;
+    
+    const step = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      setCount(Math.floor(progress * target));
+      
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      } else {
+        setCount(target);
+      }
+    };
+    
+    window.requestAnimationFrame(step);
+  }, [value, isNumber]);
+
+  if (!isNumber) return <>{value}</>;
+  
+  const match = value.match(/^(\d+)(.*)$/);
+  return (
+    <>
+      {count}
+      {match ? match[2] : ""}
+    </>
+  );
+}
+
 export default function AdminDashboard() {
   const router = useRouter();
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -292,37 +331,44 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#f8fafc] text-slate-800">
+    <div className="min-h-screen flex text-slate-800 relative bg-[#f0f4f8] overflow-hidden font-sans">
+      {/* Dynamic Background Mesh */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-400/20 blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] rounded-full bg-indigo-400/20 blur-[100px] pointer-events-none" />
+      <div className="absolute top-[20%] right-[10%] w-[20%] h-[20%] rounded-full bg-rose-400/10 blur-[100px] pointer-events-none" />
+
       {/* ── Sidebar ── */}
-      <aside className="w-64 bg-[#0b0f19] text-slate-400 flex flex-col flex-shrink-0 border-r border-slate-900 z-20">
+      <aside className="w-64 my-4 ml-4 rounded-3xl bg-white/60 backdrop-blur-xl border border-white flex flex-col flex-shrink-0 z-20 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
         {/* Sidebar Header */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-900">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-600/20">
+        <div className="h-20 flex items-center justify-between px-6 border-b border-white/40">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-blue-600/30">
               <Globe size={18} />
             </div>
-            <span className="text-white font-bold text-sm tracking-wide">WP Admin</span>
+            <span className="text-slate-800 font-display font-black text-sm tracking-wide">WP Admin</span>
           </div>
-          <button className="text-slate-500 hover:text-slate-300 transition-colors">
+          <button className="text-slate-400 hover:text-slate-600 transition-colors">
             <ChevronLeft size={16} />
           </button>
         </div>
 
         {/* Sidebar Navigation */}
-        <nav className="flex-1 py-6 px-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 py-6 px-4 space-y-1.5 overflow-y-auto">
           {sidebarLinks.map((link) => {
             const isActive = activeTab === link.label;
             return (
               <button
                 key={link.label}
                 onClick={() => setActiveTab(link.label)}
-                className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer ${
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-semibold transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-indigo-600/25"
-                    : "text-slate-400 hover:bg-white/5 hover:text-white"
+                    ? "bg-white shadow-[0_4px_20px_rgb(0,0,0,0.05)] text-blue-600 border border-white"
+                    : "text-slate-500 hover:bg-white/40 hover:text-slate-800 border border-transparent"
                 }`}
               >
-                {link.icon}
+                <div className={`${isActive ? "scale-110 text-blue-600" : "text-slate-400"} transition-transform duration-300`}>
+                  {link.icon}
+                </div>
                 {link.label}
               </button>
             );
@@ -330,10 +376,10 @@ export default function AdminDashboard() {
         </nav>
 
         {/* Sidebar Footer */}
-        <div className="p-4 border-t border-slate-900">
+        <div className="p-4 border-t border-white/40 bg-white/20">
           <Link
             href="/"
-            className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:bg-white/5 hover:text-white transition-all"
+            className="flex items-center justify-center gap-2.5 w-full py-3 rounded-2xl text-sm font-bold text-slate-500 hover:bg-white hover:text-blue-600 transition-all border border-transparent hover:border-white hover:shadow-sm"
           >
             <ArrowLeft size={16} />
             Back to Website
@@ -342,30 +388,30 @@ export default function AdminDashboard() {
       </aside>
 
       {/* ── Main Workspace ── */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden z-10 relative">
         {/* ── Top Bar ── */}
-        <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 z-10">
-          <h1 className="font-display font-black text-slate-800 text-lg">{activeTab}</h1>
+        <header className="h-20 mt-4 mx-6 bg-white/60 backdrop-blur-xl border border-white rounded-3xl flex items-center justify-between px-8 shadow-[0_4px_20px_rgb(0,0,0,0.03)] flex-shrink-0">
+          <h1 className="font-display font-black text-slate-800 text-xl tracking-tight">{activeTab}</h1>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             {/* User Profile Info */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 bg-white/50 px-4 py-2 rounded-2xl border border-white shadow-sm cursor-pointer hover:bg-white transition-colors">
               <div className="text-right hidden sm:block">
-                <span className="text-xs font-bold text-slate-800 block">admin@worldpassport.in</span>
-                <span className="text-[10px] text-slate-400 font-semibold block">Administrator</span>
+                <span className="text-xs font-bold text-slate-800 block leading-tight">admin@worldpassport.in</span>
+                <span className="text-[10px] text-blue-600 font-bold block">Administrator</span>
               </div>
-              <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-sm">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-100 to-indigo-100 border border-blue-200 flex items-center justify-center text-blue-700 text-sm font-black shadow-inner">
                 A
               </div>
             </div>
 
-            <div className="w-px h-5 bg-slate-200" />
+            <div className="w-px h-6 bg-slate-200/60" />
 
             {/* Logout Button */}
             <button
               onClick={handleLogout}
               title="Logout"
-              className="p-2 rounded-xl text-red-500 hover:bg-red-50 hover:text-red-600 transition-all flex items-center justify-center cursor-pointer"
+              className="w-10 h-10 rounded-2xl bg-white/50 border border-white text-slate-400 hover:bg-red-50 hover:text-red-500 hover:border-red-100 transition-all flex items-center justify-center cursor-pointer shadow-sm"
             >
               <LogOut size={18} />
             </button>
@@ -373,24 +419,26 @@ export default function AdminDashboard() {
         </header>
 
         {/* ── Scrollable Content Area ── */}
-        <main className="flex-1 overflow-y-auto p-8 space-y-8">
+        <main className="flex-1 overflow-y-auto p-6 pt-8 pb-12 space-y-8">
           {activeTab === "Dashboard" && (
             <>
               {/* Welcome Banner */}
-              <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-8 text-white overflow-hidden shadow-xl shadow-indigo-600/10">
-                <div className="absolute -right-10 -top-10 w-44 h-44 rounded-full bg-white/10 blur-xl pointer-events-none" />
-                <div className="absolute right-10 -bottom-10 w-32 h-32 rounded-full bg-indigo-500/20 blur-xl pointer-events-none" />
+              <div className="relative bg-gradient-to-r from-orange-400 to-red-500 rounded-3xl p-8 text-black overflow-hidden shadow-xl shadow-red-500/20 hover:shadow-2xl hover:shadow-red-500/30 hover:-translate-y-1 transition-all duration-500">
+                <div className="absolute -right-10 -top-10 w-44 h-44 rounded-full bg-white/30 blur-xl pointer-events-none" />
+                <div className="absolute right-10 -bottom-10 w-32 h-32 rounded-full bg-orange-300/40 blur-xl pointer-events-none" />
 
-                <div className="relative z-10">
-                  <h2 className="font-display font-black text-2xl sm:text-3xl mb-1.5 leading-tight">
-                    Welcome to Admin Panel
-                  </h2>
-                  <p className="text-white/80 text-sm mb-6 max-w-xl font-medium">
-                    Manage your World Passport website content and data
-                  </p>
+                <div className="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                  <div>
+                    <h2 className="font-display font-black text-3xl sm:text-4xl mb-2 leading-tight">
+                      Welcome to Admin Panel
+                    </h2>
+                    <p className="text-black/80 text-sm max-w-xl font-medium">
+                      Manage your World Passport website content and data smoothly and elegantly.
+                    </p>
+                  </div>
                   <Link
                     href="/"
-                    className="admin-cta-btn inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-xl text-xs font-bold hover:bg-blue-50 transition-all shadow-sm"
+                    className="admin-cta-btn inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-2xl text-xs font-black hover:bg-blue-700 transition-all shadow-[0_4px_15px_rgb(0,0,0,0.1)] hover:shadow-[0_8px_25px_rgb(0,0,0,0.15)] hover:-translate-y-0.5"
                   >
                     View Website <ArrowRight size={14} />
                   </Link>
@@ -400,31 +448,32 @@ export default function AdminDashboard() {
               {/* Stat Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  { label: "Countries", value: "5", icon: <Globe size={20} />, bg: "bg-blue-50", color: "text-blue-600", tabTarget: "Study Abroad" },
-                  { label: "Programs", value: "4", icon: <GraduationCap size={20} />, bg: "bg-pink-50", color: "text-pink-600", tabTarget: "Programs" },
-                  { label: "Services", value: "4", icon: <FileText size={20} />, bg: "bg-emerald-50", color: "text-emerald-600", tabTarget: "Services" },
-                  { label: "Partners", value: "2", icon: <Handshake size={20} />, bg: "bg-orange-50", color: "text-orange-600", tabTarget: "Partners" },
-                  { label: "Messages", value: loading ? "—" : leads.length.toString(), icon: <MessageSquare size={20} />, bg: "bg-violet-50", color: "text-violet-600", tabTarget: "Contact Us" },
-                  { label: "Testimonials", value: "3", icon: <Star size={20} />, bg: "bg-amber-50", color: "text-amber-600", tabTarget: "Testimonials" },
+                  { label: "Countries", value: "5", icon: <Globe size={24} />, bg: "bg-blue-50", color: "text-blue-600", tabTarget: "Study Abroad" },
+                  { label: "Programs", value: "4", icon: <GraduationCap size={24} />, bg: "bg-pink-50", color: "text-pink-600", tabTarget: "Programs" },
+                  { label: "Services", value: "4", icon: <FileText size={24} />, bg: "bg-emerald-50", color: "text-emerald-600", tabTarget: "Services" },
+                  { label: "Partners", value: "2", icon: <Handshake size={24} />, bg: "bg-orange-50", color: "text-orange-600", tabTarget: "Partners" },
+                  { label: "Messages", value: loading ? "—" : leads.length.toString(), icon: <MessageSquare size={24} />, bg: "bg-violet-50", color: "text-violet-600", tabTarget: "Contact Us" },
+                  { label: "Testimonials", value: "3", icon: <Star size={24} />, bg: "bg-amber-50", color: "text-amber-600", tabTarget: "Testimonials" },
                 ].map((stat) => (
                   <div
                     key={stat.label}
                     onClick={() => setActiveTab(stat.tabTarget)}
-                    className="bg-white border border-slate-100 rounded-2xl p-6 flex items-center justify-between shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer"
+                    className="relative bg-white/70 backdrop-blur-xl border border-white rounded-3xl p-6 flex items-center justify-between shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_12px_35px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 group cursor-pointer overflow-hidden"
                   >
-                    <div>
-                      <div className={`w-11 h-11 ${stat.bg} ${stat.color} rounded-xl flex items-center justify-center shadow-sm`}>
+                    <div className={`absolute -right-8 -top-8 w-32 h-32 rounded-full ${stat.bg} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+                    <div className="relative z-10">
+                      <div className={`w-14 h-14 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center shadow-inner border border-white mb-4 transition-transform duration-300 group-hover:scale-110`}>
                         {stat.icon}
                       </div>
-                      <p className="font-display font-black text-3xl text-slate-800 mt-4 leading-tight">
-                        {stat.value}
+                      <p className="font-display font-black text-4xl text-slate-800 leading-tight">
+                        <AnimatedStat value={stat.value} />
                       </p>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-1">
+                      <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mt-1.5">
                         {stat.label}
                       </p>
                     </div>
-                    <div className="w-8 h-8 rounded-full border border-slate-100 flex items-center justify-center text-slate-300 group-hover:text-slate-600 group-hover:border-slate-300 transition-all duration-300">
-                      <ArrowRight size={14} />
+                    <div className="relative z-10 w-10 h-10 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-slate-300 group-hover:text-blue-600 group-hover:border-blue-100 group-hover:bg-blue-50 transition-all duration-300 shadow-sm group-hover:shadow-md group-hover:translate-x-1">
+                      <ArrowRight size={16} />
                     </div>
                   </div>
                 ))}
@@ -433,16 +482,16 @@ export default function AdminDashboard() {
           )}
 
           {activeTab === "Contact Us" && (
-            <div className="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-white/70 backdrop-blur-xl border border-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
               {/* Table Header */}
-              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 border border-indigo-100">
-                    <Mail size={16} />
+              <div className="px-8 py-6 border-b border-white/60 flex items-center justify-between bg-white/40">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-50 to-blue-50 flex items-center justify-center text-indigo-600 border border-white shadow-sm">
+                    <Mail size={18} />
                   </div>
-                  <h3 className="font-display font-bold text-slate-800 text-base">Contact Form Submissions</h3>
+                  <h3 className="font-display font-black text-slate-800 text-lg">Contact Form Submissions</h3>
                   {!loading && (
-                    <span className="ml-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-50 text-indigo-600 border border-indigo-100">
+                    <span className="ml-3 px-3 py-1 rounded-full text-xs font-black bg-indigo-600 text-white shadow-md shadow-indigo-600/20">
                       {leads.length}
                     </span>
                   )}
@@ -450,9 +499,9 @@ export default function AdminDashboard() {
                 <button
                   onClick={fetchLeads}
                   disabled={loading}
-                  className="p-2 rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800 transition-all flex items-center justify-center cursor-pointer"
+                  className="p-2.5 rounded-xl bg-white border border-slate-100 text-slate-500 hover:text-indigo-600 hover:border-indigo-100 hover:bg-indigo-50 transition-all shadow-sm flex items-center justify-center cursor-pointer"
                 >
-                  <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
+                  <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
                 </button>
               </div>
 
@@ -561,33 +610,33 @@ export default function AdminDashboard() {
           )}
 
           {activeTab === "Programs" && (
-            <div className="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-white/70 backdrop-blur-xl border border-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
               {/* Header */}
-              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-pink-50 flex items-center justify-center text-pink-600 border border-pink-100">
-                    <GraduationCap size={16} />
+              <div className="px-8 py-6 border-b border-white/60 flex items-center justify-between bg-white/40">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-50 to-rose-50 flex items-center justify-center text-pink-600 border border-white shadow-sm">
+                    <GraduationCap size={18} />
                   </div>
-                  <h3 className="font-display font-bold text-slate-800 text-base">Course Programs List</h3>
+                  <h3 className="font-display font-black text-slate-800 text-lg">Course Programs List</h3>
                   {!programsLoading && (
-                    <span className="ml-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-50 text-pink-600 border border-pink-100">
+                    <span className="ml-3 px-3 py-1 rounded-full text-xs font-black bg-pink-600 text-white shadow-md shadow-pink-600/20">
                       {programs.length}
                     </span>
                   )}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <button
                     onClick={fetchPrograms}
                     disabled={programsLoading}
-                    className="p-2 rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800 transition-all flex items-center justify-center cursor-pointer"
+                    className="p-2.5 rounded-xl bg-white border border-slate-100 text-slate-500 hover:text-pink-600 hover:border-pink-100 hover:bg-pink-50 transition-all shadow-sm flex items-center justify-center cursor-pointer"
                   >
-                    <RefreshCw size={14} className={programsLoading ? "animate-spin" : ""} />
+                    <RefreshCw size={16} className={programsLoading ? "animate-spin" : ""} />
                   </button>
                   <button
                     onClick={() => openProgramForm(null)}
-                    className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer shadow-sm"
+                    className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer shadow-md shadow-blue-600/20 hover:shadow-lg hover:-translate-y-0.5"
                   >
-                    Add Program
+                    <Plus size={16} /> Add Program
                   </button>
                 </div>
               </div>
@@ -660,33 +709,33 @@ export default function AdminDashboard() {
 
           {/* ── Testimonials Tab ── */}
           {activeTab === "Testimonials" && (
-            <div className="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-white/70 backdrop-blur-xl border border-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
               {/* Header */}
-              <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-yellow-50 flex items-center justify-center text-yellow-600 border border-yellow-100">
-                    <Star size={16} />
+              <div className="px-8 py-6 border-b border-white/60 flex items-center justify-between bg-white/40">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-50 to-orange-50 flex items-center justify-center text-amber-600 border border-white shadow-sm">
+                    <Star size={18} />
                   </div>
-                  <h3 className="font-display font-bold text-slate-800 text-base">Testimonials</h3>
+                  <h3 className="font-display font-black text-slate-800 text-lg">Testimonials</h3>
                   {!testimonialsLoading && (
-                    <span className="ml-2 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-yellow-50 text-yellow-700 border border-yellow-100">
+                    <span className="ml-3 px-3 py-1 rounded-full text-xs font-black bg-amber-500 text-white shadow-md shadow-amber-500/20">
                       {testimonials.length}
                     </span>
                   )}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                   <button
                     onClick={fetchTestimonials}
                     disabled={testimonialsLoading}
-                    className="p-2 rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 hover:text-slate-800 transition-all flex items-center justify-center cursor-pointer"
+                    className="p-2.5 rounded-xl bg-white border border-slate-100 text-slate-500 hover:text-amber-600 hover:border-amber-100 hover:bg-amber-50 transition-all shadow-sm flex items-center justify-center cursor-pointer"
                   >
-                    <RefreshCw size={14} className={testimonialsLoading ? "animate-spin" : ""} />
+                    <RefreshCw size={16} className={testimonialsLoading ? "animate-spin" : ""} />
                   </button>
                   <button
                     onClick={() => openTestimonialForm(null)}
-                    className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer shadow-sm"
+                    className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-all cursor-pointer shadow-md shadow-blue-600/20 hover:shadow-lg hover:-translate-y-0.5"
                   >
-                    <Plus size={14} /> Add Testimonial
+                    <Plus size={16} /> Add Testimonial
                   </button>
                 </div>
               </div>

@@ -18,11 +18,48 @@ export default function TrustStrip() {
         </p>
       </div>
 
-      <div className="relative fade-left overflow-hidden">
-        <div className="flex gap-3 animate-marquee" style={{ width: "max-content" }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes marqueeLocal {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marqueeReverse {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .animate-marquee-local {
+          animation: marqueeLocal 60s linear infinite;
+        }
+        .animate-marquee-reverse {
+          animation: marqueeReverse 60s linear infinite;
+        }
+      `}} />
+      <div className="relative fade-left overflow-hidden flex flex-col gap-8">
+        <div className="flex gap-3 animate-marquee-local hover:[animation-play-state:paused]" style={{ width: "max-content" }}>
           {allItems.map((item, i) => (
             <div
-              key={i}
+              key={`top-${i}`}
+              className="flex items-center gap-3 px-5 py-3 rounded-xl flex-shrink-0 cursor-default transition-all hover:-translate-y-0.5 tilt-on-hover"
+              style={{
+                background: "rgba(29,78,216,0.08)",
+                border: "1px solid rgba(29,78,216,0.2)",
+                minWidth: "220px",
+                backdropFilter: "blur(8px)",
+              }}
+            >
+              <span style={{ color: "#93C5FD", flexShrink: 0 }}><Icon name={item.icon} size={18} /></span>
+              <div>
+                <div className="text-sm font-bold leading-tight" style={{ color: "rgba(255,255,255,0.85)" }}>{item.label}</div>
+                <div className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.35)" }}>{item.sub}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="flex gap-3 animate-marquee-reverse hover:[animation-play-state:paused]" style={{ width: "max-content" }}>
+          {allItems.map((item, i) => (
+            <div
+              key={`bottom-${i}`}
               className="flex items-center gap-3 px-5 py-3 rounded-xl flex-shrink-0 cursor-default transition-all hover:-translate-y-0.5 tilt-on-hover"
               style={{
                 background: "rgba(29,78,216,0.08)",

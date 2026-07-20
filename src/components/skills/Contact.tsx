@@ -105,7 +105,7 @@ export default function Contact() {
                       required
                       value={form.name}
                       onChange={handleChange}
-                      placeholder="Your full name"
+                      placeholder="enter your name"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all"
                     />
                   </div>
@@ -121,7 +121,7 @@ export default function Contact() {
                       required
                       value={form.email}
                       onChange={handleChange}
-                      placeholder="your@email.com"
+                      placeholder="enter your email"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all"
                     />
                   </div>
@@ -137,7 +137,7 @@ export default function Contact() {
                       required
                       value={form.phone}
                       onChange={handleChange}
-                      placeholder="+91 XXXXX XXXXX"
+                      placeholder="enter your phone number"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all"
                     />
                   </div>
@@ -152,7 +152,7 @@ export default function Contact() {
                       rows={4}
                       value={form.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your career goals or ask any question..."
+                      placeholder="enter your message"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-black placeholder:text-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none transition-all resize-none"
                     />
                   </div>

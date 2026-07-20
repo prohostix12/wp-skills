@@ -16,6 +16,7 @@ import Testimonials from "@/components/skills/Testimonials";
 import CTA from "@/components/skills/CTA";
 import Contact from "@/components/skills/Contact";
 import Footer from "@/components/skills/Footer";
+import PopupForm from "@/components/skills/PopupForm";
 
 export const metadata: Metadata = {
   title: "Skills Program | World Passport — Build Your Global Career",
@@ -94,6 +95,7 @@ export default function SkillsPage() {
 
       {/* Section 15 — Footer */}
       <Footer />
+      <PopupForm />
     </main>
   );
 }
